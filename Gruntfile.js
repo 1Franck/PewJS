@@ -24,7 +24,13 @@ module.exports = function(grunt) {
             src: '**/*',          // copy all files and subfolders
             dest: 'build/demos',  // destination folder
             expand: true          // required when using cwd
-          }
+          },
+          {
+            cwd: 'src/boilerplate',     // set working folder / root to copy
+            src: '**/*',                // copy all files and subfolders
+            dest: 'build/boilerplate',  // destination folder
+            expand: true                // required when using cwd
+          },
         ],
       }
     },
@@ -63,7 +69,7 @@ module.exports = function(grunt) {
 
     watch: {
       scripts: {
-        files: ['src/pew/*.js','src/demos/*/*.js'],
+        files: ['src/pew/*.js', 'src/demos/*/*.js', 'src/boilerplate/*.*'],
         tasks: ['default'],
         options: {
           spawn: false,
