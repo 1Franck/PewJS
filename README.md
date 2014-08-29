@@ -1,6 +1,6 @@
 
 ##PewJS
----------
+
 PewJS is a tiny HTML5 Canvas framework for games and animations.
 
 **Why ?**
