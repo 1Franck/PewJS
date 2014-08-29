@@ -9,6 +9,7 @@
 *.zip
 *.vi
 *.exe
+*.Ink
 *~
 
 # OS or Editor folders
