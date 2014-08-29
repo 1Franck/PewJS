@@ -35,3 +35,4 @@ node_modules
 _test
 src/demos
 build/demos
+*.lnk
