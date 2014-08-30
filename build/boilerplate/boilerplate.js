@@ -1,24 +1,24 @@
     // Create the game
-    var game = Pew.createGame({
+    var project = Pew.createProject({
         title  : "My Game",
     });
 
     // Create a scene
-    game.createScene('myscene', (function(){
+    project.createScene('myscene', (function(){
 
         // Scene properties
         var scene = {};
 
         // Create layers canvas
-        var layerA = game.createLayer('background'),
-            layerB = game.createLayer('foreground');
+        var layerA = project.createLayer('background'),
+            layerB = project.createLayer('foreground');
      
         // Start inputs capture
         // Mouse note: to work properly, mouse event must 
         // be associated to the highest zindex canvas which
         // is always the last one created
-        game.keyboard.init();
-        game.mouse.init(layerB.canvas); 
+        project.keyboard.init();
+        project.mouse.init(layerB.canvas); 
 
 
         // Called once when animation start
@@ -51,4 +51,4 @@
 
 
     // Start scene animation loop
-    game.start('myscene');
+    project.start('myscene');
