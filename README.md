@@ -249,10 +249,10 @@ layerA.ctx.drawImage(my_img , 0, 0, 300, 400);
 
 ##Scope
 
-Calling Pew.createGame() store a new instance of `Pew.Game` inside Pew and return it so you can use it after. To retreive/access your game object, you can also use `Pew.game()`
+Calling Pew.createProject() store a new instance of `Pew.Project` inside Pew and return it so you can use it after. To retreive/access your game object, you can also use `Pew.project()`
 
 *Example 1*:
-Create game and stored it into variable `game`: 
+Create project and stored it into variable `game`: 
 ```javascript
 var game = Pew.createProject({
     title  : "My Game",
@@ -261,7 +261,7 @@ var game = Pew.createProject({
 console.log(game.conf.title); // output in console "My Game"
 ```
 *Example 2:*
-Create game and retreive game instance via `Pew.project()`: 
+Create project and retreive it instance via `Pew.project()`: 
 ```javascript
 Pew.createProject({
     title  : "My Game",
