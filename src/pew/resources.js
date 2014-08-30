@@ -1,7 +1,7 @@
 /**
- * Pew / Game / Resources
+ * Pew / Project / Resources
  */
-Pew.Game.prototype.resources = (function() {
+Pew.Project.prototype.resources = (function() {
 
     /**
      * Stored resources

@@ -15,8 +15,8 @@ var Pew = (function(){
 
     "use strict";
 
-    // current game/animation instance
-    var game_object;
+    // current project instance
+    var project_obj;
   
     /**
      * Auto increment z-index value
@@ -43,9 +43,9 @@ var Pew = (function(){
     })();
 
     /**
-     * Game object
+     * Project object
      */
-    function Game(conf) {
+    function Project(conf) {
 
         // settings
         var def_settings = {
@@ -73,17 +73,17 @@ var Pew = (function(){
      * @param  string name Layer name. ex: bg, fg, background, topmenu, etc...
      * @param  object opts Options @see GameLayer
      */
-    Game.prototype.createLayer = function(name, opts) {
+    Project.prototype.createLayer = function(name, opts) {
 
-        var def = new GameLayer(opts);
+        var def = new Layer(opts);
         this.layers[name] = def;
         return def;
     };
 
     /**
-     * Game animation start loop
+     * Project animation start loop
      */
-    Game.prototype.start = function(name){
+    Project.prototype.start = function(name){
 
         var scene = this.scenes[name].fn;
 
@@ -93,7 +93,7 @@ var Pew = (function(){
         scene.draw();
     };
 
-    Game.prototype.pause = function(name) {
+    Project.prototype.pause = function(name) {
 
         this.scenes[name].fn.cancelAnim();
         //this.animationFrame.cancel(this.scenes[name].fn._fid);
@@ -106,19 +106,19 @@ var Pew = (function(){
      * @param  function fn   
      * @return object        
      */
-    Game.prototype.createScene = function(name, fn) {
+    Project.prototype.createScene = function(name, fn) {
 
-        this.scenes[name] = new GameScene(name, fn);
+        this.scenes[name] = new Scene(name, fn);
         return this.scenes[name];
     };
 
 
      /**
-     * Game Canvas Layer
+     * Project Canvas Layer
      * 
      * @param object opts layer options
      */
-    function GameLayer(opts) {
+    function Layer(opts) {
         var o = opts || {};
 
         this.full   = o.full || true;
@@ -136,7 +136,7 @@ var Pew = (function(){
     /**
      * Create canvas
      */
-    GameLayer.prototype.init = function() {
+    Layer.prototype.init = function() {
 
         if(this.canvas == null) {
             this.canvas = document.createElement("canvas");
@@ -174,7 +174,7 @@ var Pew = (function(){
     /**
      * Fullscreen
      */
-    GameLayer.prototype.fullscreen = function() {
+    Layer.prototype.fullscreen = function() {
         this.canvas.width  = window.innerWidth;
         this.canvas.height = window.innerHeight;
         this.width  = this.canvas.width;
@@ -190,7 +190,7 @@ var Pew = (function(){
      * @param  int x2 
      * @param  int y2 
      */
-    GameLayer.prototype.clear = function(x,y,x2,y2) {
+    Layer.prototype.clear = function(x,y,x2,y2) {
         var x = x || 0,
             y = y || 0,
             x2 = x2 || this.canvas.width,
@@ -201,12 +201,12 @@ var Pew = (function(){
 
 
     /**
-     * Scene object
+     * Project scene object
      * 
      * @param string   name 
      * @param function fn   
      */
-    function GameScene(name, fn) {
+    function Scene(name, fn) {
 
         this.fn = fn || (function(){});
 
@@ -222,12 +222,12 @@ var Pew = (function(){
 
             this.requestAnim = function(callback) {
                 var callback = callback || this.draw;
-                this._fid    = Pew.game().animationFrame.request(callback);
+                this._fid    = Pew.project().animationFrame.request(callback);
                 this._status = 'playing';
             };
 
             this.cancelAnim = function() {
-                Pew.game().animationFrame.cancel(this._fid);
+                Pew.project().animationFrame.cancel(this._fid);
                 this._status = 'idle';
             };
 
@@ -241,21 +241,21 @@ var Pew = (function(){
      */
     return {
 
-        //reference to priv func Game() so we can extends it outside
-        //like this: Pew.Game.prototype.myFunc = function(){...}
-        Game:      Game, 
-        GameScene: GameScene, 
-        GameLayer: GameLayer, 
+        //reference to priv func Project() so we can extends it outside
+        //like this: Pew.Project.prototype.myFunc = function(){...}
+        Project: Project, 
+        Scene:   Scene, 
+        Layer:   Layer, 
 
-        //current game object instance stored in Pew
-        game: function() {
-            return game_object;
+        //current project object instance stored in Pew
+        project: function() {
+            return project_obj;
         },
 
-        //create a new Game() object
-        createGame: function(settings) {
-            game_object = new Game(settings);
-            return game_object;
+        //create a new Project() object
+        createProject: function(settings) {
+            project_obj = new Project(settings);
+            return project_obj;
         },
     }
 })(); 

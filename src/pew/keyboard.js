@@ -1,7 +1,7 @@
 /**
- * Pew / Game / Keyboard
+ * Pew / Project / Keyboard
  */
-Pew.Game.prototype.keyboard = (function(){
+Pew.Project.prototype.keyboard = (function(){
 
     var keys = [], //curent down keys
         events_cb = {}, //keycode event callback

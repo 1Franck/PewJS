@@ -1,9 +1,9 @@
 /**
- * Pew / Game / fps meter 
+ * Pew / Project / fps meter 
  * Original source from AnimationFrame.js
  * modified for Pew
  */
-Pew.Game.prototype.fpsmeter = (function(){
+Pew.Project.prototype.fpsmeter = (function(){
 
     var now = Date.now || function() { 
         return (new Date).getTime(); 

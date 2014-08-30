@@ -1,7 +1,7 @@
 /**
- * Pew / Game / Mouse
+ * Pew / Project / Mouse
  */
-Pew.Game.prototype.mouse = (function(){
+Pew.Project.prototype.mouse = (function(){
 
     var events = [], //current mouse events
         events_cb = [], //mouse event callback

@@ -1,4 +1,4 @@
-Pew.Game.prototype.debug = (function(){
+Pew.Project.prototype.debug = (function(){
     var position = [];
 
     //console.log(this);
