@@ -355,9 +355,11 @@ layerA.ctx.fillStyle = layerA.gradient(0,0,100,100,["#000","#111"],[0.5,1]);
 
 ##License
 PewJS is released under the MIT Licence.
+
 Copyright (c) 2014 François Lajoie
 
 PewJS is also bundled with AnimationFrame.js
+
 Copyright (c) 2013 Oleg Slobodskoi - https://github.com/kof/animationFrame
 
 &nbsp;
