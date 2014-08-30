@@ -5,7 +5,7 @@ PewJS is a tiny HTML5 Canvas framework for games and animations.
 
 **Why ?**
 
-I’ve been experimenting a lot with canvas/js lately and found myself writing over and over the same bunch of codes to make it working properly, before even being able to start writing the game/animation codes. I decided to create PewJs mainly because i wanted to reuse easily the same bunch of codes from a project to another and create a straightforward modular structure for my experiments. 
+I’ve been experimenting a lot with canvas/js lately and found myself writing over and over the same bunch of codes to make it working properly, before even being able to start writing the game/animation codes. I decided to create PewJS mainly because i wanted to reuse easily the same bunch of codes from a project to another and create a straightforward modular structure for my experiments. 
 
 **What it do ?**
 
@@ -25,7 +25,7 @@ Take a look at this boiler plate. **We will use this code as reference for the n
 
 ```javascript
 // Create the game
-var game = Pew.createGame({
+var game = Pew.createProject({
     title  : "My Game",
 });
 
@@ -110,7 +110,7 @@ var layerA = game.createLayer('platform', {
 ##Draw
 
 *Example 1*: 
-Simple drawing can be achieved by using game layer canvas context(**`ctx`**) property which is just a reference to `canvas.getContext('2d')`.
+Simple drawing can be achieved by using game layer canvas context(**`ctx`**) property which is just a reference to `canvas.getContext('2d')` ([more info](http://www.html5canvastutorials.com/tutorials/html5-canvas-element/)).
 
 ```javascript
 layerA.ctx.fillStyle = "#DD0000";
@@ -238,17 +238,13 @@ game.resources.load(['img/sprite1.jpg','img/sprite1.jpg',...], function(){
 });
 ```
 *Example 3*:     
-**Retreive** a loaded **resource**.
+**Retreive** and **use** a loaded **resource**.
 
 ```javascript
 var my_img = game.resources.get('img/foobar.jpg'); 
+layerA.ctx.drawImage(my_img , 0, 0, 300, 400);
 ```
-*Example 4*:   
-**Use** a loaded **resource**.
 
-```javascript
-layerA.ctx.drawImage(game.resources.get('img/foobar.jpg'), 0, 0, 300, 400)
-```    
 
 
 ##Scope
@@ -258,21 +254,21 @@ Calling Pew.createGame() store a new instance of `Pew.Game` inside Pew and retur
 *Example 1*:
 Create game and stored it into variable `game`: 
 ```javascript
-var game = Pew.createGame({
+var game = Pew.createProject({
     title  : "My Game",
 });
 
 console.log(game.conf.title); // output in console "My Game"
 ```
 *Example 2:*
-Create game and retreive game instance via `Pew.game()`: 
+Create game and retreive game instance via `Pew.project()`: 
 ```javascript
-Pew.createGame({
+Pew.createProject({
     title  : "My Game",
 });
 
-console.log(Pew.game().conf.title); // output in console "My Game"
-var mygame = Pew.game();
+console.log(Pew.project().conf.title); // output in console "My Game"
+var mygame = Pew.project();
 console.log(mygame.conf.title); // output in console "My Game"
 ```
 
@@ -313,14 +309,14 @@ console.log( Pew.utils.extend({}, objA, objB) );
 // output {title: "BBB", x: 20, y: 0}
 ```
 
-##Extending PewJs
+##Extending PewJS
 
 Create your own reusable plugins by extending thoses objects:
-`Pew.Game`, `Pew.GameLayer` and `Pew.utils`
+`Pew.Project`, `Pew.Layer` and `Pew.utils`
 
 *Example 1:*
 ```javascript
-Pew.GameLayer.prototype.circle = function(x, y, rad, fill, stroke, line_w) {
+Pew.Layer.prototype.circle = function(x, y, rad, fill, stroke, line_w) {
 
     this.ctx.beginPath();
     this.ctx.arc(x, y, rad, 0, 2 * Math.PI, false);
@@ -339,7 +335,7 @@ Pew.GameLayer.prototype.circle = function(x, y, rad, fill, stroke, line_w) {
 ```
 *Example 2:*
 ```javascript
-Pew.GameLayer.prototype.gradient = function(x, y, x2, y2, colors, stops) {
+Pew.Layer.prototype.gradient = function(x, y, x2, y2, colors, stops) {
         
     x2 = x2 || this.canvas.width;
     y2 = y2 || this.canvas.height;
@@ -358,10 +354,10 @@ layerA.ctx.fillStyle = layerA.gradient(0,0,100,100,["#000","#111"],[0.5,1]);
 ```
 
 ##License
-PewJs is released under the MIT Licence.
+PewJS is released under the MIT Licence.
 Copyright (c) 2014 François Lajoie
 
-PewJs is also bundled with AnimationFrame.js
+PewJS is also bundled with AnimationFrame.js
 Copyright (c) 2013 Oleg Slobodskoi - https://github.com/kof/animationFrame
 
 &nbsp;
