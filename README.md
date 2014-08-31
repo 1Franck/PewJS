@@ -84,6 +84,56 @@ game.start('myscene');
 Scenes are javascript modules that encapsulate your animation logic and drawing loop. For small project, most of the time, one scene is sufficient, but there is no limit how many scenes you can have.
 
 
+**Request next animation frame**. By default, scene.draw is used
+```javascript
+scene.draw = function() {
+    ...
+    // recall scene.draw()
+    scene.requestAnim(); 
+}
+```
+**Change** animation **loop** frame **callback**
+```javascript
+scene.draw = function() {
+    ...
+    if(foo === "bar") {
+        return scene.draw2();
+    }
+    scene.requestAnim();
+}
+
+scene.draw2 = function() {
+    ...
+    scene.requestAnim(scene.draw2);
+}
+```
+
+**Pause** the animation loop
+```javascript
+scene.draw = function() {
+    ...
+    if(foo === "bar") {
+        return scene.cancelAnim();
+    }
+    scene.requestAnim();
+}
+```
+
+**Toggle** the loop (request/cancel)
+```javascript
+// example of pause toggle button
+game.keyboard.on("p", function(){
+    scene.toggleAnim();
+});
+```
+
+**Check** the loop status (idle/playing)
+```javascript
+if(scene.is('idle')) { ... }
+...
+if(scene.is('playing')) { ... }
+```
+
 ##Canvas layers
 A layer is a canvas. You can have one or many layers. Each time you create a new layer, it create a DOM canvas element with an z-index higher than previous layer.
 
@@ -186,8 +236,7 @@ game.keyboard.trigger("space");
 
 Before you binds mouse events, you need to enable mouse event listener.
 
-To work properly, mouse listener must be associated to the highest z-index canvas which 
-is always the last one created by `game.createLayer()`
+If you have more than one layer, mouse events listener must be associated to the highest z-index canvas which is always the last one created by `game.createLayer()`
 
 ```javascript
 game.mouse.init(layerB.canvas);
@@ -272,7 +321,7 @@ var mygame = Pew.project();
 console.log(mygame.conf.title); // output in console "My Game"
 ```
 
-###Utilities
+##Utilities
 Utilities can be accessed with `Pew.utils.[fn name]`
 
 Generate a **random number**
@@ -355,11 +404,9 @@ layerA.ctx.fillStyle = layerA.gradient(0,0,100,100,["#000","#111"],[0.5,1]);
 
 ##License
 PewJS is released under the MIT Licence.
-
 Copyright (c) 2014 François Lajoie
 
 PewJS is also bundled with AnimationFrame.js
-
 Copyright (c) 2013 Oleg Slobodskoi - https://github.com/kof/animationFrame
 
 &nbsp;
