@@ -155,8 +155,10 @@ var layerA = game.createLayer('platform', {
 });
 ```
 
+You can access to layer canvas DOM element with `layerA.canvas` property.
 
-##Draw
+
+###Draw
 
 Simple drawing can be achieved by using game layer canvas context(**`ctx`**) property which is just a reference to `canvas.getContext('2d')` ([more info](http://www.html5canvastutorials.com/tutorials/html5-canvas-element/)).
 
