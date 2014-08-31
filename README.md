@@ -22,6 +22,7 @@ I’ve been experimenting a lot with canvas/js lately and found myself writing o
 **Overview:**
 
  - [Quick Start](#quick-start)
+ - [Project](#project)
  - [Scenes](#scenes)
  - [Canvas layers](#canvas-layers)
      - [Draw](#draw)
