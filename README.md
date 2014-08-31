@@ -340,6 +340,17 @@ var mygame = Pew.project();
 console.log(mygame.conf.title); // output in console "My Game"
 ```
 
+In case your are out of scope, you can always access at most stuff of your current project via `Pew.project()`
+```javascript
+// access to project config
+Pew.project().conf
+// access to a layer
+Pew.project().layers["layer_name"]
+// access to a scene
+Pew.project().scenes["scene_name"]
+```
+
+
 ##Utilities
 Utilities can be accessed with `Pew.utils.[fn name]`
 
