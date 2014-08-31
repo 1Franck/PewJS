@@ -18,17 +18,6 @@ var Pew = (function(){
     // current project instance
     var project_obj;
   
-    /**
-     * Auto increment z-index value
-     */
-    var zi = (function() {
-        var i = 0;
-        return {
-            get: function(){
-                return ++i;
-            }
-        }
-    })();
 
     /**
      * Auto increment unique id
@@ -66,49 +55,9 @@ var Pew = (function(){
 
         return this;
     }
-    
-    /**
-     * Create a new layer canvas
-     * 
-     * @param  string name Layer name. ex: bg, fg, background, topmenu, etc...
-     * @param  object opts Options @see GameLayer
-     */
-    Project.prototype.createLayer = function(name, opts) {
-
-        var def = new Layer(opts);
-        this.layers[name] = def;
-        return def;
-    };
 
     /**
-     * Project animation start loop
-     */
-    Project.prototype.start = function(name){
-
-        var scene = this.scenes[name].fn;
-
-        if(scene.init)
-            scene.init();
-
-        scene.draw();
-    };
-
-    /**
-     * Create a new scene
-     * 
-     * @param  string  name 
-     * @param  function fn   
-     * @return object        
-     */
-    Project.prototype.createScene = function(name, fn) {
-
-        this.scenes[name] = new Scene(name, fn);
-        return this.scenes[name];
-    };
-
-
-     /**
-     * Project Canvas Layer
+     * Canvas Layer object
      * 
      * @param object opts layer options
      */
@@ -128,74 +77,7 @@ var Pew = (function(){
     }
 
     /**
-     * Create canvas
-     */
-    Layer.prototype.init = function() {
-
-        if(this.canvas == null) {
-            this.canvas = document.createElement("canvas");
-            this.ctx    = this.canvas.getContext('2d');
-
-            //append canvas to DOM
-            document.body.appendChild(this.canvas);
-        }
-
-        //default style
-        this.canvas.style.display = "block";
-        this.canvas.style.position = "absolute";
-        this.canvas.style.zIndex = zi.get();
-
-        // set w/h
-        if(this.full) this.fullscreen();
-        else {
-            this.canvas.width  = this.width;
-            this.canvas.height = this.height;
-        }
-
-        // bind this.fullscreen on window.onresize if autoresize = true
-        if(this.autoresize) {
-            var self = this;
-            window.onresize = window.onresize || function() {
-                for(var i in Pew.game().layers) {
-                    if(Pew.game().layers[i].autoresize) {
-                        Pew.game().layers[i].fullscreen();
-                    }
-                }
-            }
-        }
-    }
-
-    /**
-     * Fullscreen
-     */
-    Layer.prototype.fullscreen = function() {
-        this.canvas.width  = window.innerWidth;
-        this.canvas.height = window.innerHeight;
-        this.width  = this.canvas.width;
-        this.height = this.canvas.height;
-        
-    }
-
-    /**
-     * Context clearRect()
-     * 
-     * @param  int x  
-     * @param  int y  
-     * @param  int x2 
-     * @param  int y2 
-     */
-    Layer.prototype.clear = function(x,y,x2,y2) {
-        var x = x || 0,
-            y = y || 0,
-            x2 = x2 || this.canvas.width,
-            y2 = y2 || this.canvas.height;
-
-        this.ctx.clearRect(x,y,x2,y2); 
-    };
-
-
-    /**
-     * Project scene object
+     * Scene object
      * 
      * @param string   name 
      * @param function fn   
@@ -255,12 +137,135 @@ var Pew = (function(){
         },
 
         //create a new Project() object
+        //will overwrite the current project if exists
         createProject: function(settings) {
             project_obj = new Project(settings);
             return project_obj;
         },
     }
 })(); ;/**
+ * Pew / Project
+ */
+
+/**
+ * Create a new layer canvas
+ * 
+ * @param  string name Layer name. ex: bg, fg, background, topmenu, etc...
+ * @param  object opts Options @see GameLayer
+ */
+Pew.Project.prototype.createLayer = function(name, opts) {
+
+    var def = new Pew.Layer(opts);
+    this.layers[name] = def;
+    return def;
+};
+
+/**
+ * Project animation start loop
+ */
+Pew.Project.prototype.start = function(name){
+
+    var scene = this.scenes[name].fn;
+
+    if(scene.init)
+        scene.init();
+
+    scene.draw();
+};
+
+/**
+ * Create a new scene
+ * 
+ * @param  string  name 
+ * @param  function fn   
+ * @return object        
+ */
+Pew.Project.prototype.createScene = function(name, fn) {
+
+    this.scenes[name] = new Pew.Scene(name, fn);
+    return this.scenes[name];
+};;/**
+ * Pew / Layer
+ */
+
+/**
+ * Create canvas
+ */
+Pew.Layer.prototype.init = function() {
+
+    if(this.canvas == null) {
+        this.canvas = document.createElement("canvas");
+        this.ctx    = this.canvas.getContext('2d');
+
+        //append canvas to DOM
+        document.body.appendChild(this.canvas);
+    }
+
+    //default style
+    this.canvas.style.display = "block";
+    this.canvas.style.position = "absolute";
+    this.canvas.style.zIndex = this._zi.get();
+
+    // set w/h
+    if(this.full) this.fullscreen();
+    else {
+        this.canvas.width  = this.width;
+        this.canvas.height = this.height;
+    }
+
+    // bind this.fullscreen on window.onresize if autoresize = true
+    if(this.autoresize) {
+        var self = this;
+        window.onresize = window.onresize || function() {
+            for(var i in Pew.project().layers) {
+                if(Pew.project().layers[i].autoresize) {
+                    Pew.project().layers[i].fullscreen();
+                }
+            }
+        }
+    }
+}
+
+/**
+ * Fullscreen
+ */
+Pew.Layer.prototype.fullscreen = function() {
+    this.canvas.width  = window.innerWidth;
+    this.canvas.height = window.innerHeight;
+    this.width  = this.canvas.width;
+    this.height = this.canvas.height; 
+}
+
+/**
+ * Context clearRect()
+ * 
+ * @param  int x  
+ * @param  int y  
+ * @param  int x2 
+ * @param  int y2 
+ */
+Pew.Layer.prototype.clear = function(x,y,x2,y2) {
+    var x = x || 0,
+        y = y || 0,
+        x2 = x2 || this.canvas.width,
+        y2 = y2 || this.canvas.height;
+
+    this.ctx.clearRect(x,y,x2,y2); 
+};
+
+
+/**
+ * Auto increment z-index value
+ * This function should be used by init() only
+ */
+Pew.Layer.prototype._zi = (function() {
+    var i = 0;
+    return {
+        get: function(){
+            return ++i;
+        }
+    }
+})();;/**
  * Pew / Utils
  */
 Pew.utils = function(){}
@@ -340,7 +345,7 @@ Pew.utils.randIndex = function(a) {
 /**
  * Return a range of elements from an array
  * @see: _.range from underscore.js - http://underscorejs.org/
- * dont work
+ * @dont work
  */
 Pew.utils.range = function(start, stop, step) {
 
