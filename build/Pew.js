@@ -732,22 +732,62 @@ Pew.Project.prototype.resources = (function() {
         }
     }
 
+    /**
+     * Onload event
+     *
+     * @param  function     fn_ready      
+     * @param  function     fn_not_ready 
+     * 
+     * @return string
+     */
+    Resource.prototype.onLoad = function(fn_ready, fn_not_ready) {
+
+        var self = this;
+
+        // on ready
+        this.el.addEventListener('load', function() {
+
+            self.ready = true;
+            var progress = groupProgress(self.rid);
+            
+            //when all resource group are ready, we call fn_ready only once
+            if(isReady(self.rid)) {
+
+                fn_not_ready(progress); // for the 100%
+                fn_ready();
+
+                //remove current group callback
+                ready_callbacks[self.rid] = (function(){})
+            }
+            else {
+                fn_not_ready(progress);
+            }
+        });
+
+        
+    }
+
 
     /**
      * Load an image url or an array of image urls
      * 
      * @param  array|string res      
-     * @param  function     fn_ready           
+     * @param  function     fn_ready      
+     * @param  function     fn_not_ready       
      */
-    function load(resources, fn_ready) {
+    function load(resources, fn_ready, fn_not_ready) {
 
         fn_ready = fn_ready || (function(){});
+        fn_not_ready = fn_not_ready || (function(){});
 
-        ready_callbacks.push(fn_ready);
+        ready_callbacks.push(fn_ready);   
 
         var ready_index = ready_callbacks.length-1;
 
         if(resources instanceof Array) {
+
+            fn_not_ready(groupProgress(ready_index)); // for the 0%
+
             resources.forEach(function(res) {
 
                 var r = new Resource(res, ready_index);
@@ -756,33 +796,14 @@ Pew.Project.prototype.resources = (function() {
                 else if(r.type() === 'audio') r.el = new Audio();
                 else return; // dont load unknow type
 
-                // on ready
-                r.el.addEventListener('load', function() {
-
-                    cache[res].el    = r.el;
-                    cache[res].ready = true;
-                    
-                    /**
-                     * When all res group are ready, we call fn_ready only once
-                     */
-                    if(isReady(cache[res].rid)) {
-                        fn_ready();
-                        //remove current group callback
-                        ready_callbacks[cache[res].rid] = (function(){})
-                    }
-                });
+                r.onLoad(fn_ready, fn_not_ready);
 
                 // load file and cache obj
                 r.el.src = res;
                 cache[res] = r;
             });
         }
-        else {
-
-        }
     }
-
-
 
     /**
      * Get resource element
@@ -803,14 +824,37 @@ Pew.Project.prototype.resources = (function() {
     function isReady(rid) {
         var ready = true;
         for(var k in cache) {
-            if(cache[k].ready == false && cache[k].rid == rid) {
+            if(cache[k].ready === false && cache[k].rid === rid) {
                 ready = false;
             }
         }
         return ready;
     }
 
+    /**
+     * Get the current progression status of a group of resources
+     * 
+     * @param  integer rid
+     * @return object    
+     */
+    function groupProgress(rid) {
+        var r = 0, nr = 0;
+        for(var k in cache) {
+            if(cache[k].rid === rid) {
+                if(cache[k].ready === false) ++nr;
+                else ++r;
+            }            
+        }
+        return {
+            total: (r+nr),
+            ready: r,
+            not_ready: nr,
+            progress: (Math.round((r*100)/(r+nr)) || 0)
+        }
+    }
 
+
+    //public stuff
     return {
         load: load,
         get: get,
