@@ -294,6 +294,19 @@ game.resources.load(['img/sprite1.jpg','img/sprite1.jpg',...], function(){
 });
 ```
 
+**Loading a group of resource** with progression callback.  Usefull for stuff like a progress bar.
+```javascript
+game.resources.load(['img/sprite1.jpg','img/sprite1.jpg',...], function(){
+    game.start("mygame");
+}, function(p) {
+    console.log(p.progress + " %");
+});
+//will output:
+//5 %
+//10 %
+// etc...
+```
+
 **Retreive** and **use** a loaded **resource**.
 
 ```javascript
@@ -412,7 +425,7 @@ layerA.ctx.fillStyle = layerA.gradient(0,0,100,100,["#000","#111"],[0.5,1]);
 PewJS is released under the MIT Licence.
 Copyright (c) 2014 François Lajoie
 
-PewJS is also bundled with AnimationFrame.js
+PewJS is also bundled with AnimationFrame.js.
 Copyright (c) 2013 Oleg Slobodskoi - https://github.com/kof/animationFrame
 
 &nbsp;
