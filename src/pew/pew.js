@@ -3,24 +3,22 @@
  * 
  * Lightweight canvas framework experiment for games and animations
  *
- * @version   2014-07-30
  * @copyright François Lajoie 
  * @license   MIT
- *
  * 
  * Bundled with AnimationFrame.js
  * @copyright 2013 Oleg Slobodskoi - https://github.com/kof/animationFrame
  */
-var Pew = (function(){
 
-    "use strict";
+"use strict";
+
+var Pew = (function(){
 
     // current project instance
     var project_obj;
   
-
     /**
-     * Auto increment unique id
+     * Auto increment unique id starting at 1000
      */
     var uid = (function() {
         var i = 1000;
@@ -39,7 +37,7 @@ var Pew = (function(){
         // settings
         var def_settings = {
 
-            title     : "GameTitle",
+            title     : "My Project",
             fps       : 60,
             resources : [],
             vars      : {},
