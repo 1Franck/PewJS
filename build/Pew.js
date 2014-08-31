@@ -93,12 +93,6 @@ var Pew = (function(){
         scene.draw();
     };
 
-    Project.prototype.pause = function(name) {
-
-        this.scenes[name].fn.cancelAnim();
-        //this.animationFrame.cancel(this.scenes[name].fn._fid);
-    }
-
     /**
      * Create a new scene
      * 
@@ -229,6 +223,14 @@ var Pew = (function(){
             this.cancelAnim = function() {
                 Pew.project().animationFrame.cancel(this._fid);
                 this._status = 'idle';
+            };
+
+            this.toggleAnim = function(callback) {
+                if(this.is('idle')) {
+                    var callback = callback || this.draw;
+                    callback();
+                }
+                else this.cancelAnim();
             };
 
         }).apply( this.fn );
