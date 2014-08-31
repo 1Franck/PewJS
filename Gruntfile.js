@@ -60,9 +60,7 @@ module.exports = function(grunt) {
               'src/pew/mouse.js', 
               'src/pew/keyboard.js', 
               'src/pew/resources.js',
-              'src/pew/fps.js', 
-              'src/pew/log.js', 
-              'src/pew/debug.js', 
+              'src/pew/fps.js',
               'src/vendors/AnimationFrame/AnimationFrame.js'],
 
         dest: 'build/Pew.js',
