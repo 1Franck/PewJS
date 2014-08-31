@@ -908,33 +908,6 @@ Pew.Project.prototype.fpsmeter = (function(){
 
 
     return new Meter();
-})();;/**
- * Pew / Log
- */
-/*
-Pew.prototype.log = (function(){
-    var errors = [], msg = [];
-
-    return {
-        error: function(e) {
-            errors.push(e);
-        },
-        msg: function(m) {
-            msg.push(e);
-        }
-    }
-})();
-*/;Pew.Project.prototype.debug = (function(){
-    var position = [];
-
-    //console.log(this);
-
-    return {
-        test: function() {
-            console.log(this.test2);
-            return "OK";
-        },
-    }
 })();;
 
 /**
