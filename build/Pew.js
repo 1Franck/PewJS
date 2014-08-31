@@ -3,24 +3,22 @@
  * 
  * Lightweight canvas framework experiment for games and animations
  *
- * @version   2014-07-30
  * @copyright François Lajoie 
  * @license   MIT
- *
  * 
  * Bundled with AnimationFrame.js
  * @copyright 2013 Oleg Slobodskoi - https://github.com/kof/animationFrame
  */
-var Pew = (function(){
 
-    "use strict";
+"use strict";
+
+var Pew = (function(){
 
     // current project instance
     var project_obj;
   
-
     /**
-     * Auto increment unique id
+     * Auto increment unique id starting at 1000
      */
     var uid = (function() {
         var i = 1000;
@@ -39,7 +37,7 @@ var Pew = (function(){
         // settings
         var def_settings = {
 
-            title     : "GameTitle",
+            title     : "My Project",
             fps       : 60,
             resources : [],
             vars      : {},
@@ -513,7 +511,7 @@ Pew.Project.prototype.keyboard = (function(){
         };
 
     // add f1 to f12 keycode to aliases, the art of laziness
-    for(i=1;i<13;++i) aliases["F"+i] = 111 + i;
+    for(var i=1;i<13;++i) aliases["F"+i] = 111 + i;
 
     /**
      * Bind event keydown and keypress over document
@@ -579,7 +577,7 @@ Pew.Project.prototype.keyboard = (function(){
 
         if(isNaN(code)) return code;
 
-        for(key in aliases) {
+        for(var key in aliases) {
             if(aliases[key] == code) {
                 return key;
             }
@@ -623,7 +621,7 @@ Pew.Project.prototype.keyboard = (function(){
 
             var result = [];
             
-            for(key in keys) {
+            for(var key in keys) {
                 if(keys[key] != false) 
                     result.push(key);
             }
