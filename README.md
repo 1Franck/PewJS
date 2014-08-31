@@ -145,7 +145,6 @@ var layerA = game.createLayer('background'),
 
 By default, layer take all browser window space. 
 
-*Example 1*: 
 Change layer configs:
 ```javascript
 var layerA = game.createLayer('platform', {
@@ -159,7 +158,6 @@ var layerA = game.createLayer('platform', {
 
 ##Draw
 
-*Example 1*: 
 Simple drawing can be achieved by using game layer canvas context(**`ctx`**) property which is just a reference to `canvas.getContext('2d')` ([more info](http://www.html5canvastutorials.com/tutorials/html5-canvas-element/)).
 
 ```javascript
@@ -178,7 +176,6 @@ Before you binds some keyboard events, you need to enable keyboard event listene
 game.keyboard.init();
 ```
 
-*Example 1*: 
 **Capture letter** "p" keydown event and execute fn callback:
 
 ```javascript
@@ -187,7 +184,6 @@ game.keyboard.on("p", function() { ... });
 game.keyboard.on(80, function() { ... });
 ```
     
-*Example 2*: 
 **Capture a group of keys** events and execute fn callback:
 
 ```javascript
@@ -204,7 +200,6 @@ game.keyboard.on(["space", "ctrl", "alt"], function(key) {
 Note: It is possible to bind special keys like **F1** to **F12**, **Esc**, **Return**, etc.. But remember that it will prevent browser native behavior. Ex: Binding an event for F5 will prevent browser refresh.
 
     
-*Example 3*: 
 **Stop capturing** key(s):
 
 ```javascript    
@@ -214,7 +209,6 @@ game.keyboard.off(["space", "ctrl", "alt"]);
 game.keyboard.off();  // unbind everything
 ```
 
-*Example 4*: 
 **Check** a key **manually**:
 
 ```javascript
@@ -225,7 +219,6 @@ if(game.keyboard.key('space')) {
 var pressed_keys = game.keyboard.keys();
 ```
 
-*Example 5*: 
 **Trigger manually** a key:
 
 ```javascript
@@ -242,7 +235,6 @@ If you have more than one layer, mouse events listener must be associated to the
 game.mouse.init(layerB.canvas);
 ```
 
-*Example 1*: 
 **Capture mouse click** event and execute fn callback:
     
 ```javascript
@@ -250,14 +242,13 @@ game.mouse.on("click", function() {
     ...
 });
 ```
-*Example 2*:     
+ 
 **Stop capturing** mouse event(s):
 
 ```javascript
 game.mouse.off("click"); 
 ```
-    
-*Example 3*: 
+
 Access to current **cursor position**:
     
 ```javascript
@@ -269,7 +260,6 @@ var y = game.mouse.y();
 ##Resources (images/audio)#
 Support image and audio. Resource url are relative.
 
-*Example 1*: 
 **Loading resource** like an image and call fn when ready.
 
 ```javascript
@@ -277,8 +267,7 @@ game.resources.load('img/foobar.jpg', function(){
     ...
 });
 ``` 
-    
-*Example 2*: 
+
 **Loading a group of resource** and call fn when all resource ready.
 
 ```javascript
@@ -286,7 +275,7 @@ game.resources.load(['img/sprite1.jpg','img/sprite1.jpg',...], function(){
     game.start("mygame");
 });
 ```
-*Example 3*:     
+
 **Retreive** and **use** a loaded **resource**.
 
 ```javascript
@@ -295,12 +284,11 @@ layerA.ctx.drawImage(my_img , 0, 0, 300, 400);
 ```
 
 
-
 ##Scope
 
 Calling Pew.createProject() store a new instance of `Pew.Project` inside Pew and return it so you can use it after. To retreive/access your game object, you can also use `Pew.project()`
 
-*Example 1*:
+
 Create project and stored it into variable `game`: 
 ```javascript
 var game = Pew.createProject({
@@ -309,7 +297,7 @@ var game = Pew.createProject({
 
 console.log(game.conf.title); // output in console "My Game"
 ```
-*Example 2:*
+
 Create project and retreive it instance via `Pew.project()`: 
 ```javascript
 Pew.createProject({
