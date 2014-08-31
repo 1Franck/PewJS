@@ -21,7 +21,7 @@ Pew.Project.prototype.keyboard = (function(){
         };
 
     // add f1 to f12 keycode to aliases, the art of laziness
-    for(i=1;i<13;++i) aliases["F"+i] = 111 + i;
+    for(var i=1;i<13;++i) aliases["F"+i] = 111 + i;
 
     /**
      * Bind event keydown and keypress over document
@@ -87,7 +87,7 @@ Pew.Project.prototype.keyboard = (function(){
 
         if(isNaN(code)) return code;
 
-        for(key in aliases) {
+        for(var key in aliases) {
             if(aliases[key] == code) {
                 return key;
             }
@@ -131,7 +131,7 @@ Pew.Project.prototype.keyboard = (function(){
 
             var result = [];
             
-            for(key in keys) {
+            for(var key in keys) {
                 if(keys[key] != false) 
                     result.push(key);
             }
