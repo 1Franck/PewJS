@@ -78,7 +78,7 @@ Pew.utils.randIndex = function(a) {
 /**
  * Return a range of elements from an array
  * @see: _.range from underscore.js - http://underscorejs.org/
- * dont work
+ * @dont work
  */
 Pew.utils.range = function(start, stop, step) {
 
