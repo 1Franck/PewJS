@@ -95,10 +95,21 @@ game.createScene('myscene', (function(){
 // Start scene animation loop
 game.start('myscene');
 ```   
+##Project
+Before you create you very first scene, you must create a new project. Your project will hold configs, scene(s), layer(s), etc...
+```javascript
+var game = Pew.createProject({
+    title  : "My Game",
+});
+```
 
 ##Scenes
 Scenes are javascript modules that encapsulate your animation logic and drawing loop. For small project, most of the time, one scene is sufficient, but there is no limit how many scenes you can have.
 
+**Create a new scene:** (see [Quick Start](#quick-start) boiler plate for more details)
+```javascript
+game.createScene('scene_name', (function(){ ... })());
+```
 
 **Request next animation frame**. By default, scene.draw is used
 ```javascript
@@ -207,7 +218,7 @@ game.keyboard.on(80, function() { ... });
 ```javascript
 game.keyboard.on(["space", "ctrl", "alt"], function(key) {
 
-    if(key.code == 32) console.log('You have pressed SPACEBAR');
+    if(key.code === 32) console.log('You have pressed SPACEBAR');
     // or (note: key.char is always lower case)
     if(key.char === "space") console.log('You have pressed SPACEBAR');
     ...
@@ -247,7 +258,7 @@ game.keyboard.trigger("space");
 
 Before you binds mouse events, you need to enable mouse event listener.
 
-If you have more than one layer, mouse events listener must be associated to the highest z-index canvas which is always the last one created by `game.createLayer()`
+If you have more than one layer, mouse events listener must be associated to the highest z-index canvas which is always the last one created by `createLayer()`
 
 ```javascript
 game.mouse.init(layerB.canvas);
@@ -342,12 +353,18 @@ console.log(mygame.conf.title); // output in console "My Game"
 
 In case your are out of scope, you can always access at most stuff of your current project via `Pew.project()`
 ```javascript
-// access to project config
+// access to project config object
 Pew.project().conf
-// access to a layer
+// access to a layer object
 Pew.project().layers["layer_name"]
-// access to a scene
+// access to a scene module
 Pew.project().scenes["scene_name"]
+// access to keyboard module
+Pew.project().keyboard
+// access to mouse module
+Pew.project().mouse
+// access to resources module
+Pew.project().resources
 ```
 
 
