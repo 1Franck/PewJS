@@ -9,15 +9,31 @@ I’ve been experimenting a lot with canvas/js lately and found myself writing o
 
 **What it do ?**
 
-- handle animations frame rate and loop inside a scene
-- handle multiple canvas layers
-- handle loading/storing resources like image or audio
-- binds keyboard inputs event, mouse events and cursor position
+ - handle animations frame rate and loop inside a scene
+ - handle multiple canvas layers
+ - handle loading/storing resources like image or audio
+ - binds keyboard inputs event, mouse events and cursor position
 
 **What it don't:**
 
-- program a game for you
-- your laundry
+ - program a game for you
+ - your laundry
+
+**Overview:**
+
+ - [Quick Start](#quick-start)
+ - [Scenes](#scenes)
+ - [Canvas layers](#canvas-layers)
+     - [Draw](#draw)
+ - [Inputs](#input)
+     - [Keyboard](#keyboard)
+     - [Mouse](#mouse)
+ - [Resources (images/audio)](#resources-imagesaudio)
+ - [Scope](#scope)
+ - [Utilities](#utilities)
+ - [Extending PewJS](#extending-pewjs)
+ - [License](#license)
+
 
 ##Quick Start
 
