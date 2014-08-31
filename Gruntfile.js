@@ -54,6 +54,8 @@ module.exports = function(grunt) {
       },
       dist: {
         src: ['src/pew/pew.js', 
+              'src/pew/project.js', 
+              'src/pew/layer.js', 
               'src/pew/utils.js', 
               'src/pew/mouse.js', 
               'src/pew/keyboard.js', 
