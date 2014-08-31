@@ -3,7 +3,7 @@
  * 
  * Lightweight canvas framework experiment for games and animations
  *
- * @copyright François Lajoie 
+ * @copyright Francois Lajoie 
  * @license   MIT
  * 
  * Bundled with AnimationFrame.js
