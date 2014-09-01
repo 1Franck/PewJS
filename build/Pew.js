@@ -543,7 +543,7 @@ Pew.Project.prototype.keyboard = (function(){
     /**
      * Trigger manually an event
      * 
-     * @param  string|integer k (keycode or keychar)
+     * @param string|integer k (keycode or keychar)
      */
     function triggerCallback(k) {
 
