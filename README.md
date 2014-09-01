@@ -272,8 +272,8 @@ game.keyboard.onAll(function(event, key) {
 });
 
 // when pressing "p", output will be
-// "pressed 1"
 // "pressed 2"
+// "pressed 1"
 
 ...
 
@@ -297,7 +297,10 @@ game.keyboard.onAll(function(event, key) {
     }
 });
 ```
-
+**Stop capturing all keys**. It will remove global callback only, but not other callbacks defined with on().
+```javascript
+game.keyboard.offAll();
+```
 
 ###Mouse
 
