@@ -206,7 +206,7 @@ Before you binds some keyboard events, you need to enable keyboard event listene
 game.keyboard.init();
 ```
 
-**Capture letter** "p" keydown event and execute fn callback:
+**Capture a key** event and execute fn callback:
 
 ```javascript
 game.keyboard.on("p", function() { ... });
@@ -265,10 +265,10 @@ To stop propagation, you need to add `return false` to your onAll() callback. To
 ```javascript
 
 game.keyboard.on("p", function() {
-    console.log("pressed 1")
+    console.log("pressed 1");
 });
 game.keyboard.onAll(function(event, key) {
-    if(key.char === "p") console.log("pressed 2")
+    if(key.char === "p") console.log("pressed 2");
 });
 
 // when pressing "p", output will be
@@ -278,7 +278,7 @@ game.keyboard.onAll(function(event, key) {
 ...
 
 game.keyboard.on("space", function() {
-    console.log("pressed 1")
+    console.log("pressed 1");
 });
 game.keyboard.onAll(function(event, key) {
     if(key.char === "space") console.log("pressed 2");
