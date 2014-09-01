@@ -227,7 +227,7 @@ game.keyboard.on(["space", "ctrl", "alt"], function(key) {
 ```
     
 
-Note: It is possible to bind special keys like **F1** to **F12**, **Esc**, **Return**, etc.. But remember that it will prevent browser native behavior. Ex: Binding an event for F5 will prevent browser refresh.
+Note: Binding key(s) with on() always prevent event default. It is possible to bind special keys like **F1** to **F12**, **Esc**, **Return**, etc.. But remember that it will prevent browser native behavior. Ex: Binding an event for F5 will prevent browser refresh.
 
     
 **Stop capturing** key(s):
@@ -254,6 +254,50 @@ var pressed_keys = game.keyboard.keys();
 ```javascript
 game.keyboard.trigger("space");
 ```
+
+**Capturing all keys** nonobstructive way. 
+
+Important: This is a global callback, and it won't prevent other callbacks(defined with on()) from being triggered and won't prevent native browser behavior by default. 
+
+
+To stop propagation, you need to add `return false` to your onAll() callback. To prevent native behavior, you need to add `event.preventDefault()` to your onAll() callback.
+
+```javascript
+
+game.keyboard.on("p", function() {
+    console.log("pressed 1")
+});
+game.keyboard.onAll(function(event, key) {
+    if(key.char === "p") console.log("pressed 2")
+});
+
+// when pressing "p", output will be
+// "pressed 1"
+// "pressed 2"
+
+...
+
+game.keyboard.on("space", function() {
+    console.log("pressed 1")
+});
+game.keyboard.onAll(function(event, key) {
+    if(key.char === "space") console.log("pressed 2");
+    return false;
+});
+
+// when pressing "space", output will be
+// "pressed 2"
+
+...
+
+game.keyboard.onAll(function(event, key) {
+    if(key.char === "backspace") 
+        //...
+        event.preventDefault(); // prevent browser behavior
+    }
+});
+```
+
 
 ###Mouse
 
@@ -439,6 +483,7 @@ Pew.Layer.prototype.gradient = function(x, y, x2, y2, colors, stops) {
 // layers have now access to this function. ex:
 layerA.ctx.fillStyle = layerA.gradient(0,0,100,100,["#000","#111"],[0.5,1]);
 ```
+
 
 ##License
 PewJS is released under the MIT Licence.
