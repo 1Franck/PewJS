@@ -329,7 +329,7 @@ layerA.ctx.drawImage(my_img , 0, 0, 300, 400);
 
 ##Scope
 
-Calling Pew.createProject() store a new instance of `Pew.Project` inside Pew and return it so you can use it after. To retreive/access your game object, you can also use `Pew.project()`
+Calling Pew.createProject() store a new instance of `Pew.Project` inside Pew and return it. The other way to access to your project is going through `Pew.project()`
 
 
 Create project and stored it into variable `game`: 
@@ -338,18 +338,8 @@ var game = Pew.createProject({
     title  : "My Game",
 });
 
-console.log(game.conf.title); // output in console "My Game"
-```
-
-Create project and retreive it instance via `Pew.project()`: 
-```javascript
-Pew.createProject({
-    title  : "My Game",
-});
-
-console.log(Pew.project().conf.title); // output in console "My Game"
-var mygame = Pew.project();
-console.log(mygame.conf.title); // output in console "My Game"
+console.log(game.conf.title); // output "My Game"
+console.log(Pew.project().conf.title); // output "My Game"
 ```
 
 In case your are out of scope, you can always access at most stuff of your current project via `Pew.project()`
