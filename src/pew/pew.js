@@ -7,7 +7,7 @@
  * @license   MIT
  * 
  * Bundled with AnimationFrame.js
- * @copyright 2013 Oleg Slobodskoi - https://github.com/kof/animationFrame
+ * @copyright 2013 Oleg Slobodskoi > https://github.com/kof/animationFrame
  */
 
 "use strict";
