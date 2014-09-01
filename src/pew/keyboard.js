@@ -4,7 +4,8 @@
 Pew.Project.prototype.keyboard = (function(){
 
     var keys = [], //curent down keys
-        events_cb = {}, //keycode event callback
+        events_cb = {}, //keycode event callback(s)
+        global_cb = (function(){}), //global callback
         aliases = { // aliases for special key
             'SHIFT'     : 16,
             'TAB'       : 9,
@@ -33,6 +34,11 @@ Pew.Project.prototype.keyboard = (function(){
 
             keys[e.keyCode] = true;
 
+            // global callback - if return false, we stop propagation
+            var r = global_cb(e, toKeyObject(e.keyCode)); 
+            if(r === false) return;
+
+            // default callback(s) + prevent default
             if(events_cb[e.keyCode]) {
                 triggerCallback(e.keyCode);
                 e.preventDefault();
@@ -54,10 +60,7 @@ Pew.Project.prototype.keyboard = (function(){
         var code = toKeyCode(k);
 
         if(events_cb[code]) {
-            events_cb[code]({
-                "char" : toKeyChar(code).toLowerCase(),
-                "code" : code
-            });
+            events_cb[code](toKeyObject(code));
         } 
     }
 
@@ -95,7 +98,18 @@ Pew.Project.prototype.keyboard = (function(){
         return String.fromCharCode(code);
     }
 
-
+    /**
+     * Transform key code to object literal
+     * 
+     * @param  integer code 
+     * @return object
+     */
+    function toKeyObject(code) {
+        return {
+            "char" : toKeyChar(code).toLowerCase(),
+            "code" : code
+        }
+    }
 
     /**
      * Public
@@ -157,7 +171,6 @@ Pew.Project.prototype.keyboard = (function(){
             }
         },
 
-
         /**
          * Unbind "on" event(s), or unbind all events if no arg
          * 
@@ -178,6 +191,24 @@ Pew.Project.prototype.keyboard = (function(){
             else {
                 delete events_cb[toKeyCode(k)];
             }
+        },
+
+        /**
+         * Bind a global callback over any keys
+         * 
+         * @param  integer c
+         */
+        onAll: function(c) {
+            global_cb = c;
+        },
+        
+        /**
+         * Unbind a global callback over any keys
+         *
+         * This function do not clean events setted by on()
+         */
+        offAll: function() {
+            global_cb = (function(){});
         },
     }
 })();
