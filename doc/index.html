@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>PewJs Readme</title>
+<link rel="stylesheet" href="https://stackedit.io/res-min/themes/base.css" />
+<script type="text/javascript" src="https://stackedit.io/libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body><div class="container"><h2 id="pewjs">PewJS</h2>
+
+<p>PewJS is a tiny HTML5 Canvas framework for games and animations.</p>
+
+<p><strong>Why ?</strong></p>
+
+<p>I’ve been experimenting a lot with canvas/js lately and found myself writing over and over the same bunch of codes to make it working properly, before even being able to start writing the game/animation codes. I decided to create PewJS mainly because i wanted to reuse easily the same bunch of codes from a project to another and create a straightforward modular structure for my experiments. </p>
+
+<p><strong>What it do ?</strong></p>
+
+<ul>
+<li>handle animations frame rate and loop inside a scene</li>
+<li>handle multiple canvas layers</li>
+<li>handle loading/storing resources like image or audio</li>
+<li>binds keyboard inputs event, mouse events and cursor position</li>
+</ul>
+
+<p><strong>What it don’t:</strong></p>
+
+<ul>
+<li>program a game for you</li>
+<li>your laundry</li>
+</ul>
+
+<p><strong>Overview:</strong></p>
+
+<ul>
+<li><a href="#quick-start">Quick Start</a></li>
+<li><a href="#project">Project</a></li>
+<li><a href="#scenes">Scenes</a></li>
+<li><a href="#canvas-layers">Canvas layers</a> <br>
+<ul><li><a href="#draw">Draw</a></li></ul></li>
+<li><a href="#input">Inputs</a> <br>
+<ul><li><a href="#keyboard">Keyboard</a></li>
+<li><a href="#mouse">Mouse</a></li></ul></li>
+<li><a href="#resources-imagesaudio">Resources (images/audio)</a></li>
+<li><a href="#scope">Scope</a></li>
+<li><a href="#utilities">Utilities</a></li>
+<li><a href="#extending-pewjs">Extending PewJS</a></li>
+<li><a href="#license">License</a></li>
+</ul>
+
+
+
+<h2 id="quick-start">Quick Start</h2>
+
+<p>Take a look at this boiler plate. <strong>We will use this code as reference for the next paragraphs.</strong></p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="com">// Create the game</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> game </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Pew</span><span class="pun">.</span><span class="pln">createProject</span><span class="pun">({</span><span class="pln">
+    title  </span><span class="pun">:</span><span class="pln"> </span><span class="str">"My Game"</span><span class="pun">,</span><span class="pln">
+</span><span class="pun">});</span><span class="pln">
+
+</span><span class="com">// Create a scene</span><span class="pln">
+game</span><span class="pun">.</span><span class="pln">createScene</span><span class="pun">(</span><span class="str">'myscene'</span><span class="pun">,</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(){</span><span class="pln">
+
+    </span><span class="com">// Scene properties</span><span class="pln">
+    </span><span class="kwd">var</span><span class="pln"> scene </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{};</span><span class="pln">
+
+    </span><span class="com">// Create canvas layers </span><span class="pln">
+    </span><span class="kwd">var</span><span class="pln"> layerA </span><span class="pun">=</span><span class="pln"> game</span><span class="pun">.</span><span class="pln">createLayer</span><span class="pun">(</span><span class="str">'background'</span><span class="pun">),</span><span class="pln">
+        layerB </span><span class="pun">=</span><span class="pln"> game</span><span class="pun">.</span><span class="pln">createLayer</span><span class="pun">(</span><span class="str">'foreground'</span><span class="pun">);</span><span class="pln">
+
+    </span><span class="com">// Start inputs capture</span><span class="pln">
+    </span><span class="com">// Mouse note: to work properly, mouse event must </span><span class="pln">
+    </span><span class="com">// be associated to the highest z-index canvas which </span><span class="pln">
+    </span><span class="com">// is always the last one created</span><span class="pln">
+    game</span><span class="pun">.</span><span class="pln">keyboard</span><span class="pun">.</span><span class="pln">init</span><span class="pun">();</span><span class="pln">
+    game</span><span class="pun">.</span><span class="pln">mouse</span><span class="pun">.</span><span class="pln">init</span><span class="pun">(</span><span class="pln">layerB</span><span class="pun">.</span><span class="pln">canvas</span><span class="pun">);</span><span class="pln"> 
+
+
+    </span><span class="com">// Called once when animation start</span><span class="pln">
+    scene</span><span class="pun">.</span><span class="pln">init </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="pun">};</span><span class="pln">
+
+    </span><span class="com">// Update loop</span><span class="pln">
+    scene</span><span class="pun">.</span><span class="pln">update </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> 
+    </span><span class="pun">};</span><span class="pln">
+
+    </span><span class="com">// Draw loop</span><span class="pln">
+    scene</span><span class="pun">.</span><span class="pln">draw </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+
+        scene</span><span class="pun">.</span><span class="pln">update</span><span class="pun">();</span><span class="pln">
+
+        </span><span class="com">//&lt;!-- your stuff --&gt;</span><span class="pln">
+
+        </span><span class="com">// request animation frame</span><span class="pln">
+        </span><span class="com">// by default scene draw() is called again.</span><span class="pln">
+        </span><span class="com">// Switch to another property callback for </span><span class="pln">
+        </span><span class="com">// animation frame by specifying it within requestAnim().</span><span class="pln">
+        </span><span class="com">// ex: scene.requestAnim("mypropertyname");</span><span class="pln">
+        scene</span><span class="pun">.</span><span class="pln">requestAnim</span><span class="pun">();</span><span class="pln">
+    </span><span class="pun">};</span><span class="pln">
+
+    </span><span class="com">// always return scene object</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pln"> scene</span><span class="pun">;</span><span class="pln">
+
+</span><span class="pun">})());</span><span class="pln">
+
+
+</span><span class="com">// Start scene animation loop</span><span class="pln">
+game</span><span class="pun">.</span><span class="pln">start</span><span class="pun">(</span><span class="str">'myscene'</span><span class="pun">);</span></code></pre>
+
+
+
+<h2 id="project">Project</h2>
+
+<p>Before you create you very first scene, you must create a new project. Your project will hold configs, scene(s), layer(s), etc…</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="kwd">var</span><span class="pln"> game </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Pew</span><span class="pun">.</span><span class="pln">createProject</span><span class="pun">({</span><span class="pln">
+    title  </span><span class="pun">:</span><span class="pln"> </span><span class="str">"My Game"</span><span class="pun">,</span><span class="pln">
+</span><span class="pun">});</span></code></pre>
+
+
+
+<h2 id="scenes">Scenes</h2>
+
+<p>Scenes are javascript modules that encapsulate your animation logic and drawing loop. For small project, most of the time, one scene is sufficient, but there is no limit how many scenes you can have.</p>
+
+<p><strong>Create a new scene:</strong> (see <a href="#quick-start">Quick Start</a> boiler plate for more details)</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="pln">game</span><span class="pun">.</span><span class="pln">createScene</span><span class="pun">(</span><span class="str">'scene_name'</span><span class="pun">,</span><span class="pln"> </span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(){</span><span class="pln"> </span><span class="pun">...</span><span class="pln"> </span><span class="pun">})());</span></code></pre>
+
+<p><strong>Request next animation frame</strong>. By default, scene.draw is used</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="pln">scene</span><span class="pun">.</span><span class="pln">draw </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="pun">...</span><span class="pln">
+    </span><span class="com">// recall scene.draw()</span><span class="pln">
+    scene</span><span class="pun">.</span><span class="pln">requestAnim</span><span class="pun">();</span><span class="pln"> 
+</span><span class="pun">}</span></code></pre>
+
+<p><strong>Change</strong> animation <strong>loop</strong> frame <strong>callback</strong></p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="pln">scene</span><span class="pun">.</span><span class="pln">draw </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="pun">...</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">foo </span><span class="pun">===</span><span class="pln"> </span><span class="str">"bar"</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="kwd">return</span><span class="pln"> scene</span><span class="pun">.</span><span class="pln">draw2</span><span class="pun">();</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+    scene</span><span class="pun">.</span><span class="pln">requestAnim</span><span class="pun">();</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+
+scene</span><span class="pun">.</span><span class="pln">draw2 </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="pun">...</span><span class="pln">
+    scene</span><span class="pun">.</span><span class="pln">requestAnim</span><span class="pun">(</span><span class="pln">scene</span><span class="pun">.</span><span class="pln">draw2</span><span class="pun">);</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+
+<p><strong>Pause</strong> the animation loop</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="pln">scene</span><span class="pun">.</span><span class="pln">draw </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="pun">...</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">foo </span><span class="pun">===</span><span class="pln"> </span><span class="str">"bar"</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="kwd">return</span><span class="pln"> scene</span><span class="pun">.</span><span class="pln">cancelAnim</span><span class="pun">();</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+    scene</span><span class="pun">.</span><span class="pln">requestAnim</span><span class="pun">();</span><span class="pln">
+</span><span class="pun">}</span></code></pre>
+
+<p><strong>Toggle</strong> the loop (request/cancel)</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="com">// example of pause toggle button</span><span class="pln">
+game</span><span class="pun">.</span><span class="pln">keyboard</span><span class="pun">.</span><span class="pln">on</span><span class="pun">(</span><span class="str">"p"</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(){</span><span class="pln">
+    scene</span><span class="pun">.</span><span class="pln">toggleAnim</span><span class="pun">();</span><span class="pln">
+</span><span class="pun">});</span></code></pre>
+
+<p><strong>Check</strong> the loop status (idle/playing)</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="kwd">if</span><span class="pun">(</span><span class="pln">scene</span><span class="pun">.</span><span class="kwd">is</span><span class="pun">(</span><span class="str">'idle'</span><span class="pun">))</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="pun">...</span><span class="pln"> </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">...</span><span class="pln">
+</span><span class="kwd">if</span><span class="pun">(</span><span class="pln">scene</span><span class="pun">.</span><span class="kwd">is</span><span class="pun">(</span><span class="str">'playing'</span><span class="pun">))</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="pun">...</span><span class="pln"> </span><span class="pun">}</span></code></pre>
+
+
+
+<h2 id="canvas-layers">Canvas layers</h2>
+
+<p>A layer is a canvas. You can have one or many layers. Each time you create a new layer, it create a DOM canvas element with an z-index higher than previous layer.</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="com">// Create canvas layers</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> layerA </span><span class="pun">=</span><span class="pln"> game</span><span class="pun">.</span><span class="pln">createLayer</span><span class="pun">(</span><span class="str">'background'</span><span class="pun">),</span><span class="pln">
+    layerB </span><span class="pun">=</span><span class="pln"> game</span><span class="pun">.</span><span class="pln">createLayer</span><span class="pun">(</span><span class="str">'foreground'</span><span class="pun">);</span></code></pre>
+
+<p>By default, layer take all browser window space. </p>
+
+<p>Change layer configs:</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="kwd">var</span><span class="pln"> layerA </span><span class="pun">=</span><span class="pln"> game</span><span class="pun">.</span><span class="pln">createLayer</span><span class="pun">(</span><span class="str">'platform'</span><span class="pun">,</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    full</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">,</span><span class="pln">
+    autoresize</span><span class="pun">:</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">,</span><span class="pln"> </span><span class="com">//if true, canvas is resized on window resize</span><span class="pln">
+    width</span><span class="pun">:</span><span class="pln"> </span><span class="lit">500</span><span class="pun">,</span><span class="pln">
+    height</span><span class="pun">:</span><span class="pln"> </span><span class="lit">300</span><span class="pun">,</span><span class="pln">
+</span><span class="pun">});</span></code></pre>
+
+<p>You can access to layer canvas DOM element with <code>layerA.canvas</code> property.</p>
+
+
+
+<h3 id="draw">Draw</h3>
+
+<p>Simple drawing can be achieved by using game layer canvas context(<strong><code>ctx</code></strong>) property which is just a reference to <code>canvas.getContext('2d')</code> (<a href="http://www.html5canvastutorials.com/tutorials/html5-canvas-element/">more info</a>).</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="pln">layerA</span><span class="pun">.</span><span class="pln">ctx</span><span class="pun">.</span><span class="pln">fillStyle </span><span class="pun">=</span><span class="pln"> </span><span class="str">"#DD0000"</span><span class="pun">;</span><span class="pln">
+layerA</span><span class="pun">.</span><span class="pln">ctx</span><span class="pun">.</span><span class="pln">font </span><span class="pun">=</span><span class="pln"> </span><span class="str">"14px monospace"</span><span class="pun">;</span><span class="pln">
+layerA</span><span class="pun">.</span><span class="pln">ctx</span><span class="pun">.</span><span class="pln">fillText</span><span class="pun">(</span><span class="typ">Welcome</span><span class="pln"> to </span><span class="kwd">my</span><span class="pln"> game</span><span class="str">",10,50);</span></code></pre>
+
+
+
+<h2 id="inputs">Inputs</h2>
+
+
+
+<h3 id="keyboard">Keyboard</h3>
+
+<p>Before you binds some keyboard events, you need to enable keyboard event listener.</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="pln">game</span><span class="pun">.</span><span class="pln">keyboard</span><span class="pun">.</span><span class="pln">init</span><span class="pun">();</span></code></pre>
+
+<p><strong>Capture a key</strong> event and execute fn callback:</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="pln">game</span><span class="pun">.</span><span class="pln">keyboard</span><span class="pun">.</span><span class="pln">on</span><span class="pun">(</span><span class="str">"p"</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="pun">...</span><span class="pln"> </span><span class="pun">});</span><span class="pln">
+</span><span class="com">// alternatively, you can use the upperchar keycode (80 = P)</span><span class="pln">
+game</span><span class="pun">.</span><span class="pln">keyboard</span><span class="pun">.</span><span class="pln">on</span><span class="pun">(</span><span class="lit">80</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> </span><span class="pun">...</span><span class="pln"> </span><span class="pun">});</span></code></pre>
+
+<p><strong>Capture a group of keys</strong> events and execute fn callback:</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="pln">game</span><span class="pun">.</span><span class="pln">keyboard</span><span class="pun">.</span><span class="pln">on</span><span class="pun">([</span><span class="str">"space"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"ctrl"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"alt"</span><span class="pun">],</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">key</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+
+    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">key</span><span class="pun">.</span><span class="pln">code </span><span class="pun">===</span><span class="pln"> </span><span class="lit">32</span><span class="pun">)</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'You have pressed SPACEBAR'</span><span class="pun">);</span><span class="pln">
+    </span><span class="com">// or (note: key.char is always lower case)</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">key</span><span class="pun">.</span><span class="kwd">char</span><span class="pln"> </span><span class="pun">===</span><span class="pln"> </span><span class="str">"space"</span><span class="pun">)</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'You have pressed SPACEBAR'</span><span class="pun">);</span><span class="pln">
+    </span><span class="pun">...</span><span class="pln">
+</span><span class="pun">});</span></code></pre>
+
+<p>Note: Binding key(s) with on() always prevent event default. It is possible to bind special keys like <strong>F1</strong> to <strong>F12</strong>, <strong>Esc</strong>, <strong>Return</strong>, etc.. But remember that it will prevent browser native behavior. Ex: Binding an event for F5 will prevent browser refresh.</p>
+
+<p><strong>Stop capturing</strong> key(s):</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="pln">game</span><span class="pun">.</span><span class="pln">keyboard</span><span class="pun">.</span><span class="pln">off</span><span class="pun">(</span><span class="lit">80</span><span class="pun">);</span><span class="pln"> </span><span class="com">// 80 = P</span><span class="pln">
+game</span><span class="pun">.</span><span class="pln">keyboard</span><span class="pun">.</span><span class="pln">off</span><span class="pun">(</span><span class="str">"a"</span><span class="pun">);</span><span class="pln"> 
+game</span><span class="pun">.</span><span class="pln">keyboard</span><span class="pun">.</span><span class="pln">off</span><span class="pun">([</span><span class="str">"space"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"ctrl"</span><span class="pun">,</span><span class="pln"> </span><span class="str">"alt"</span><span class="pun">]);</span><span class="pln">  
+game</span><span class="pun">.</span><span class="pln">keyboard</span><span class="pun">.</span><span class="pln">off</span><span class="pun">();</span><span class="pln">  </span><span class="com">// unbind everything</span></code></pre>
+
+<p><strong>Check</strong> a key <strong>manually</strong>:</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="kwd">if</span><span class="pun">(</span><span class="pln">game</span><span class="pun">.</span><span class="pln">keyboard</span><span class="pun">.</span><span class="pln">key</span><span class="pun">(</span><span class="str">'space'</span><span class="pun">))</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">'spacebar pressed!'</span><span class="pun">);</span><span class="pln">
+</span><span class="pun">}</span><span class="pln">
+</span><span class="com">//get an array of all pressed keys at this very moment</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> pressed_keys </span><span class="pun">=</span><span class="pln"> game</span><span class="pun">.</span><span class="pln">keyboard</span><span class="pun">.</span><span class="pln">keys</span><span class="pun">();</span></code></pre>
+
+<p><strong>Trigger manually</strong> a key:</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="pln">game</span><span class="pun">.</span><span class="pln">keyboard</span><span class="pun">.</span><span class="pln">trigger</span><span class="pun">(</span><span class="str">"space"</span><span class="pun">);</span></code></pre>
+
+<p><strong>Capturing all keys</strong> nonobstructive way. </p>
+
+<p>Important: This is a global callback, and it won’t prevent other callbacks(defined with on()) from being triggered and won’t prevent native browser behavior by default. </p>
+
+<p>To stop propagation, you need to add <code>return false</code> to your onAll() callback. To prevent native behavior, you need to add <code>event.preventDefault()</code> to your onAll() callback.</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="pln">
+game</span><span class="pun">.</span><span class="pln">keyboard</span><span class="pun">.</span><span class="pln">on</span><span class="pun">(</span><span class="str">"p"</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">"pressed 1"</span><span class="pun">);</span><span class="pln">
+</span><span class="pun">});</span><span class="pln">
+game</span><span class="pun">.</span><span class="pln">keyboard</span><span class="pun">.</span><span class="pln">onAll</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="kwd">event</span><span class="pun">,</span><span class="pln"> key</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">key</span><span class="pun">.</span><span class="kwd">char</span><span class="pln"> </span><span class="pun">===</span><span class="pln"> </span><span class="str">"p"</span><span class="pun">)</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">"pressed 2"</span><span class="pun">);</span><span class="pln">
+</span><span class="pun">});</span><span class="pln">
+
+</span><span class="com">// when pressing "p", output will be</span><span class="pln">
+</span><span class="com">// "pressed 2"</span><span class="pln">
+</span><span class="com">// "pressed 1"</span><span class="pln">
+
+</span><span class="pun">...</span><span class="pln">
+
+game</span><span class="pun">.</span><span class="pln">keyboard</span><span class="pun">.</span><span class="pln">on</span><span class="pun">(</span><span class="str">"space"</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">"pressed 1"</span><span class="pun">);</span><span class="pln">
+</span><span class="pun">});</span><span class="pln">
+game</span><span class="pun">.</span><span class="pln">keyboard</span><span class="pun">.</span><span class="pln">onAll</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="kwd">event</span><span class="pun">,</span><span class="pln"> key</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">key</span><span class="pun">.</span><span class="kwd">char</span><span class="pln"> </span><span class="pun">===</span><span class="pln"> </span><span class="str">"space"</span><span class="pun">)</span><span class="pln"> console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="str">"pressed 2"</span><span class="pun">);</span><span class="pln">
+    </span><span class="kwd">return</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">;</span><span class="pln">
+</span><span class="pun">});</span><span class="pln">
+
+</span><span class="com">// when pressing "space", output will be</span><span class="pln">
+</span><span class="com">// "pressed 2"</span><span class="pln">
+
+</span><span class="pun">...</span><span class="pln">
+
+game</span><span class="pun">.</span><span class="pln">keyboard</span><span class="pun">.</span><span class="pln">onAll</span><span class="pun">(</span><span class="kwd">function</span><span class="pun">(</span><span class="kwd">event</span><span class="pun">,</span><span class="pln"> key</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">key</span><span class="pun">.</span><span class="kwd">char</span><span class="pln"> </span><span class="pun">===</span><span class="pln"> </span><span class="str">"backspace"</span><span class="pun">)</span><span class="pln"> 
+        </span><span class="com">//...</span><span class="pln">
+        </span><span class="kwd">event</span><span class="pun">.</span><span class="pln">preventDefault</span><span class="pun">();</span><span class="pln"> </span><span class="com">// prevent browser behavior</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">});</span></code></pre>
+
+<p><strong>Stop capturing all keys</strong>. It will remove global callback only, but not other callbacks defined with on().</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="pln">game</span><span class="pun">.</span><span class="pln">keyboard</span><span class="pun">.</span><span class="pln">offAll</span><span class="pun">();</span></code></pre>
+
+
+
+<h3 id="mouse">Mouse</h3>
+
+<p>Before you binds mouse events, you need to enable mouse event listener.</p>
+
+<p>If you have more than one layer, mouse events listener must be associated to the highest z-index canvas which is always the last one created by <code>createLayer()</code></p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="pln">game</span><span class="pun">.</span><span class="pln">mouse</span><span class="pun">.</span><span class="pln">init</span><span class="pun">(</span><span class="pln">layerB</span><span class="pun">.</span><span class="pln">canvas</span><span class="pun">);</span></code></pre>
+
+<p><strong>Capture mouse click</strong> event and execute fn callback:</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="pln">game</span><span class="pun">.</span><span class="pln">mouse</span><span class="pun">.</span><span class="pln">on</span><span class="pun">(</span><span class="str">"click"</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">()</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    </span><span class="pun">...</span><span class="pln">
+</span><span class="pun">});</span></code></pre>
+
+<p><strong>Stop capturing</strong> mouse event(s):</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="pln">game</span><span class="pun">.</span><span class="pln">mouse</span><span class="pun">.</span><span class="pln">off</span><span class="pun">(</span><span class="str">"click"</span><span class="pun">);</span><span class="pln"> </span></code></pre>
+
+<p>Access to current <strong>cursor position</strong>:</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="kwd">var</span><span class="pln"> x </span><span class="pun">=</span><span class="pln"> game</span><span class="pun">.</span><span class="pln">mouse</span><span class="pun">.</span><span class="pln">x</span><span class="pun">();</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> y </span><span class="pun">=</span><span class="pln"> game</span><span class="pun">.</span><span class="pln">mouse</span><span class="pun">.</span><span class="pln">y</span><span class="pun">();</span></code></pre>
+
+
+
+<h2 id="resources-imagesaudio">Resources (images/audio)</h2>
+
+<p>Support image and audio. Resource url are relative.</p>
+
+<p><strong>Loading resource</strong> like an image and call fn when ready.</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="pln">game</span><span class="pun">.</span><span class="pln">resources</span><span class="pun">.</span><span class="pln">load</span><span class="pun">(</span><span class="str">'img/foobar.jpg'</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(){</span><span class="pln">
+    </span><span class="pun">...</span><span class="pln">
+</span><span class="pun">});</span></code></pre>
+
+<p><strong>Loading a group of resource</strong> and call fn when all resource ready.</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="pln">game</span><span class="pun">.</span><span class="pln">resources</span><span class="pun">.</span><span class="pln">load</span><span class="pun">([</span><span class="str">'img/sprite1.jpg'</span><span class="pun">,</span><span class="str">'img/sprite1.jpg'</span><span class="pun">,...],</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(){</span><span class="pln">
+    game</span><span class="pun">.</span><span class="pln">start</span><span class="pun">(</span><span class="str">"mygame"</span><span class="pun">);</span><span class="pln">
+</span><span class="pun">});</span></code></pre>
+
+<p><strong>Loading a group of resource</strong> with progression callback.  Usefull for stuff like a progress bar.</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="pln">game</span><span class="pun">.</span><span class="pln">resources</span><span class="pun">.</span><span class="pln">load</span><span class="pun">([</span><span class="str">'img/sprite1.jpg'</span><span class="pun">,</span><span class="str">'img/sprite1.jpg'</span><span class="pun">,...],</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(){</span><span class="pln">
+    game</span><span class="pun">.</span><span class="pln">start</span><span class="pun">(</span><span class="str">"mygame"</span><span class="pun">);</span><span class="pln">
+</span><span class="pun">},</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">p</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+    console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">p</span><span class="pun">.</span><span class="pln">progress </span><span class="pun">+</span><span class="pln"> </span><span class="str">" %"</span><span class="pun">);</span><span class="pln">
+</span><span class="pun">});</span><span class="pln">
+</span><span class="com">//will output:</span><span class="pln">
+</span><span class="com">//5 %</span><span class="pln">
+</span><span class="com">//10 %</span><span class="pln">
+</span><span class="com">// etc...</span></code></pre>
+
+<p><strong>Retreive</strong> and <strong>use</strong> a loaded <strong>resource</strong>.</p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="kwd">var</span><span class="pln"> my_img </span><span class="pun">=</span><span class="pln"> game</span><span class="pun">.</span><span class="pln">resources</span><span class="pun">.</span><span class="kwd">get</span><span class="pun">(</span><span class="str">'img/foobar.jpg'</span><span class="pun">);</span><span class="pln"> 
+layerA</span><span class="pun">.</span><span class="pln">ctx</span><span class="pun">.</span><span class="pln">drawImage</span><span class="pun">(</span><span class="pln">my_img </span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">300</span><span class="pun">,</span><span class="pln"> </span><span class="lit">400</span><span class="pun">);</span></code></pre>
+
+
+
+<h2 id="scope">Scope</h2>
+
+<p>Calling Pew.createProject() store a new instance of <code>Pew.Project</code> inside Pew and return it. The other way to access to your project is going through <code>Pew.project()</code></p>
+
+<p>Create project and stored it into variable <code>game</code>: </p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="kwd">var</span><span class="pln"> game </span><span class="pun">=</span><span class="pln"> </span><span class="typ">Pew</span><span class="pun">.</span><span class="pln">createProject</span><span class="pun">({</span><span class="pln">
+    title  </span><span class="pun">:</span><span class="pln"> </span><span class="str">"My Game"</span><span class="pun">,</span><span class="pln">
+</span><span class="pun">});</span><span class="pln">
+
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln">game</span><span class="pun">.</span><span class="pln">conf</span><span class="pun">.</span><span class="pln">title</span><span class="pun">);</span><span class="pln"> </span><span class="com">// output "My Game"</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="typ">Pew</span><span class="pun">.</span><span class="pln">project</span><span class="pun">().</span><span class="pln">conf</span><span class="pun">.</span><span class="pln">title</span><span class="pun">);</span><span class="pln"> </span><span class="com">// output "My Game"</span></code></pre>
+
+<p>In case your are out of scope, you can always access at most stuff of your current project via <code>Pew.project()</code></p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="com">// access to project config object</span><span class="pln">
+</span><span class="typ">Pew</span><span class="pun">.</span><span class="pln">project</span><span class="pun">().</span><span class="pln">conf
+</span><span class="com">// access to a layer object</span><span class="pln">
+</span><span class="typ">Pew</span><span class="pun">.</span><span class="pln">project</span><span class="pun">().</span><span class="pln">layers</span><span class="pun">[</span><span class="str">"layer_name"</span><span class="pun">]</span><span class="pln">
+</span><span class="com">// access to a scene module</span><span class="pln">
+</span><span class="typ">Pew</span><span class="pun">.</span><span class="pln">project</span><span class="pun">().</span><span class="pln">scenes</span><span class="pun">[</span><span class="str">"scene_name"</span><span class="pun">]</span><span class="pln">
+</span><span class="com">// access to keyboard module</span><span class="pln">
+</span><span class="typ">Pew</span><span class="pun">.</span><span class="pln">project</span><span class="pun">().</span><span class="pln">keyboard
+</span><span class="com">// access to mouse module</span><span class="pln">
+</span><span class="typ">Pew</span><span class="pun">.</span><span class="pln">project</span><span class="pun">().</span><span class="pln">mouse
+</span><span class="com">// access to resources module</span><span class="pln">
+</span><span class="typ">Pew</span><span class="pun">.</span><span class="pln">project</span><span class="pun">().</span><span class="pln">resources</span></code></pre>
+
+
+
+<h2 id="utilities">Utilities</h2>
+
+<p>Utilities can be accessed with <code>Pew.utils.[fn name]</code></p>
+
+<p>Generate a <strong>random number</strong> <br>
+<code>Pew.utils.rand(min, max, interval = 1)</code></p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="typ">Pew</span><span class="pun">.</span><span class="pln">utils</span><span class="pun">.</span><span class="pln">rand</span><span class="pun">(</span><span class="lit">1</span><span class="pun">,</span><span class="lit">10</span><span class="pun">));</span><span class="pln"> 
+</span><span class="com">// output a number between 1 and 10</span><span class="pln">
+
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="typ">Pew</span><span class="pun">.</span><span class="pln">utils</span><span class="pun">.</span><span class="pln">rand</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="lit">100</span><span class="pun">,</span><span class="pln"> </span><span class="lit">25</span><span class="pun">));</span><span class="pln"> 
+</span><span class="com">// output a number between 0 and 100 at interval of 25</span><span class="pln">
+</span><span class="com">// so possible value here can be 0,25,50,75 or 100 only</span></code></pre>
+
+<p>Get a <strong>random element from an array</strong>  <br>
+<code>Pew.utils.randIndex(array);</code></p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="pln">console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln"> </span><span class="typ">Pew</span><span class="pun">.</span><span class="pln">utils</span><span class="pun">.</span><span class="pln">randIndex</span><span class="pun">([</span><span class="str">"aaa"</span><span class="pun">,</span><span class="str">"bbb"</span><span class="pun">,</span><span class="str">"ccc"</span><span class="pun">])</span><span class="pln"> </span><span class="pun">);</span><span class="pln"> 
+</span><span class="com">// output one random element form array</span><span class="pln">
+</span><span class="com">// in this example, output can be "aaa","bbb" or "ccc"</span></code></pre>
+
+<p><strong>Extend an object</strong> with another object <br>
+<code>Pew.utils.extend({}, objA, objB)</code></p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="kwd">var</span><span class="pln"> objA </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> title</span><span class="pun">:</span><span class="pln"> </span><span class="str">"AAA"</span><span class="pun">,</span><span class="pln"> x</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> y</span><span class="pun">:</span><span class="pln"> </span><span class="lit">0</span><span class="pln"> </span><span class="pun">};</span><span class="pln">
+</span><span class="kwd">var</span><span class="pln"> objB </span><span class="pun">=</span><span class="pln"> </span><span class="pun">{</span><span class="pln"> title</span><span class="pun">:</span><span class="pln"> </span><span class="str">"BBB"</span><span class="pun">,</span><span class="pln"> x</span><span class="pun">:</span><span class="pln"> </span><span class="lit">20</span><span class="pln"> </span><span class="pun">};</span><span class="pln">
+
+</span><span class="com">// merge objB into objA</span><span class="pln">
+console</span><span class="pun">.</span><span class="pln">log</span><span class="pun">(</span><span class="pln"> </span><span class="typ">Pew</span><span class="pun">.</span><span class="pln">utils</span><span class="pun">.</span><span class="pln">extend</span><span class="pun">({},</span><span class="pln"> objA</span><span class="pun">,</span><span class="pln"> objB</span><span class="pun">)</span><span class="pln"> </span><span class="pun">);</span><span class="pln"> 
+</span><span class="com">// output {title: "BBB", x: 20, y: 0}</span></code></pre>
+
+
+
+<h2 id="extending-pewjs">Extending PewJS</h2>
+
+<p>Create your own reusable plugins by extending thoses objects: <br>
+<code>Pew.Project</code>, <code>Pew.Layer</code> and <code>Pew.utils</code></p>
+
+<p><em>Example 1:</em></p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="typ">Pew</span><span class="pun">.</span><span class="typ">Layer</span><span class="pun">.</span><span class="pln">prototype</span><span class="pun">.</span><span class="pln">circle </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">x</span><span class="pun">,</span><span class="pln"> y</span><span class="pun">,</span><span class="pln"> rad</span><span class="pun">,</span><span class="pln"> fill</span><span class="pun">,</span><span class="pln"> stroke</span><span class="pun">,</span><span class="pln"> line_w</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+
+    </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">ctx</span><span class="pun">.</span><span class="pln">beginPath</span><span class="pun">();</span><span class="pln">
+    </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">ctx</span><span class="pun">.</span><span class="pln">arc</span><span class="pun">(</span><span class="pln">x</span><span class="pun">,</span><span class="pln"> y</span><span class="pun">,</span><span class="pln"> rad</span><span class="pun">,</span><span class="pln"> </span><span class="lit">0</span><span class="pun">,</span><span class="pln"> </span><span class="lit">2</span><span class="pln"> </span><span class="pun">*</span><span class="pln"> </span><span class="typ">Math</span><span class="pun">.</span><span class="pln">PI</span><span class="pun">,</span><span class="pln"> </span><span class="kwd">false</span><span class="pun">);</span><span class="pln">
+    </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">ctx</span><span class="pun">.</span><span class="pln">fillStyle </span><span class="pun">=</span><span class="pln"> fill</span><span class="pun">;</span><span class="pln">
+    </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">ctx</span><span class="pun">.</span><span class="pln">fill</span><span class="pun">();</span><span class="pln">
+
+    </span><span class="kwd">if</span><span class="pun">(</span><span class="pln">stroke</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">ctx</span><span class="pun">.</span><span class="pln">lineWidth </span><span class="pun">=</span><span class="pln"> line_w </span><span class="pun">||</span><span class="pln"> </span><span class="lit">1</span><span class="pun">;</span><span class="pln">
+        </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">ctx</span><span class="pun">.</span><span class="pln">strokeStyle </span><span class="pun">=</span><span class="pln"> stroke</span><span class="pun">;</span><span class="pln">
+        </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">ctx</span><span class="pun">.</span><span class="pln">stroke</span><span class="pun">();</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+</span><span class="pun">};</span><span class="pln">
+
+</span><span class="com">// ex in your scene draw loop:</span><span class="pln">
+</span><span class="com">// layerA.circle(100,100,10,"#000");</span></code></pre>
+
+<p><em>Example 2:</em></p>
+
+
+
+<pre class="prettyprint prettyprinted"><code class="language-javascript"><span class="typ">Pew</span><span class="pun">.</span><span class="typ">Layer</span><span class="pun">.</span><span class="pln">prototype</span><span class="pun">.</span><span class="pln">gradient </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">function</span><span class="pun">(</span><span class="pln">x</span><span class="pun">,</span><span class="pln"> y</span><span class="pun">,</span><span class="pln"> x2</span><span class="pun">,</span><span class="pln"> y2</span><span class="pun">,</span><span class="pln"> colors</span><span class="pun">,</span><span class="pln"> stops</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+
+    x2 </span><span class="pun">=</span><span class="pln"> x2 </span><span class="pun">||</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">canvas</span><span class="pun">.</span><span class="pln">width</span><span class="pun">;</span><span class="pln">
+    y2 </span><span class="pun">=</span><span class="pln"> y2 </span><span class="pun">||</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">canvas</span><span class="pun">.</span><span class="pln">height</span><span class="pun">;</span><span class="pln">
+
+    </span><span class="kwd">var</span><span class="pln"> grd </span><span class="pun">=</span><span class="pln"> </span><span class="kwd">this</span><span class="pun">.</span><span class="pln">ctx</span><span class="pun">.</span><span class="pln">createLinearGradient</span><span class="pun">(</span><span class="pln">x</span><span class="pun">,</span><span class="pln"> y</span><span class="pun">,</span><span class="pln"> x2</span><span class="pun">,</span><span class="pln"> y2</span><span class="pun">);</span><span class="pln">
+
+    </span><span class="kwd">for</span><span class="pun">(</span><span class="kwd">var</span><span class="pln"> i </span><span class="kwd">in</span><span class="pln"> colors</span><span class="pun">)</span><span class="pln"> </span><span class="pun">{</span><span class="pln">
+        grd</span><span class="pun">.</span><span class="pln">addColorStop</span><span class="pun">(</span><span class="pln">stop</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]||</span><span class="lit">0</span><span class="pun">,</span><span class="pln"> colors</span><span class="pun">[</span><span class="pln">i</span><span class="pun">]);</span><span class="pln">
+    </span><span class="pun">}</span><span class="pln">
+
+    </span><span class="kwd">return</span><span class="pln"> grd</span><span class="pun">;</span><span class="pln"> 
+</span><span class="pun">};</span><span class="pln">
+
+</span><span class="com">// layers have now access to this function. ex:</span><span class="pln">
+layerA</span><span class="pun">.</span><span class="pln">ctx</span><span class="pun">.</span><span class="pln">fillStyle </span><span class="pun">=</span><span class="pln"> layerA</span><span class="pun">.</span><span class="pln">gradient</span><span class="pun">(</span><span class="lit">0</span><span class="pun">,</span><span class="lit">0</span><span class="pun">,</span><span class="lit">100</span><span class="pun">,</span><span class="lit">100</span><span class="pun">,[</span><span class="str">"#000"</span><span class="pun">,</span><span class="str">"#111"</span><span class="pun">],[</span><span class="lit">0.5</span><span class="pun">,</span><span class="lit">1</span><span class="pun">]);</span></code></pre>
+
+
+
+<h2 id="license">License</h2>
+
+<p>PewJS is released under the MIT Licence. <br>
+Copyright (c) 2014 François Lajoie</p>
+
+<p>PewJS is also bundled with AnimationFrame.js. <br>
+Copyright (c) 2013 Oleg Slobodskoi - <a href="https://github.com/kof/animationFrame">https://github.com/kof/animationFrame</a></p>
+
+<p>&nbsp; <br>
+&nbsp; <br>
+&nbsp; <br>
+&nbsp; <br>
+&nbsp; <br>
+&nbsp; <br>
+&nbsp; <br>
+&nbsp; <br>
+&nbsp; <br>
+&nbsp; <br>
+&nbsp;</p>
+
+<p>………………….PewPew………Pew………PewPew…Pew………….</p></div></body>
+</html>
