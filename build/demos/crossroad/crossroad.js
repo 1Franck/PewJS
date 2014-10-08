@@ -22,9 +22,6 @@ game.createScene('gameplay', (function(){
      */
     game.keyboard.init();
 
-    //game.ke
-
-
     /**
      * Called once when animation start
      */
