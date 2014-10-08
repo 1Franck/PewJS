@@ -33,6 +33,11 @@ nbproject
 # Folders to ignore
 node_modules
 _test
-src/demos
-build/demos
+
+src/demos/*
+!src/demos/crossroad/
+
+build/demos/*
+!build/demos/crossroad/
+
 *.lnk
