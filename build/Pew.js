@@ -753,7 +753,7 @@ Pew.Project.prototype.resources = (function() {
      * @return string
      */
     Resource.prototype.type = function() {
-        for(property in mimes) {
+        for(var property in mimes) {
             for(var j in mimes[property]) {
                 if(mimes[property][j] === this.ext)
                     return property;
