@@ -326,7 +326,7 @@ Pew.utils.extend = function(out) {
  * @return integer          
  */
 Pew.utils.rand = function(min, max, interval) {
-    if(interval === undefined) interval = 1;
+    interval = interval || 1;
     return Math.round((Math.floor(Math.random() * (max - min + 1)) + min) / interval) *interval;
 };
 
