@@ -69,7 +69,7 @@ module.exports = function(grunt) {
 
     watch: {
       scripts: {
-        files: ['src/pew/*.js', 'src/demos/*/*.js', 'src/boilerplate/*.*'],
+        files: ['src/pew/*.js', 'src/demos/*/*.js', 'src/demos/*/*.html', 'src/boilerplate/*.*'],
         tasks: ['default'],
         options: {
           spawn: false,
@@ -78,7 +78,7 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      less: ["build/demos/demo.less"]
+      less: ["build/demos/demo.less"],
     }
 
   });
