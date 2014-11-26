@@ -65,10 +65,15 @@ var Pew = (function(){
         this.fullscreen = (o.fullscreen === undefined) ? false : o.fullscreen;
         this.autoresize = (o.autoresize === undefined) ? false : o.autoresize,
 
+        // misc opt
+        this.container = o.container || "document";
+
         // take all browser space if not specified
         this.width  = o.width  || window.innerWidth; 
         this.height = o.height || window.innerHeight;
 
+
+        // canvas el and conttext
         this.canvas = o.canvas || null;
         this.ctx    = o.ctx    || null;
 

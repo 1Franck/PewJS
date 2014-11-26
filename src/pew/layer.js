@@ -12,7 +12,12 @@ Pew.Layer.prototype.init = function() {
         this.ctx    = this.canvas.getContext('2d');
 
         //append canvas to DOM
-        document.body.appendChild(this.canvas);
+        if(this.container === "document") {
+            document.body.appendChild(this.canvas);
+        }
+        else {
+            document.querySelector(this.container).appendChild(this.canvas);
+        }
     }
 
     //default style
