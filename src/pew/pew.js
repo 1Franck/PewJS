@@ -62,12 +62,15 @@ var Pew = (function(){
     function Layer(opts) {
         var o = opts || {};
 
-        this.full   = o.full || true;
-        this.autoresize = o.autoresize || true,
-        this.width  = o.width || "480";
-        this.height = o.height || "320";
+        this.fullscreen = (o.fullscreen === undefined) ? false : o.fullscreen;
+        this.autoresize = (o.autoresize === undefined) ? false : o.autoresize,
+
+        // take all browser space if not specified
+        this.width  = o.width  || window.innerWidth; 
+        this.height = o.height || window.innerHeight;
+
         this.canvas = o.canvas || null;
-        this.ctx    = o.ctx || null;
+        this.ctx    = o.ctx    || null;
 
         this.init();
 
