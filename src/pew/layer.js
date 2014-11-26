@@ -21,7 +21,7 @@ Pew.Layer.prototype.init = function() {
     this.canvas.style.zIndex = this._zi.get();
 
     // set w/h
-    if(this.full) this.fullscreen();
+    if(this.fullscreen === true) this.requestFullscreen();
     else {
         this.canvas.width  = this.width;
         this.canvas.height = this.height;
@@ -33,7 +33,12 @@ Pew.Layer.prototype.init = function() {
         window.onresize = window.onresize || function() {
             for(var i in Pew.project().layers) {
                 if(Pew.project().layers[i].autoresize) {
-                    Pew.project().layers[i].fullscreen();
+                    
+                    Pew.project().layers[i].canvas.width  = window.innerWidth;
+                    Pew.project().layers[i].canvas.height = window.innerHeight;
+
+                    Pew.project().layers[i].width  = Pew.project().layers[i].canvas.width;
+                    Pew.project().layers[i].height = Pew.project().layers[i].canvas.height;
                 }
             }
         }
@@ -41,11 +46,25 @@ Pew.Layer.prototype.init = function() {
 }
 
 /**
- * Fullscreen
+ * Fullscreen // dont work
  */
-Pew.Layer.prototype.fullscreen = function() {
+Pew.Layer.prototype.requestFullscreen = function() {
+
+    var doc_el = document.documentElement;
+
+    if (doc_el.requestFullscreen) {
+        doc_el.requestFullscreen();
+    } else if (doc_el.webkitRequestFullscreen) {
+        doc_el.webkitRequestFullscreen();
+    } else if (doc_el.mozRequestFullScreen) {
+        doc_el.mozRequestFullScreen();
+    } else if (doc_el.msRequestFullscreen) {
+        doc_el.msRequestFullscreen();
+    }
+
     this.canvas.width  = window.innerWidth;
     this.canvas.height = window.innerHeight;
+
     this.width  = this.canvas.width;
     this.height = this.canvas.height; 
 }
