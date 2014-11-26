@@ -36,9 +36,11 @@ _test
 tests
 
 src/demos/*
+!src/demos/demo.less
 !src/demos/game-crossroad/
 
 build/demos/*
+!build/demos/demo.css
 !build/demos/game-crossroad/
 
 *.lnk
