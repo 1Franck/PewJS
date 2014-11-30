@@ -1,9 +1,12 @@
 $(function() {
 
-    $("#demo-placeholder").css('height', window.innerHeight - $('#demos-bar').height());
+    var dph = $("#demo-placeholder");
+
+    dph.css('height', window.innerHeight - $('#demos-bar').height());
 
     $("#demos-list").on('change', function() {
-        $("#demo-placeholder").attr('src', $(this).find(':selected').val());
+        dph.attr('src', $(this).find(':selected').val());
+        dph.focus();
     });
     
 });
