@@ -67,6 +67,7 @@ var Pew = (function(){
 
         // misc opt
         this.container = o.container || "document";
+        this.class     = o.class || "";
 
         // take all browser space if not specified
         this.width  = o.width  || window.innerWidth; 

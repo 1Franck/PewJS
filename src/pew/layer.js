@@ -20,6 +20,9 @@ Pew.Layer.prototype.init = function() {
         }
     }
 
+    //class attr
+    this.canvas.classList.add(this.class);
+
     //default style
     this.canvas.style.display = "block";
     this.canvas.style.position = "absolute";
