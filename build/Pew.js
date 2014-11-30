@@ -67,6 +67,7 @@ var Pew = (function(){
 
         // misc opt
         this.container = o.container || "document";
+        this.class     = o.class || "";
 
         // take all browser space if not specified
         this.width  = o.width  || window.innerWidth; 
@@ -211,6 +212,9 @@ Pew.Layer.prototype.init = function() {
             document.querySelector(this.container).appendChild(this.canvas);
         }
     }
+
+    //class attr
+    this.canvas.classList.add(this.class);
 
     //default style
     this.canvas.style.display = "block";
