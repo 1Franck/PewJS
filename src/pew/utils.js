@@ -98,4 +98,14 @@ Pew.utils.range = function(start, stop, step) {
     }
 
     return range;
-}
+};
+
+/**
+ * Check if the variable is an array
+ * 
+ * @param  mixed  ar
+ * @return boolean
+ */
+Pew.utils.isArray = function(ar) {
+    return Object.prototype.toString.call(ar) == "[object Array]";
+};
