@@ -16,14 +16,41 @@ Pew.Project.prototype.createLayer = function(name, opts) {
 };
 
 /**
+ * Delete a layer and its canvas dom element
+ * 
+ * @param  string name
+ */
+Pew.Project.prototype.destroyLayer = function(name) {
+    if(this.layers.hasOwnProperty(name)) {
+        if(this.layers[name].canvas.remove == undefined) {
+            this.layers[name].canvas.style.display = "none"; //hack fo IE
+        }
+        else {
+            this.layers[name].canvas.remove(); // dont work in IE
+        }
+
+        delete this.layers[name];
+    }
+};
+
+/**
+ * Delete all layers (use destroyLayer())
+ */
+Pew.Project.prototype.destroyLayers = function() {
+    for(var key in this.layers) {
+        this.destroyLayer(key);
+    }
+};
+
+
+/**
  * Project animation start loop
  */
 Pew.Project.prototype.start = function(name){
 
     var scene = this.scenes[name].fn;
 
-    if(scene.init)
-        scene.init();
+    if(scene.init) scene.init();
 
     scene.draw();
 };
