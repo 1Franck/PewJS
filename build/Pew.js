@@ -213,8 +213,13 @@ Pew.Layer.prototype.init = function() {
         }
     }
 
-    //class attr
-    if(this.class.length > 0) this.canvas.classList.add(this.class);
+    //class(es) attr
+    if(this.class.length > 0) {
+        var classes = this.class.split(" ");
+        for(var i in classes) {
+            this.canvas.classList.add(classes[i]);
+        }
+    }
 
     //default style
     this.canvas.style.display = "block";
@@ -399,7 +404,17 @@ Pew.utils.range = function(start, stop, step) {
     }
 
     return range;
-};/**
+};
+
+/**
+ * Check if the variable is an array
+ * 
+ * @param  mixed  ar
+ * @return boolean
+ */
+Pew.utils.isArray = function(ar) {
+    return Object.prototype.toString.call(ar) == "[object Array]";
+};;/**
  * Pew / Project / Mouse
  */
 Pew.Project.prototype.mouse = (function(){
