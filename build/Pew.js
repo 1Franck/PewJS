@@ -242,10 +242,7 @@ Pew.Layer.prototype.init = function() {
 
     //class(es) attr
     if(this.class.length > 0) {
-        var classes = this.class.split(" ");
-        for(var i in classes) {
-            this.canvas.classList.add(classes[i]);
-        }
+        this.canvas.setAttribute('class', this.class);
     }
 
     //default style
