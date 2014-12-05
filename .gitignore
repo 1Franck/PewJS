@@ -33,7 +33,6 @@ nbproject
 # Folders to ignore
 node_modules
 _test
-tests
 
 src/demos/*
 !src/demos/game-crossroad/
