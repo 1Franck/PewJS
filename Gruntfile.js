@@ -75,23 +75,40 @@ module.exports = function(grunt) {
           spawn: false,
         },
       },
+
+      tests: {
+        files: ['build/pew.js', 'tests/*.js'],
+        tasks: ['tests'],
+        options: {
+          spawn: false,
+        },
+      },
+
     },
 
     clean: {
       less: ["build/demos/_assets/demo.less"],
+    },
+
+    qunit: {
+      all: ['tests/*.html']
     }
 
   });
 
-  // Load the plugin that provides the "uglify" task.
+  // Load the plugins
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-qunit');
 
   // Default task(s).
   grunt.registerTask('default', ['less', 'concat', 'copy', 'uglify', 'clean']);
+
+  // Test task
+  grunt.registerTask('tests', ['qunit']);
 
 };
