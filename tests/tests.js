@@ -1,3 +1,6 @@
+/**
+ * Test project creation
+ */
 QUnit.test("Project Creation", function( assert ) {
 
     var game = Pew.createProject({
@@ -10,8 +13,10 @@ QUnit.test("Project Creation", function( assert ) {
 });
 
 
-
-QUnit.test("Setting project FPS", function( assert ) {
+/**
+ * Test FPS option
+ */
+QUnit.test("Project FPS", function( assert ) {
 
     var game = Pew.createProject({ fps  : 30  });
 
