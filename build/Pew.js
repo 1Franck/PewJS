@@ -204,7 +204,7 @@ Pew.Project.prototype.start = function(name){
 
     if(scene.init) scene.init();
 
-    scene.draw();
+    if(scene.draw) scene.draw();
 };
 
 /**
