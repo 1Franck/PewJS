@@ -479,28 +479,47 @@ Pew.Project.prototype.mouse = (function(){
         var el = el || null;
         if(el == null) return;
         
-        // mouse click events
+        // mouse click event
         el.addEventListener ("click", function (event) {
             events['click'] = true;
 
             if(events_cb['click'])
-                events_cb['click']();
+                events_cb['click'](event);
 
             events['click'] = false;
         });
 
-        // mouse dblclick events
+        // mouse dblclick event
         el.addEventListener ("dblclick", function (event) {
             events['dblclick'] = true;
 
             if(events_cb['dblclick'])
-                events_cb['dblclick']();
+                events_cb['dblclick'](event);
 
             events['dblclick'] = false;
         });
 
+        // mousedown event
+        el.addEventListener ("mousedown", function (event) {
+            events['mousedown'] = true;
 
-        //mouse mov
+            if(events_cb['mousedown'])
+                events_cb['mousedown'](event);
+
+            events['mousedown'] = false;
+        });
+
+        // mouseup event
+        el.addEventListener ("mouseup", function (event) {
+            events['mouseup'] = true;
+
+            if(events_cb['mouseup'])
+                events_cb['mouseup'](event);
+
+            events['mouseup'] = false;
+        });
+
+        //mouse move event
         el.addEventListener ("mousemove", function (event) {
 
             var xy = leftTopScreen(el);
