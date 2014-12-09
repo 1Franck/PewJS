@@ -1,6 +1,9 @@
 {
-  "name": "pew",
-  "version": "0.1.0",
+  "name": "pewjs",
+  "version": "0.1.1",
+  "description": "Tiny HTML5 Canvas javacript framework for games and animations.",
+  "author": "Francois Lajoie",
+  "license": "MIT License",
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-contrib-jshint": "~0.10.0",
