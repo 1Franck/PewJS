@@ -17,14 +17,8 @@ module.exports = function(grunt) {
     },
 
     copy: {
-      main: {
+      build: {
         files: [
-          {
-            cwd: 'src/demos',     // set working folder / root to copy
-            src: '**/*',          // copy all files and subfolders
-            dest: 'build/demos',  // destination folder
-            expand: true          // required when using cwd
-          },
           {
             cwd: 'src/boilerplate',     // set working folder / root to copy
             src: '**/*',                // copy all files and subfolders
@@ -32,12 +26,21 @@ module.exports = function(grunt) {
             expand: true                // required when using cwd
           },
         ],
+      },
+      demos: {
+        files: [
+          {
+            cwd: 'src/demos',     // set working folder / root to copy
+            src: '**/*',          // copy all files and subfolders
+            dest: 'build/demos',  // destination folder
+            expand: true          // required when using cwd
+          },
+        ],
       }
     },
 
     less: {
-      development: {
-      },
+      development: {},
       production: {
         options: {
           cleancss: true,
@@ -69,7 +72,7 @@ module.exports = function(grunt) {
 
     watch: {
       scripts: {
-        files: ['src/pew/*.js', 'src/demos/*/*.js', 'src/demos/_assets/*.*', 'src/demos/*/*.html', 'src/boilerplate/*.*', 'src/demos/index.html'],
+        files: ['src/pew/*.js', 'src/boilerplate/*.*'],
         tasks: ['default'],
         options: {
           spawn: false,
@@ -79,6 +82,14 @@ module.exports = function(grunt) {
       tests: {
         files: ['build/pew.js', 'tests/*.js'],
         tasks: ['tests'],
+        options: {
+          spawn: false,
+        },
+      },
+
+      demos: {
+        files: ['src/demos/*/*.js', 'src/demos/_assets/*.*', 'src/demos/*/*.html', 'src/demos/index.html'],
+        tasks: ['demos'],
         options: {
           spawn: false,
         },
@@ -105,8 +116,11 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-qunit');
 
-  // Default task(s).
-  grunt.registerTask('default', ['less', 'concat', 'copy', 'uglify', 'clean']);
+  // Default task (AKA BUILD)
+  grunt.registerTask('default', ['concat', 'copy:build', 'uglify']);
+
+  // Demos task
+  grunt.registerTask('demos', ['less', 'copy:demos','clean']);
 
   // Test task
   grunt.registerTask('tests', ['qunit']);
