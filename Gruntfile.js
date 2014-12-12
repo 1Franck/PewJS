@@ -30,10 +30,8 @@ module.exports = function(grunt) {
       demos: {
         files: [
           {
-            cwd: 'src/demos',     // set working folder / root to copy
-            src: '**/*',          // copy all files and subfolders
-            dest: 'build/demos',  // destination folder
-            expand: true          // required when using cwd
+            src:  'build/Pew.js',     // set working folder / root to copy
+            dest: 'demos/_assets/Pew.js',  // destination folder
           },
         ],
       }
@@ -46,7 +44,7 @@ module.exports = function(grunt) {
           cleancss: true,
         },
         files: {
-          "build/demos/_assets/demo.css": "src/demos/_assets/demo.less",
+          "demos/_assets/demo.css": "demos/_assets/demo.less",
         }
       }
     },
@@ -88,7 +86,7 @@ module.exports = function(grunt) {
       },
 
       demos: {
-        files: ['src/demos/*/*.js', 'src/demos/_assets/*.*', 'src/demos/*/*.html', 'src/demos/index.html'],
+        files: ['demos/*.html', 'demos/_assets/*.*', 'demos/*/*.*'],
         tasks: ['demos'],
         options: {
           spawn: false,
@@ -98,7 +96,7 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      less: ["build/demos/_assets/demo.less"],
+      //less: ["build/demos/_assets/demo.less"],
     },
 
     qunit: {
@@ -120,7 +118,7 @@ module.exports = function(grunt) {
   grunt.registerTask('default', ['concat', 'copy:build', 'uglify']);
 
   // Demos task
-  grunt.registerTask('demos', ['less', 'copy:demos','clean']);
+  grunt.registerTask('demos', ['less', 'copy:demos']);
 
   // Test task
   grunt.registerTask('tests', ['qunit']);
