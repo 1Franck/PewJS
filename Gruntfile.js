@@ -27,7 +27,7 @@ module.exports = function(grunt) {
           },
           {
             src:  'build/Pew.js',     // set working folder / root to copy
-            dest: 'demos/_assets/Pew.js',  // destination folder
+            dest: 'demos/assets/Pew.js',  // destination folder
           },
         ],
       },
@@ -35,7 +35,7 @@ module.exports = function(grunt) {
         files: [
           {
             src:  'build/Pew.js',     // set working folder / root to copy
-            dest: 'demos/_assets/Pew.js',  // destination folder
+            dest: 'demos/assets/Pew.js',  // destination folder
           },
         ],
       }
@@ -48,7 +48,7 @@ module.exports = function(grunt) {
           cleancss: true,
         },
         files: {
-          "demos/_assets/demo.css": "demos/_assets/demo.less",
+          "demos/assets/demo.css": "demos/assets/demo.less",
         }
       }
     },
@@ -90,7 +90,7 @@ module.exports = function(grunt) {
       },
 
       demos: {
-        files: ['demos/*.html', 'demos/_assets/*.less', 'demos/*/*.*'],
+        files: ['demos/*.html', 'demos/assets/*.less', 'demos/*/*.*'],
         tasks: ['demos'],
         options: {
           spawn: false,
@@ -100,7 +100,7 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      //less: ["build/demos/_assets/demo.less"],
+      //less: ["build/demos/assets/demo.less"],
     },
 
     qunit: {

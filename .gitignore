@@ -35,7 +35,7 @@ node_modules
 _test
 
 demos/*
-!demos/_assets/
+!demos/assets/
 !demos/game-crossroad/
 
 *.lnk
