@@ -90,7 +90,7 @@ module.exports = function(grunt) {
       },
 
       demos: {
-        files: ['demos/*.html', 'demos/_assets/*.*', 'demos/*/*.*'],
+        files: ['demos/*.html', 'demos/_assets/*.less', 'demos/*/*.*'],
         tasks: ['demos'],
         options: {
           spawn: false,
