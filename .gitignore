@@ -34,12 +34,8 @@ nbproject
 node_modules
 _test
 
-src/demos/*
-!src/demos/game-crossroad/
-!src/demos/_assets/
-
-build/demos/*
-!build/demos/_assets/
-!build/demos/game-crossroad/
+demos/*
+!demos/_assets/
+!demos/game-crossroad/
 
 *.lnk
