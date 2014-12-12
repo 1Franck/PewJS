@@ -25,6 +25,10 @@ module.exports = function(grunt) {
             dest: 'build/boilerplate',  // destination folder
             expand: true                // required when using cwd
           },
+          {
+            src:  'build/Pew.js',     // set working folder / root to copy
+            dest: 'demos/_assets/Pew.js',  // destination folder
+          },
         ],
       },
       demos: {
