@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PewJS | Keyboard input</title>
+  <link rel="stylesheet" href="assets/demo.css">
+</head>
+<body class="demo-body">
+
+
+  <div class="container">
+    <h1>Keyboard input</h1>
+  </div>
+
+<br>
+<pre class="code-src"><code class="javascript">// Listen keyboard input
+game.keyboard.init();
+
+// Bind on all keyboard input
+game.keyboard.onAll(function(event, key) {
+    layerA.clear(0,120,500,40);
+    layerA.ctx.fillText("You have pressed: "+key.char,165,140);
+    event.preventDefault();
+});
+
+// Bind specific keys
+game.keyboard.on(["space", "ctrl", "alt"], function(key) {
+    if(key.code === 32) {
+        console.log("You have pressed " + key.char + '(' + key.code + ')');
+    }
+});
+
+// ...
+</code></pre>
+
+  <script src="assets/Pew.js"></script>
+  <script src="scripts/basic-keyboard.js"></script>
+
+  <link rel="stylesheet" href="assets/monokai_sublime.css">
+  <script src="assets/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>

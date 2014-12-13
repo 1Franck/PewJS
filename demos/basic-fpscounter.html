@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PewJS | FPS counter</title>
+  <link rel="stylesheet" href="assets/demo.css">
+</head>
+<body class="demo-body">
+
+
+  <div class="container">
+    <h1>FPS counter</h1>
+  </div>
+
+<br>
+<pre class="code-src"><code class="javascript">
+var game = Pew.createProject({
+    title : "FPS counter",
+    fps: 60,
+});
+
+//...
+
+game.createScene('mainScene', (function(){
+
+  //...
+
+  scene.init = function() {
+      game.fpsmeter.start();
+      //...
+  };
+
+
+  scene.update = function() {
+      game.fpsmeter.tick();
+      //...
+  };
+
+  scene.draw = function() {
+      scene.update();
+
+      var fps = game.fpsmeter.current;
+
+      layerA.clear();
+      layerA.ctx.fillText('FPS: ' + fps, 10, 20);
+
+      //...
+
+      scene.requestAnim();
+  };
+
+//...
+})());
+</code></pre>
+
+  <script src="assets/Pew.js"></script>
+  <script src="assets/cube.js"></script>
+  <script src="scripts/basic-fpscounter.js"></script>
+
+  <link rel="stylesheet" href="assets/monokai_sublime.css">
+  <script src="assets/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
