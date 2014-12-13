@@ -38,7 +38,6 @@ demos/*
 
 !demos/assets/
 !demos/scripts/
-!demos/game-crossroad/
 
 !demos/*.html
 demos/index.html
