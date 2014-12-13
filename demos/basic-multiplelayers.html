@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PewJS | Multiple Layers</title>
+  <link rel="stylesheet" href="assets/demo.css">
+</head>
+<body class="demo-body">
+
+
+  <div class="container">
+    <h1>Multiple Layers</h1>
+  </div>
+
+<br>
+<pre class="code-src" style="margin-top:320px;"><code class="javascript">var layers_opts = {
+    width: 500,
+    height: 300,
+    container: '.container',
+    class: 'canvas-absolute-box',
+};
+
+var layerA = game.createLayer('layerA', layers_opts);
+var layerB = game.createLayer('layerB', layers_opts);
+var layerC = game.createLayer('layerC', layers_opts);
+var layerD = game.createLayer('layerD', layers_opts);
+var layerE = game.createLayer('layerE', layers_opts);
+var layerF = game.createLayer('layerF', layers_opts);
+</code></pre>
+
+  <script src="assets/Pew.js"></script>
+  <script src="scripts/basic-multiplelayers.js"></script>
+
+  <link rel="stylesheet" href="assets/monokai_sublime.css">
+  <script src="assets/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</body>
+</html>
