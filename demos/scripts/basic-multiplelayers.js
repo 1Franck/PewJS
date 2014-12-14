@@ -66,6 +66,7 @@ game.createScene('mainScene', (function(){
         rect(300,30,150,120,layerF, "#aa0000");
         rect(280,100,130,160,layerB, "#666");
         rect(380,10,50,200,layerC, "#0E344E");
+        rect(325,130,40,40,layerF, "orange");
     };
 
     /**
