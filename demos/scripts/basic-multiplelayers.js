@@ -2,7 +2,7 @@
  * Create the game
  */
 var game = Pew.createProject({
-    title : "Basic fixed size Canvas",
+    title : "multiple layers",
 });
 
 

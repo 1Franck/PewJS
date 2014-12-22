@@ -2,7 +2,7 @@
  * Create the game
  */
 var game = Pew.createProject({
-    title : "Crossroad",
+    title : "Game Crossroad",
 });
 
 
