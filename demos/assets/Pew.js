@@ -981,6 +981,7 @@ Pew.Project.prototype.resources = (function() {
     return {
         load: load,
         get: get,
+        //cache: cache,
     }
 
 })();;/**
