@@ -885,9 +885,7 @@ Pew.Project.prototype.resources = (function() {
             else {
                 fn_not_ready(progress);
             }
-        });
-
-        
+        });  
     }
 
 
