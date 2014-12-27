@@ -3,7 +3,10 @@
  */
 var game = Pew.createProject({
     title : "image loading",
-    resources : ['assets/img/scene.png'],
+    resources : {
+        name: 'map',
+        src:  'assets/img/scene.png',
+    }
 });
 
 
@@ -39,7 +42,7 @@ game.createScene('mainScene', (function(){
      * Called once when animation start
      */
     scene.init = function() {
-        img.data = game.resources.get('assets/img/scene.png');
+        img.data = game.resources.get('map');
     };
 
     /**
