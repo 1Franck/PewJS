@@ -107,35 +107,26 @@ Pew.Project.prototype.resources = (function() {
 
         var ready_index = ready_callbacks.length-1;
 
-        if(resources instanceof Array) {
-
-            fn_not_ready(groupProgress(ready_index)); // for the 0%
-
-            resources.forEach(function(res) {
-
-                var r = new Resource(res, ready_index);
-
-                if(r.type() === 'image') r.el = new Image();
-                else if(r.type() === 'audio') r.el = new Audio();
-                else return; // dont load unknow type
-
-                r.onLoad(fn_ready, fn_not_ready);
-
-                // load file and cache obj
-                r.el.src = res;
-                cache[res] = r;
-            });
+        if(!Pew.utils.isArray(resources)) {
+            resources = [resources];
         }
-    }
 
-    /**
-     * Get resource element
-     * 
-     * @param  string res [description]
-     * @return mixed     
-     */
-    function get(res) {
-        return cache[res].el;
+        fn_not_ready(groupProgress(ready_index)); // for the 0%
+
+        resources.forEach(function(res) {
+
+            var r = new Resource(res.src, ready_index);
+
+            if(r.type() === 'image') r.el = new Image();
+            else if(r.type() === 'audio') r.el = new Audio();
+            else return; // dont load unknow type
+
+            r.onLoad(fn_ready, fn_not_ready);
+
+            // load file and cache obj
+            r.el.src = res.src;
+            cache[res.name] = r;
+        });
     }
 
     /**
@@ -179,9 +170,18 @@ Pew.Project.prototype.resources = (function() {
 
     //public stuff
     return {
+
         load: load,
-        get: get,
-        //cache: cache,
+
+        /**
+         * Get resource element
+         * 
+         * @param  string name 
+         * @return mixed     
+         */
+        get: function(name) {
+            return cache[name].el;
+        }
     }
 
 })();
