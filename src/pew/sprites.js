@@ -9,8 +9,11 @@ Pew.Project.prototype.sprites = (function() {
      * @param  string name
      */
     function Sprite(name) {
-        this.name = name;
-        this.res;
+
+        this.name   = name;
+        this.frames = [];
+
+        return this;
     };
 
     /**
@@ -19,8 +22,20 @@ Pew.Project.prototype.sprites = (function() {
      * @param object res Resource
      */
     Sprite.prototype.addResource = function(res) {
+        if(!Pew.utils.isArray(res)) {
+            res = [res];
+        }
 
+        return this;
     };
+
+    /**
+     * Fetch resource as an array of images
+     * Each image will become a frame
+     */
+    Sprite.prototype.fetchAsArray = function() {
+
+    }
 
 
     //public stuff
