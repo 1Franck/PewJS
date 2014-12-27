@@ -14,8 +14,44 @@
 <br>
 <pre class="code-src"><code class="javascript">var game = Pew.createProject({
     title : "image loading",
-    resources : ['assets/img/scene.png'],
+    resources : {
+        name: "map",
+        src:  "assets/img/scene.png",
+    }
 });
+
+game.createScene("mainScene", (function(){
+
+    var img;
+
+    //...
+
+    /**
+     * Called once when animation start
+     */
+    scene.init = function() {
+        img.data = game.resources.get("map");
+    };
+
+    /**
+     * Update loop
+     */
+    scene.update = function() {
+        if(img.x < -(4096-500)) img.x = 0;
+        img.x = img.x - 1;
+    };
+
+    /**
+     * Draw loop
+     */
+    scene.draw = function() {
+        scene.update();
+        layerA.clear();
+        layerA.ctx.drawImage(img.data, img.x, 0, img.data.width, img.data.height);
+        scene.requestAnim();
+    };
+
+})());
 
 game.resources.load(game.conf.resources,
 
