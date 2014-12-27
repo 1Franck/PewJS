@@ -50,7 +50,7 @@ Pew.Project.prototype.start = function(name){
 
     var scene = this.scenes[name].fn;
 
-    if(scene.init) scene.init();
+    if(scene.start) scene.start();
 
     if(scene.draw) scene.draw();
 };
