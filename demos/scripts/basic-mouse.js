@@ -69,6 +69,23 @@ game.createScene('mainScene', (function(){
         layerA.ctx.fillText('------------', 10, 30);
     };
 
+    /**
+     * Cursor position
+     * @return {[type]} [description]
+     */
+    scene.draw = function() {
+
+        layerA.clear(400,00,100,50);
+        var x = game.mouse.x();
+        var y = game.mouse.y();
+
+        layerA.ctx.fillStyle = "#D98D00";
+        layerA.ctx.fillText("X: " + x, 445, 20);
+        layerA.ctx.fillText("Y: " + y, 445, 40);
+
+        scene.requestAnim();
+    }
+
     return scene;
 
 })());
