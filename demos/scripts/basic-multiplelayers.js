@@ -57,7 +57,7 @@ game.createScene('mainScene', (function(){
     /**
      * Called once when animation start
      */
-    scene.init = function() {
+    scene.start = function() {
         rect(100,60,100,150,layerA);
         rect(80,100,40,100,layerF, "yellow");
         rect(50,75,100,100,layerA, "orange");

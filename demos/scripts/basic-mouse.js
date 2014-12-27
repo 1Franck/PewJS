@@ -62,7 +62,7 @@ game.createScene('mainScene', (function(){
     /**
      * Called once when animation start
      */
-    scene.init = function() {
+    scene.start = function() {
         layerA.ctx.font = "14px monospace";
         layerA.ctx.fillStyle = "#D98D00";
         layerA.ctx.fillText('Mouse events', 10, 20);

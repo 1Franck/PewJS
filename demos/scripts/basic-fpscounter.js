@@ -29,7 +29,7 @@ game.createScene('mainScene', (function(){
     /**
      * Called once when animation start
      */
-    scene.init = function() {
+    scene.start = function() {
         game.fpsmeter.start();
     
         layerA.ctx.font = "14px monospace";

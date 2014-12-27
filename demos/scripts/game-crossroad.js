@@ -25,7 +25,7 @@ game.createScene('gameplay', (function(){
     /**
      * Called once when animation start
      */
-    scene.init = function() {
+    scene.start = function() {
         game.fpsmeter.start();
     };
 

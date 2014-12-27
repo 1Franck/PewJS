@@ -36,7 +36,7 @@ game.createScene('mainScene', (function(){
     /**
      * Called once when animation start
      */
-    scene.init = function() {
+    scene.start = function() {
     };
 
     /**
