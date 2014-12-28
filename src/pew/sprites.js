@@ -22,6 +22,10 @@ Pew.Project.prototype.sprites = (function() {
         this.conf   = Pew.utils.extend({}, def, conf);
         this.frames = [];
 
+        if(this.conf.clip.w > 0 && this.conf.clip.h > 0) {
+            this.clip(this.conf.clip.w, this.conf.clip.h);
+        }
+
         return this;
     };
 
@@ -46,7 +50,9 @@ Pew.Project.prototype.sprites = (function() {
             for(var j=0;j < cols;++j) {
                 this.frames.push({
                     x: this.conf.clip.w * j,
-                    y: this.conf.clip.h * i
+                    y: this.conf.clip.h * i,
+                    w: fw,
+                    h: fh,
                 });
             }
         } 
