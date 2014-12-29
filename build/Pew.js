@@ -431,6 +431,17 @@ Pew.utils.range = function(start, stop, step) {
 };
 
 /**
+ * Check if a string describe a range
+ * ex: 5..18 or 1..59
+ * 
+ * @param  string  str
+ * @return false or array
+ */
+Pew.utils.isRangeStr = function(str) {
+    return str.match(/([0-9]+)..([0-9]+)/gi);
+}
+
+/**
  * Check if the variable is an array
  * 
  * @param  mixed  ar
