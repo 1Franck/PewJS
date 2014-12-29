@@ -1017,11 +1017,8 @@ Pew.Project.prototype.sprites = (function() {
         this.conf   = Pew.utils.extend({}, def, conf);
         this.frames = [];
 
-        console.log(typeof this.conf.resource);
-
         // get resource if needed
         if(typeof this.conf.resource === "string") {
-            console.log('is string');
             this.conf.resource = Pew.project().resources.get(this.conf.resource);
         }
 
