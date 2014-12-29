@@ -22,6 +22,14 @@ Pew.Project.prototype.sprites = (function() {
         this.conf   = Pew.utils.extend({}, def, conf);
         this.frames = [];
 
+        console.log(typeof this.conf.resource);
+
+        // get resource if needed
+        if(typeof this.conf.resource === "string") {
+            console.log('is string');
+            this.conf.resource = Pew.project().resources.get(this.conf.resource);
+        }
+
         if(this.conf.clip.w > 0 && this.conf.clip.h > 0) {
             this.clip(this.conf.clip.w, this.conf.clip.h);
         }
@@ -38,8 +46,8 @@ Pew.Project.prototype.sprites = (function() {
     Sprite.prototype.clip = function(fw, fh) {
         
         this.frames = [];
-        this.conf.clip.w = fw;
-        this.conf.clip.h = fh;
+        this.conf.clip.w = Math.round(fw);
+        this.conf.clip.h = Math.round(fh);
 
         var w = this.conf.resource.width,
             h = this.conf.resource.height,
@@ -56,6 +64,35 @@ Pew.Project.prototype.sprites = (function() {
                 });
             }
         }
+    };
+
+    /**
+     * Show all frames with their index number
+     */
+    Sprite.prototype.framesIndexMap = function(layer, x, y) {
+
+        x = x || 0;
+        y = y || 0;
+
+        var font = layer.ctx.font;
+        layer.ctx.font = "12px monospace";
+
+        for(var i=0;i<this.frames.length;++i) {
+
+            this.drawFrame(i, layer, this.frames[i].x, this.frames[i].y);
+
+            layer.ctx.beginPath();
+            layer.ctx.globalAlpha = 0.4;
+            layer.ctx.rect(this.frames[i].x, this.frames[i].y + this.frames[i].h/2 - 10, 50, 13);
+            layer.ctx.fillStyle = '#fff';
+            layer.ctx.fill();
+
+            layer.ctx.globalAlpha = 1;
+            layer.ctx.fillStyle = "#000";
+            layer.ctx.fillText(i, this.frames[i].x + (this.frames[i].w/2), this.frames[i].y + (this.frames[i].h/2));
+        }
+
+        layer.ctx.font = font;
     };
 
     /**
@@ -111,22 +148,30 @@ Pew.Project.prototype.sprites = (function() {
      */
     Sprite.prototype.createAnim = function(conf) {
 
-        return new Animation(conf);
+        return new Animation(conf, this.frames.length);
     };
 
     /**
      * Animation from a custom set of frames
      * 
-     * @param object conf
+     * @param object  conf
+     * @param integer total
      */
-    function Animation(conf) {
+    function Animation(conf, total) {
 
         var def = {
             duration: 500, //ms
-            frames: []
+            frames: [],
+            loop: true,
         };
 
-        this.conf        = Pew.utils.extend({}, def, conf);
+        this.conf = Pew.utils.extend({}, def, conf);
+
+        if(this.conf.frames === 'all') {
+            this.conf.frames = [];
+            for(var i=0;i<total;++i) this.conf.frames.push(i);
+        }
+
         this.ticks       = Pew.project().animationFrame.frameRate * (this.conf.duration / 1000);
         this.tick_index  = 0;
         this.cur_frame   = 0;
@@ -146,7 +191,12 @@ Pew.Project.prototype.sprites = (function() {
         }
 
         if(this.cur_frame > (this.conf.frames.length - 1)) {
-            this.cur_frame = 0;
+            if(this.conf.loop === false) {
+                --this.cur_frame;
+            }
+            else {
+                this.cur_frame = 0;
+            }
         }
 
         ++this.tick_index;
