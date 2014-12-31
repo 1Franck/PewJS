@@ -46,10 +46,13 @@ var Pew = (function(){
         // merge default setting with current game settings
         this.conf  = Pew.utils.extend({}, def_settings, conf);
 
-        // scenes / layers and animation frame
+        // scenes 
         this.scenes = {};
+        this.current_scene = '';
+
+        // layers and animation frame
         this.layers = {};
-        this.animationFrame = new AnimationFrame(this.conf.fps);
+        this.anim_frame = new AnimationFrame(this.conf.fps);
 
         return this;
     }
@@ -72,7 +75,6 @@ var Pew = (function(){
         // take all browser space if not specified
         this.width  = o.width  || window.innerWidth; 
         this.height = o.height || window.innerHeight;
-
 
         // canvas el and conttext
         this.canvas = o.canvas || null;
@@ -105,12 +107,12 @@ var Pew = (function(){
 
             this.requestAnim = function(callback) {
                 var callback = callback || this.draw;
-                this._fid    = Pew.project().animationFrame.request(callback);
+                this._fid    = Pew.project().anim_frame.request(callback);
                 this._status = 'playing';
             };
 
             this.cancelAnim = function() {
-                Pew.project().animationFrame.cancel(this._fid);
+                Pew.project().anim_frame.cancel(this._fid);
                 this._status = 'idle';
             };
 
@@ -122,7 +124,7 @@ var Pew = (function(){
                 else this.cancelAnim();
             };
 
-        }).apply( this.fn );
+        }).apply(this.fn);
 
         return this;
     }
