@@ -20,5 +20,5 @@ QUnit.test("Project FPS", function( assert ) {
 
     var game = Pew.createProject({ fps  : 30  });
 
-    assert.equal( game.animationFrame.frameRate, 30, "FPS set to 30" );
+    assert.equal( game.anim_frame.frameRate, 30, "FPS set to 30" );
 });
