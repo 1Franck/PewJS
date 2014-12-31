@@ -42,23 +42,10 @@ Pew.Project.prototype.destroyLayers = function() {
     }
 };
 
-
-/**
- * Project animation start loop
- */
-Pew.Project.prototype.start = function(name){
-
-    var scene = this.scenes[name].fn;
-
-    if(scene.start) scene.start();
-
-    if(scene.draw) scene.draw();
-};
-
 /**
  * Create a new scene
  * 
- * @param  string  name 
+ * @param  string   name 
  * @param  function fn   
  * @return object        
  */
@@ -66,4 +53,20 @@ Pew.Project.prototype.createScene = function(name, fn) {
 
     this.scenes[name] = new Pew.Scene(name, fn);
     return this.scenes[name];
+};
+
+
+/**
+ * Project animation start loop
+ *
+ * @param string name 
+ */
+Pew.Project.prototype.start = function(name){
+
+    var scene = this.scenes[name].fn;
+
+    if(scene.start) scene.start();
+    if(scene.draw) scene.draw();
+
+    this.current_scene = name;
 };
