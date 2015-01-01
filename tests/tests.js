@@ -28,6 +28,7 @@ QUnit.test("Project FPS", function(assert) {
  * Scene creation / playing
  */
 QUnit.test("Scene creation / playing", function(assert) {
+
     var game = Pew.createProject();
 
     assert.deepEqual(game.scenes, { }, 'Not created yet');
@@ -69,4 +70,30 @@ QUnit.test("Scene creation / playing", function(assert) {
     // stop scene
     game.scenes.scene1.fn.cancelAnim();
     assert.strictEqual(game.scenes.scene1.fn.is('idle'), true, 'Scene stopped');
+
+    // stop alernative
+    game.startScene('scene1');
+    game.stopScene('scene1');
+    assert.strictEqual(game.scenes.scene1.fn.is('idle'), true, 'Scene stopped');
+});
+
+/**
+ * Layers
+ */
+QUnit.test("Layers", function(assert) {
+
+    var game = Pew.createProject();
+
+    var layerA = game.createLayer('main', {
+        width: 500,
+        height: 300,
+        //container: '.container',
+        class: 'canvas-box',
+    });
+
+    assert.strictEqual(layerA, game.layers['main'], 'Layer reference');
+
+
+
+
 });
