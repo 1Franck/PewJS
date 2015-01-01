@@ -196,10 +196,16 @@ Pew.Project.prototype.sprites = (function() {
             }
         }
 
-        ++this.tick_index;
+        ++this.tick_index;        
+    };
 
-        //console.log(this.conf.frames[this.cur_frame]);
-
+    /**
+     * Get frame
+     * 
+     * @return integer
+     */
+    Animation.prototype.getFrame = function() {
+        this.loop();
         return this.conf.frames[this.cur_frame];
     };
 
