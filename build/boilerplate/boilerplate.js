@@ -1,4 +1,4 @@
-// Create the game
+// Create the project
 var game = Pew.createProject({
     title  : "My Game",
 });
@@ -51,4 +51,4 @@ game.createScene('myscene', (function(){
 
 
 // Start scene animation loop
-game.start('myscene');
+game.startScene('myscene');
