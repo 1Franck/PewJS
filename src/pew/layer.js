@@ -96,7 +96,6 @@ Pew.Layer.prototype.clear = function(x,y,x2,y2) {
     this.ctx.clearRect(x,y,x2,y2); 
 };
 
-
 /**
  * Auto increment z-index value
  * This function should be used by init() only
