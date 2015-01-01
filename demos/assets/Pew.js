@@ -48,7 +48,6 @@ var Pew = (function(){
 
         // scenes 
         this.scenes = {};
-        this.current_scene = '';
 
         // layers and animation frame
         this.layers = {};
@@ -153,78 +152,25 @@ var Pew = (function(){
         },
     }
 })(); ;/**
- * Pew / Project
+ * Pew / Scene
  */
 
 /**
- * Create a new layer canvas
- * 
- * @param  string name Layer name. ex: bg, fg, background, topmenu, etc...
- * @param  object opts Options @see GameLayer
+ * Scene animation start loop
  */
-Pew.Project.prototype.createLayer = function(name, opts) {
+Pew.Scene.prototype.start = function() {
 
-    var def = new Pew.Layer(opts);
-    this.layers[name] = def;
-    return def;
-};
-
-/**
- * Delete a layer and its canvas dom element
- * 
- * @param  string name
- */
-Pew.Project.prototype.destroyLayer = function(name) {
-    if(this.layers.hasOwnProperty(name)) {
-        if(this.layers[name].canvas.remove == undefined) {
-            this.layers[name].canvas.style.display = "none"; //hack fo IE
-        }
-        else {
-            this.layers[name].canvas.remove(); // dont work in IE
-        }
-
-        delete this.layers[name];
-    }
-};
-
-/**
- * Delete all layers (use destroyLayer())
- */
-Pew.Project.prototype.destroyLayers = function() {
-    for(var key in this.layers) {
-        this.destroyLayer(key);
-    }
-};
-
-/**
- * Create a new scene
- * 
- * @param  string   name 
- * @param  function fn   
- * @return object        
- */
-Pew.Project.prototype.createScene = function(name, fn) {
-
-    this.scenes[name] = new Pew.Scene(name, fn);
-    return this.scenes[name];
+    if(this.fn.start) this.fn.start();
+    if(this.fn.draw)  this.fn.draw();
 };
 
 
 /**
- * Project animation start loop
- *
- * @param string name 
+ * Scene animation stop loop
  */
-Pew.Project.prototype.start = function(name){
-
-    var scene = this.scenes[name].fn;
-
-    if(scene.start) scene.start();
-    if(scene.draw) scene.draw();
-
-    this.current_scene = name;
-};
-;/**
+Pew.Scene.prototype.stop = function() {
+    this.fn.cancelAnim();
+};;/**
  * Pew / Layer
  */
 
@@ -335,127 +281,81 @@ Pew.Layer.prototype._zi = (function() {
         }
     }
 })();;/**
- * Pew / Utils
+ * Pew / Project
  */
-Pew.utils = function(){}
-
 
 /**
- * Deep object extends
- * ex: Pew.utils.deepExtend({}, objA, objB);
+ * Create a new layer canvas
+ * 
+ * @param  string name Layer name. ex: bg, fg, background, topmenu, etc...
+ * @param  object opts Options @see GameLayer
  */
-Pew.utils.deepExtend = function(out) {
-    out = out || {};
+Pew.Project.prototype.createLayer = function(name, opts) {
 
-    for (var i = 1; i < arguments.length; i++) {
-        var obj = arguments[i];
+    var def = new Pew.Layer(opts);
+    this.layers[name] = def;
+    return def;
+};
 
-        if(!obj) continue;
-
-        for (var key in obj) {
-            if (obj.hasOwnProperty(key)) {
-                if (typeof obj[key] === 'object')
-                    Pew.utils.extend(out[key], obj[key]);
-                else
-                    out[key] = obj[key];
-            }
+/**
+ * Delete a layer and its canvas dom element
+ * 
+ * @param  string name
+ */
+Pew.Project.prototype.destroyLayer = function(name) {
+    if(this.layers.hasOwnProperty(name)) {
+        if(this.layers[name].canvas.remove == undefined) {
+            this.layers[name].canvas.style.display = "none"; //hack fo IE
         }
-    }
-
-    return out;
-};
-
-/**
- * object extends
- * ex: Pew.utils.extend({}, objA, objB);
- */
-Pew.utils.extend = function(out) {
-    out = out || {};
-
-    for (var i = 1; i < arguments.length; i++) {
-        var obj = arguments[i];
-
-        if(!obj) continue;
-
-        for (var key in obj) {
-            if (obj.hasOwnProperty(key)) {
-                out[key] = obj[key];
-            }
+        else {
+            this.layers[name].canvas.remove(); // dont work in IE
         }
+
+        delete this.layers[name];
     }
-
-    return out;
-};
-
-
-/**
- * Random interger
- * 
- * @param  integer min      
- * @param  integer max      
- * @param  integer interval 
- * @return integer          
- */
-Pew.utils.rand = function(min, max, interval) {
-    interval = interval || 1;
-    return Math.round((Math.floor(Math.random() * (max - min + 1)) + min) / interval) *interval;
 };
 
 /**
- * Random element from an array
- * 
- * @param  array a
- * @return misc  
+ * Delete all layers (use destroyLayer())
  */
-Pew.utils.randIndex = function(a) {
-    return a[this.rand(1, a.length) - 1];
-};
-
-/**
- * Return a range of elements from an array
- * @see: _.range from underscore.js - http://underscorejs.org/
- * @dont work
- */
-Pew.utils.range = function(start, stop, step) {
-
-    if (arguments.length <= 1) {
-        stop = start || 0;
-        start = 0;
+Pew.Project.prototype.destroyLayers = function() {
+    for(var key in this.layers) {
+        this.destroyLayer(key);
     }
-    step = arguments[2] || 1;
-
-    var length = Math.max(Math.ceil((stop - start) / step), 0);
-    var idx = 0;
-    var range = new Array(length);
-
-    while(idx < length) {
-        range[idx++] = start;
-        start += step;
-    }
-
-    return range;
 };
 
 /**
- * Check if a string describe a range
- * ex: 5..18 or 1..59
+ * Create a new scene
  * 
- * @param  string  str
- * @return false or array
+ * @param  string   name 
+ * @param  function fn   
+ * @return object        
  */
-Pew.utils.isRangeStr = function(str) {
-    return str.match(/([0-9]+)..([0-9]+)/gi);
-}
+Pew.Project.prototype.createScene = function(name, fn) {
+    this.scenes[name] = new Pew.Scene(name, fn);
+    return this.scenes[name];
+};
+
 
 /**
- * Check if the variable is an array
- * 
- * @param  mixed  ar
- * @return boolean
+ * Start a scene animation loop
+ *
+ * @param string name 
  */
-Pew.utils.isArray = function(ar) {
-    return Object.prototype.toString.call(ar) == "[object Array]";
-};;/**
+Pew.Project.prototype.startScene = function(name){
+    this.scenes[name].start();
+};
+
+
+/**
+ * Stop a scene animation loop
+ *
+ * @param string name 
+ */
+Pew.Project.prototype.stopScene = function(name){
+    this.scenes[name].stop();
+};
+;/**
  * Pew / Project / Mouse
  */
 Pew.Project.prototype.mouse = (function(){
@@ -1170,7 +1070,7 @@ Pew.Project.prototype.sprites = (function() {
             for(var i=0;i<total;++i) this.conf.frames.push(i);
         }
 
-        this.ticks       = Pew.project().animationFrame.frameRate * (this.conf.duration / 1000);
+        this.ticks       = Pew.project().anim_frame.frameRate * (this.conf.duration / 1000);
         this.tick_index  = 0;
         this.cur_frame   = 0;
         this.fpt         = Math.round(this.ticks / this.conf.frames.length);
@@ -1261,7 +1161,128 @@ Pew.Project.prototype.fpsmeter = (function(){
 
 
     return new Meter();
-})();;
+})();;/**
+ * Pew / Utils
+ */
+Pew.utils = function(){}
+
+
+/**
+ * Deep object extends
+ * ex: Pew.utils.deepExtend({}, objA, objB);
+ */
+Pew.utils.deepExtend = function(out) {
+    out = out || {};
+
+    for (var i = 1; i < arguments.length; i++) {
+        var obj = arguments[i];
+
+        if(!obj) continue;
+
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                if (typeof obj[key] === 'object')
+                    Pew.utils.extend(out[key], obj[key]);
+                else
+                    out[key] = obj[key];
+            }
+        }
+    }
+
+    return out;
+};
+
+/**
+ * object extends
+ * ex: Pew.utils.extend({}, objA, objB);
+ */
+Pew.utils.extend = function(out) {
+    out = out || {};
+
+    for (var i = 1; i < arguments.length; i++) {
+        var obj = arguments[i];
+
+        if(!obj) continue;
+
+        for (var key in obj) {
+            if (obj.hasOwnProperty(key)) {
+                out[key] = obj[key];
+            }
+        }
+    }
+
+    return out;
+};
+
+
+/**
+ * Random interger
+ * 
+ * @param  integer min      
+ * @param  integer max      
+ * @param  integer interval 
+ * @return integer          
+ */
+Pew.utils.rand = function(min, max, interval) {
+    interval = interval || 1;
+    return Math.round((Math.floor(Math.random() * (max - min + 1)) + min) / interval) *interval;
+};
+
+/**
+ * Random element from an array
+ * 
+ * @param  array a
+ * @return misc  
+ */
+Pew.utils.randIndex = function(a) {
+    return a[this.rand(1, a.length) - 1];
+};
+
+/**
+ * Return a range of elements from an array
+ * @see: _.range from underscore.js - http://underscorejs.org/
+ * @dont work
+ */
+Pew.utils.range = function(start, stop, step) {
+
+    if (arguments.length <= 1) {
+        stop = start || 0;
+        start = 0;
+    }
+    step = arguments[2] || 1;
+
+    var length = Math.max(Math.ceil((stop - start) / step), 0);
+    var idx = 0;
+    var range = new Array(length);
+
+    while(idx < length) {
+        range[idx++] = start;
+        start += step;
+    }
+
+    return range;
+};
+
+/**
+ * Check if a string describe a range
+ * ex: 5..18 or 1..59
+ * 
+ * @param  string  str
+ * @return false or array
+ */
+Pew.utils.isRangeStr = function(str) {
+    return str.match(/([0-9]+)..([0-9]+)/gi);
+}
+
+/**
+ * Check if the variable is an array
+ * 
+ * @param  mixed  ar
+ * @return boolean
+ */
+Pew.utils.isArray = function(ar) {
+    return Object.prototype.toString.call(ar) == "[object Array]";
+};;
 
 /**
  * An even better animation frame.

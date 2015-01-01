@@ -343,4 +343,4 @@ updateCtrl();
 
 
 blocks.nextLevel();
-game.start('gameplay');
+game.startScene('gameplay');

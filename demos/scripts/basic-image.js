@@ -4,8 +4,8 @@
 var game = Pew.createProject({
     title : "image loading",
     resources : {
-        name: 'map',
-        src:  'assets/img/scene.png',
+        name: "map",
+        src:  "assets/img/scene.png",
     }
 });
 
@@ -13,7 +13,7 @@ var game = Pew.createProject({
 /**
  * Create a scene
  */
-game.createScene('mainScene', (function(){
+game.createScene("scene1", (function(){
 
     /**
      * Scene properties
@@ -23,11 +23,11 @@ game.createScene('mainScene', (function(){
     /**
      * Create layers canvas
      */
-    var layerA = game.createLayer('main', {
+    var layerA = game.createLayer("main", {
         width: 500,
         height: 300,
-        container: '.container',
-        class: 'canvas-box',
+        container: ".container",
+        class: "canvas-box",
     });
 
     /**
@@ -35,14 +35,14 @@ game.createScene('mainScene', (function(){
      */
     var img = {
         x:0,
-        data:'',
+        data:"",
     };
 
     /**
      * Called once when animation start
      */
     scene.start = function() {
-        img.data = game.resources.get('map');
+        img.data = game.resources.get("map");
     };
 
     /**
@@ -72,7 +72,7 @@ game.createScene('mainScene', (function(){
 game.resources.load(game.conf.resources,
 
     function() {
-        game.start("mainScene");
+        game.startScene("scene1");
     },
     function(p) {
         console.log(p.progress);

@@ -8,7 +8,7 @@ var game = Pew.createProject({
 /**
  * Create a scene
  */
-game.createScene('mainScene', (function(){
+game.createScene('scene1', (function(){
 
     /**
      * Scene properties
@@ -90,4 +90,4 @@ game.createScene('mainScene', (function(){
 
 })());
 
-game.start('mainScene');
+game.startScene('scene1');
