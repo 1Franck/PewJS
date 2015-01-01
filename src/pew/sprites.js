@@ -19,8 +19,9 @@ Pew.Project.prototype.sprites = (function() {
             frameset: [],
         };
 
-        this.conf   = Pew.utils.extend({}, def, conf);
-        this.frames = [];
+        this.conf       = Pew.utils.extend({}, def, conf);
+        this.frames     = [];
+        this.to_radians = Math.PI/180;
 
         // get resource if needed
         if(typeof this.conf.resource === "string") {
@@ -58,6 +59,8 @@ Pew.Project.prototype.sprites = (function() {
                     y: this.conf.clip.h * i,
                     w: fw,
                     h: fh,
+                    cx: this.conf.clip.w/2,
+                    cy: this.conf.clip.h/2
                 });
             }
         }
@@ -65,6 +68,10 @@ Pew.Project.prototype.sprites = (function() {
 
     /**
      * Show all frames with their index number
+     *
+     * @param object  layer Pew.Layer instance
+     * @param integer x
+     * @param integer y
      */
     Sprite.prototype.framesIndexMap = function(layer, x, y) {
 
@@ -121,27 +128,70 @@ Pew.Project.prototype.sprites = (function() {
      * @param  integer num   
      * @param  object  layer Pew.Layer instance
      * @param  integer x     
-     * @param  integer y           
+     * @param  integer y
+     * @param  integer deg           
      */
-    Sprite.prototype.drawFrame = function(num, layer, x, y, show_center) {
+    Sprite.prototype.drawFrame = function(num, layer, x, y, deg) {
 
         var f = this.frames[num];
 
         if(f !== undefined) {
-            layer.ctx.drawImage(this.conf.resource,
-                f.x, f.y,
-                f.w, f.h,
-                x, y,
-                f.w, f.h
-            );
+
+            var res = this.conf.resource;
+
+            // need rotation
+            if(deg !== undefined) {
+                res = this.preRender(f, deg);
+                layer.ctx.drawImage(res, x, y);
+            }
+            else {
+                layer.ctx.drawImage(res,
+                    f.x, f.y,
+                    f.w, f.h,
+                    x+f.cx, y+f.cy,
+                    f.w, f.h
+                );
+            }
         }
 
         return this;
     };
 
     /**
+     * Pre render a frame that need rotation
+     * 
+     * @param  object  frame  
+     * @param  integer degree 
+     * @return object  Image object
+     */
+    Sprite.prototype.preRender = function(frame, deg) {
+
+        var canvas = document.createElement('canvas'),
+            ctx    = canvas.getContext('2d'),
+            img    = new Image(),
+            radian = deg * this.to_radians;
+
+        canvas.width  = frame.w*2;
+        canvas.height = frame.h*2;
+
+        ctx.translate(frame.w, frame.h);
+        ctx.rotate(radian);
+        ctx.drawImage(this.conf.resource, 
+            frame.x, frame.y, 
+            frame.w, frame.h, 
+            frame.cx*-1, frame.cy*-1, 
+            frame.w, frame.h
+        );
+
+        img.src = canvas.toDataURL('image/png');
+        return img;
+    }
+
+    /**
      * Create animation set
-     *      
+     *
+     * @param  object conf
+     * @return object
      */
     Sprite.prototype.createAnim = function(conf) {
 
@@ -177,8 +227,6 @@ Pew.Project.prototype.sprites = (function() {
 
     /**
      * Loop throw the set and return the current frame
-     * 
-     * @return integer
      */
     Animation.prototype.loop = function() {
 
@@ -209,7 +257,9 @@ Pew.Project.prototype.sprites = (function() {
         return this.conf.frames[this.cur_frame];
     };
 
-    //public stuff
+    /**
+     * Public stuff
+     */
     return {
 
         create: function(conf) {
