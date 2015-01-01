@@ -33,42 +33,40 @@ QUnit.test("Scene creation / playing", function(assert) {
     assert.deepEqual(game.scenes, { }, 'Not created yet');
 
     // create empty scene
-    game.createScene('mainScene', (function(){})());
+    game.createScene('scene1', (function(){})());
 
-    assert.notEqual(game.scenes.mainScene, undefined, 'Scene created');
-    assert.notEqual(game.scenes.mainScene.fn, undefined, 'Scene fn ok');
+    assert.notEqual(game.scenes.scene1, undefined, 'Scene created');
+    assert.notEqual(game.scenes.scene1.fn, undefined, 'Scene fn ok');
 
-    assert.equal(game.scenes.mainScene.fn._name, "mainScene", 'Scene name ok');
+    assert.equal(game.scenes.scene1.fn._name, "scene1", 'Scene name ok');
 
-    assert.equal(game.scenes.mainScene.fn._status, "idle", 'Scene is idle');
-    assert.strictEqual(game.scenes.mainScene.fn.is('idle'), true, 'Scene is idle (is() func)');
-
-    assert.equal(game.current_scene, "", 'Current scene is not set yet');
+    assert.equal(game.scenes.scene1.fn._status, "idle", 'Scene is idle');
+    assert.strictEqual(game.scenes.scene1.fn.is('idle'), true, 'Scene is idle (is() func)');
 
     // start empty scene
-    game.start('mainScene');
+    game.startScene('scene1');
 
-    assert.strictEqual(game.scenes.mainScene.fn.is('idle'), true, 'Scene started but still idle cause no draw func yet');    
-    assert.equal(game.current_scene, "mainScene", 'Current scene is set');
+    assert.strictEqual(game.scenes.scene1.fn.is('idle'), true, 'Scene started but still idle cause no draw func yet');    
 
     // add draw and request anim and restart the scene
-    game.scenes.mainScene.fn.draw = function() {
-        game.scenes.mainScene.fn.requestAnim();
+    game.scenes.scene1.fn.draw = function() {
+        game.scenes.scene1.fn.requestAnim();
     };
 
-    game.start('mainScene');
+    //alternative start syntax
+    game.scenes.scene1.start();
 
-    assert.strictEqual(game.scenes.mainScene.fn.is('idle'), false, 'Scene started and playing');
-    assert.strictEqual(game.scenes.mainScene.fn._status, "playing", 'Scene started and playing');
+    assert.strictEqual(game.scenes.scene1.fn.is('idle'), false, 'Scene started and playing');
+    assert.strictEqual(game.scenes.scene1.fn._status, "playing", 'Scene started and playing');
 
     // pause toggle scene
-    game.scenes.mainScene.fn.toggleAnim();
-    assert.strictEqual(game.scenes.mainScene.fn.is('idle'), true, 'Pausing the scene');
+    game.scenes.scene1.fn.toggleAnim();
+    assert.strictEqual(game.scenes.scene1.fn.is('idle'), true, 'Pausing the scene');
 
-    game.scenes.mainScene.fn.toggleAnim();
-    assert.strictEqual(game.scenes.mainScene.fn.is('playing'), true, 'Resuming the scene');
+    game.scenes.scene1.fn.toggleAnim();
+    assert.strictEqual(game.scenes.scene1.fn.is('playing'), true, 'Resuming the scene');
 
     // stop scene
-    game.scenes.mainScene.fn.cancelAnim();
-    assert.strictEqual(game.scenes.mainScene.fn.is('idle'), true, 'Scene stopped');
+    game.scenes.scene1.fn.cancelAnim();
+    assert.strictEqual(game.scenes.scene1.fn.is('idle'), true, 'Scene stopped');
 });
