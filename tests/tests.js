@@ -91,7 +91,20 @@ QUnit.test("Layers", function(assert) {
         class: 'canvas-box',
     });
 
+    var layerB = game.createLayer('second');
+
     assert.strictEqual(layerA, game.layers['main'], 'Layer reference');
+
+    assert.strictEqual(layerA.width, 500, 'Canvas width');  
+    assert.strictEqual(layerA.height, 300, 'Canvas height'); 
+
+    assert.strictEqual(layerA.canvas.width, 500, 'Canvas width');  
+    assert.strictEqual(layerA.canvas.height, 300, 'Canvas height'); 
+
+    assert.equal(layerA.canvas.style.zIndex, 1, 'Canvas z-index'); 
+    assert.equal(layerB.canvas.style.zIndex, 2, 'Second Canvas z-index'); 
+
+    assert.strictEqual(layerA.canvas.getAttribute('class'), 'canvas-box', 'Element Class');
 
 
 
