@@ -169,7 +169,7 @@ Pew.Project.prototype.sprites = (function() {
             for(var i=0;i<total;++i) this.conf.frames.push(i);
         }
 
-        this.ticks       = Pew.project().animationFrame.frameRate * (this.conf.duration / 1000);
+        this.ticks       = Pew.project().anim_frame.frameRate * (this.conf.duration / 1000);
         this.tick_index  = 0;
         this.cur_frame   = 0;
         this.fpt         = Math.round(this.ticks / this.conf.frames.length);
