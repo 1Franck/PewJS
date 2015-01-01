@@ -48,7 +48,6 @@ var Pew = (function(){
 
         // scenes 
         this.scenes = {};
-        this.current_scene = '';
 
         // layers and animation frame
         this.layers = {};
