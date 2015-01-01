@@ -105,8 +105,4 @@ QUnit.test("Layers", function(assert) {
     assert.equal(layerB.canvas.style.zIndex, 2, 'Second Canvas z-index'); 
 
     assert.strictEqual(layerA.canvas.getAttribute('class'), 'canvas-box', 'Element Class');
-
-
-
-
 });

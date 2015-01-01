@@ -9,10 +9,11 @@ I’ve been experimenting a lot with canvas/js lately and found myself writing o
 
 **What it do ?**
 
- - handle animations frame rate and loop inside a scene
+ - handle animations frame rate and loop inside scene(s)
  - handle multiple canvas layers
  - handle loading/storing resources like image or audio
- - binds keyboard inputs event, mouse events and cursor position
+ - handle sprites resources and animation
+ - catch keyboard inputs event, mouse events and cursor position
 
 **What it don't:**
 
