@@ -59,8 +59,8 @@ Pew.Project.prototype.sprites = (function() {
                     y: this.conf.clip.h * i,
                     w: fw,
                     h: fh,
-                    cx: this.conf.clip.w/2,
-                    cy: this.conf.clip.h/2
+                    cx: Math.round(fw/2),
+                    cy: Math.round(fh/2)
                 });
             }
         }
