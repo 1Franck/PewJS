@@ -106,3 +106,41 @@ QUnit.test("Layers", function(assert) {
 
     assert.strictEqual(layerA.canvas.getAttribute('class'), 'canvas-box', 'Element Class');
 });
+
+
+/**
+ * Sprites
+ */
+QUnit.test("Sprites", function(assert) {
+
+    var game = Pew.createProject();
+
+    assert.equal(1, 1, 'prevent fail'); 
+
+    game.resources.load({
+        name: 'mario',
+        src:  'assets/mario.png',
+    }, function() {
+
+        mario = game.sprites.create({
+            resource: 'mario',
+            clip: { w: 39.64, h: 39.36 }
+        });
+
+        assert.equal(typeof mario, "object", "Sprite creation");
+
+        var frame = mario.getFrame(1);
+        assert.equal(frame.cx, 20, 'frame 1 ok');
+
+        var frame = mario.getFrame(10000);
+        assert.equal(frame, undefined, 'unknow frame');
+
+        var frames = mario.getFrames("6..20");
+        console.log(frames);
+        assert.equal(frames.length, 15, 'Frames ranges');
+
+
+    });
+
+
+});
