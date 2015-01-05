@@ -136,10 +136,7 @@ QUnit.test("Sprites", function(assert) {
         assert.equal(frame, undefined, 'unknow frame');
 
         var frames = mario.getFrames("6..20");
-        console.log(frames);
         assert.equal(frames.length, 15, 'Frames ranges');
-
-
     });
 
 

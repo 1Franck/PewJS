@@ -1020,7 +1020,6 @@ Pew.Project.prototype.sprites = (function() {
     Sprite.prototype.getFrames = function(range) {
 
         var range = Pew.utils.isRangeStr(range);
-        console.log(range);
         if(range != null) {
             var r = [], max = range[2]*1;
             for(var i=range[1];i <= max;++i) {
