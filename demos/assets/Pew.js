@@ -1166,6 +1166,14 @@ Pew.Project.prototype.sprites = (function() {
     };
 
     /**
+     * Draw frame / @see sprite drawFrame()
+     */
+    Animation.prototype.drawFrame = function(sprite, layer, x, y, deg) {
+        var num = this.getFrame();
+        sprite.drawFrame(num, layer, x, y, deg);
+    };
+
+    /**
      * Public stuff
      */
     return {
