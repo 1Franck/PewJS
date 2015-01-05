@@ -66,6 +66,7 @@ module.exports = function(grunt) {
               'src/pew/keyboard.js', 
               'src/pew/resources.js',
               'src/pew/sprites.js',
+              'src/pew/audio.js',
               'src/pew/fps.js',
               'src/pew/utils.js', 
               'src/vendors/AnimationFrame/AnimationFrame.js'],
