@@ -127,7 +127,7 @@ QUnit.test("Sprites", function(assert) {
             clip: { w: 39.64, h: 39.36 }
         });
 
-        assert.equal(typeof mario, "object", "Sprite creation");
+        assert.equal(typeof mario, 'object', 'Sprite creation');
 
         var frame = mario.getFrame(1);
         assert.equal(frame.cx, 20, 'frame 1 ok');
