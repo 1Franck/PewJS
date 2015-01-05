@@ -104,11 +104,12 @@ Pew.utils.range = function(start, stop, step) {
  * Check if a string describe a range
  * ex: 5..18 or 1..59
  * 
- * @param  string  str
+ * @param  string   str
  * @return false or array
  */
 Pew.utils.isRangeStr = function(str) {
-    return str.match(/([0-9]+)..([0-9]+)/gi);
+    var regex = /([0-9]+)..([0-9]+)/gi;
+    return regex.exec(str);
 }
 
 /**
