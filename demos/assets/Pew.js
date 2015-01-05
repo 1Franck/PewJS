@@ -1019,7 +1019,15 @@ Pew.Project.prototype.sprites = (function() {
      */
     Sprite.prototype.getFrames = function(range) {
 
-        
+        var range = Pew.utils.isRangeStr(range);
+        if(range != null) {
+            var r = [];
+            for(var i=range[1];i <= range[2];++i) {
+                r.push(this.frames[i]);
+            }
+            return r;
+        }
+        return [];
     };
 
     /**
@@ -1322,11 +1330,12 @@ Pew.utils.range = function(start, stop, step) {
  * Check if a string describe a range
  * ex: 5..18 or 1..59
  * 
- * @param  string  str
+ * @param  string   str
  * @return false or array
  */
 Pew.utils.isRangeStr = function(str) {
-    return str.match(/([0-9]+)..([0-9]+)/gi);
+    var regex = /([0-9]+)..([0-9]+)/gi;
+    return regex.exec(str);
 }
 
 /**
