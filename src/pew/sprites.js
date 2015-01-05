@@ -120,14 +120,15 @@ Pew.Project.prototype.sprites = (function() {
     Sprite.prototype.getFrames = function(range) {
 
         var range = Pew.utils.isRangeStr(range);
+        console.log(range);
         if(range != null) {
-            var r = [];
-            for(var i=range[1];i <= range[2];++i) {
+            var r = [], max = range[2]*1;
+            for(var i=range[1];i <= max;++i) {
                 r.push(this.frames[i]);
             }
             return r;
         }
-        return [];
+        else return ["sadf"];
     };
 
     /**
