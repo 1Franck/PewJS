@@ -119,7 +119,15 @@ Pew.Project.prototype.sprites = (function() {
      */
     Sprite.prototype.getFrames = function(range) {
 
-        
+        var range = Pew.utils.isRangeStr(range);
+        if(range != null) {
+            var r = [];
+            for(var i=range[1];i <= range[2];++i) {
+                r.push(this.frames[i]);
+            }
+            return r;
+        }
+        return [];
     };
 
     /**
