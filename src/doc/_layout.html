@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>PewJS</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://maxcdn.bootstrapcdn.com/bootswatch/3.3.1/slate/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/monokai_sublime.css" rel="stylesheet">
+    <link href="assets/ubuntu.css" rel="stylesheet">
+    <style>
+      body {
+        height: 100%;
+        background-color: #373737;
+        font-family: UbuntuRegular;
+        font-size: 14px;
+      }
+      pre {
+        background-color: rgba(0,0,0,0.1);
+        border: 0;
+        padding:10px;
+      }
+      h1,h2,h3,h4,h5,h6 {
+        color:#D98D00;
+      }
+    </style>
+  </head>
+    
+  <body>
+    <div class="container">
+    <%=content%>
+    </div>
+    <!-- JavaScript -->
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </body>
+</html>
