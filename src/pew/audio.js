@@ -3,24 +3,22 @@
  */
 Pew.Project.prototype.audio = (function() {
 
-    function Audio(resource) {
-
-    }
-
     return {
+
         play: function(resource) {
 
-            var el = Pew.project().resources.get(resource);
+            var res = Pew.project().resources.get(resource),
+                snd = new Audio();
 
-            if(!el instanceof Audio) return;
-            if(!el.paused) return;
-            
+            if(!res instanceof Audio) return;
+            snd.src = res.src;
+
             try {
-                el.play();
+                snd.play();
             }
             catch (e) {
                 // Fail silently but show in F12 developer tools console
-                if(window.console && console.error("Error:" + e));
+                if(window.console && console.log("Error:" + e));
             }
         }
     }
