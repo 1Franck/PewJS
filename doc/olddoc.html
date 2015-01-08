@@ -12,6 +12,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="http://maxcdn.bootstrapcdn.com/bootswatch/3.3.1/slate/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/doc.css" rel="stylesheet">
     <link href="assets/monokai_sublime.css" rel="stylesheet">
     <link href="assets/ubuntu.css" rel="stylesheet">
     <style>
@@ -31,10 +32,35 @@
       }
     </style>
   </head>
-    
+
   <body>
-    <div class="container">
-    <h2 id="pewjs-documentation">PewJS / Documentation</h2>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Analytics</a></li>
+            <li><a href="#">Export</a></li>
+          </ul>
+
+          
+          <!-- <ul class="nav nav-sidebar">
+            <li><a href="">Nav item</a></li>
+            <li><a href="">Nav item again</a></li>
+            <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li>
+            <li><a href="">More navigation</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="">Nav item again</a></li>
+            <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li>
+          </ul> -->
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h2 id="pewjs-documentation">PewJS / Documentation</h2>
 <p>PewJS is a tiny HTML5 Canvas framework for games and animations.</p>
 <p>@see <a href="https://github.com/1Franck/PewJS/">Github project</a></p>
 <p><strong>Overview:</strong></p>
@@ -59,78 +85,78 @@
 </ul>
 <h2 id="quick-start">Quick Start</h2>
 <p>Take a look at this boiler plate. <strong>We will use this code as reference for the next paragraphs.</strong></p>
-<pre><code class="lang-javascript"><span class="comment">// Create the game</span>
-<span class="keyword">var</span> game = Pew.createProject({
+<pre><code class="lang-javascript"><span class="regexp">//</span> Create the game
+<span class="reserved">var</span> game = Pew.createProject({
     title  : <span class="string">"My Game"</span>,
 });
 
-<span class="comment">// Create a scene</span>
-game.createScene(<span class="string">'myscene'</span>, (<span class="keyword">function</span>(){
+<span class="regexp">//</span> Create a scene
+game.createScene(<span class="string">'myscene'</span>, (<span class="reserved">function</span>(){
 
-    <span class="comment">// Scene properties</span>
-    <span class="keyword">var</span> scene = {};
+    <span class="regexp">//</span> Scene properties
+    <span class="reserved">var</span> scene = {};
 
-    <span class="comment">// Create canvas layers </span>
-    <span class="keyword">var</span> layerA = game.createLayer(<span class="string">'background'</span>),
+    <span class="regexp">//</span> Create canvas layers 
+    <span class="reserved">var</span> layerA = game.createLayer(<span class="string">'background'</span>),
         layerB = game.createLayer(<span class="string">'foreground'</span>);
 
-    <span class="comment">// Start inputs capture</span>
-    <span class="comment">// Mouse note: to work properly, mouse event must </span>
-    <span class="comment">// be associated to the highest z-index canvas which </span>
-    <span class="comment">// is always the last one created</span>
+    <span class="regexp">//</span> Start inputs capture
+    <span class="regexp">//</span> Mouse note: to work properly, mouse event must 
+    <span class="regexp">//</span> be associated to the highest z-index canvas which 
+    <span class="regexp">//</span> <span class="keyword">is</span> always the last one created
     game.keyboard.init();
     game.mouse.init(layerB.canvas); 
 
 
-    <span class="comment">// Called once when animation start</span>
-    scene.init = <span class="keyword">function</span>() {
+    <span class="regexp">//</span> Called once <span class="keyword">when</span> animation start
+    scene.init = <span class="reserved">function</span>() {
     };
 
-    <span class="comment">// Update loop</span>
-    scene.update = <span class="keyword">function</span>() { 
+    <span class="regexp">//</span> Update <span class="keyword">loop</span>
+    scene.update = <span class="reserved">function</span>() { 
     };
 
-    <span class="comment">// Draw loop</span>
-    scene.draw = <span class="keyword">function</span>() {
+    <span class="regexp">//</span> Draw <span class="keyword">loop</span>
+    scene.draw = <span class="reserved">function</span>() {
 
         scene.update();
 
-        <span class="comment">//&lt;!-- your stuff --&gt;</span>
+        <span class="regexp">//</span>&lt;!-- your stuff --&gt;
 
-        <span class="comment">// request animation frame</span>
-        <span class="comment">// by default scene draw() is called again.</span>
-        <span class="comment">// Switch to another property callback for </span>
-        <span class="comment">// animation frame by specifying it within requestAnim().</span>
-        <span class="comment">// ex: scene.requestAnim("mypropertyname");</span>
+        <span class="regexp">//</span> request animation frame
+        <span class="regexp">//</span> <span class="keyword">by</span> <span class="reserved">default</span> scene draw() <span class="keyword">is</span> called again.
+        <span class="regexp">//</span> Switch to another property callback <span class="keyword">for</span> 
+        <span class="regexp">//</span> animation frame <span class="keyword">by</span> specifying it within requestAnim().
+        <span class="regexp">//</span> ex: scene.requestAnim(<span class="string">"mypropertyname"</span>);
         scene.requestAnim();
     };
 
-    <span class="comment">// always return scene object</span>
+    <span class="regexp">//</span> always <span class="keyword">return</span> scene object
     <span class="keyword">return</span> scene;
 
 })());
 
 
-<span class="comment">// Start scene animation loop</span>
+<span class="regexp">//</span> Start scene animation <span class="keyword">loop</span>
 game.start(<span class="string">'myscene'</span>);</code></pre>
 <h2 id="project">Project</h2>
 <p>Before you create you very first scene, you must create a new project. Your project will hold configs, scene(s), layer(s), etc...</p>
-<pre><code class="lang-javascript"><span class="keyword">var</span> game = Pew.createProject({
-    title  : <span class="string">"My Game"</span>,
+<pre><code class="lang-javascript"><span class="title">var</span> game = Pew.createProject({
+    <span class="title">title</span>  : <span class="string">"My Game"</span>,
 });</code></pre>
 <h2 id="scenes">Scenes</h2>
 <p>Scenes are javascript modules that encapsulate your animation logic and drawing loop. For small project, most of the time, one scene is sufficient, but there is no limit how many scenes you can have.</p>
 <p><strong>Create a new scene:</strong> (see <a href="#quick-start">Quick Start</a> boiler plate for more details)</p>
-<pre><code class="lang-javascript">game.createScene(<span class="string">'scene_name'</span>, (<span class="keyword">function</span>(){ ... })());</code></pre>
+<pre><code class="lang-javascript">game.createScene(<span class="string">'scene_name'</span>, (<span class="keyword">function</span>(){ <span class="keyword">...</span> })());</code></pre>
 <p><strong>Request next animation frame</strong>. By default, scene.draw is used</p>
 <pre><code class="lang-javascript">scene.draw = <span class="keyword">function</span>() {
-    ...
-    <span class="comment">// recall scene.draw()</span>
+    <span class="keyword">...</span>
+    // recall scene.draw()
     scene.requestAnim(); 
 }</code></pre>
 <p><strong>Change</strong> animation <strong>loop</strong> frame <strong>callback</strong></p>
 <pre><code class="lang-javascript">scene.draw = <span class="keyword">function</span>() {
-    ...
+    <span class="keyword">...</span>
     <span class="keyword">if</span>(foo === <span class="string">"bar"</span>) {
         <span class="keyword">return</span> scene.draw2();
     }
@@ -138,26 +164,26 @@ game.start(<span class="string">'myscene'</span>);</code></pre>
 }
 
 scene.draw2 = <span class="keyword">function</span>() {
-    ...
+    <span class="keyword">...</span>
     scene.requestAnim(scene.draw2);
 }</code></pre>
 <p><strong>Pause</strong> the animation loop</p>
 <pre><code class="lang-javascript">scene.draw = <span class="keyword">function</span>() {
-    ...
+    <span class="keyword">...</span>
     <span class="keyword">if</span>(foo === <span class="string">"bar"</span>) {
         <span class="keyword">return</span> scene.cancelAnim();
     }
     scene.requestAnim();
 }</code></pre>
 <p><strong>Toggle</strong> the loop (request/cancel)</p>
-<pre><code class="lang-javascript"><span class="comment">// example of pause toggle button</span>
-game.keyboard.on(<span class="string">"p"</span>, <span class="keyword">function</span>(){
-    scene.toggleAnim();
-});</code></pre>
+<pre><code class="lang-javascript">// example of pause toggle button
+game<span class="preprocessor">.keyboard</span><span class="preprocessor">.on</span>(<span class="string">"p"</span>, function(){
+    scene<span class="preprocessor">.toggleAnim</span>()<span class="comment">;</span>
+})<span class="comment">;</span></code></pre>
 <p><strong>Check</strong> the loop status (idle/playing)</p>
-<pre><code class="lang-javascript"><span class="keyword">if</span>(scene.is(<span class="string">'idle'</span>)) { ... }
-...
-<span class="keyword">if</span>(scene.is(<span class="string">'playing'</span>)) { ... }</code></pre>
+<pre><code class="lang-javascript"><span class="keyword">if</span>(scene.is(<span class="string">'idle'</span>)) { <span class="keyword">...</span> }
+<span class="keyword">...</span>
+<span class="keyword">if</span>(scene.is(<span class="string">'playing'</span>)) { <span class="keyword">...</span> }</code></pre>
 <h2 id="canvas-layers">Canvas layers</h2>
 <p>A layer is a canvas. You can have one or many layers. Each time you create a new layer, it create a DOM canvas element with an z-index higher than previous layer.</p>
 <pre><code class="lang-javascript"><span class="comment">// Create canvas layers</span>
@@ -165,48 +191,48 @@ game.keyboard.on(<span class="string">"p"</span>, <span class="keyword">function
     layerB = game.createLayer(<span class="string">'foreground'</span>);</code></pre>
 <p>By default, layer take all browser window space. </p>
 <p>Change layer configs:</p>
-<pre><code class="lang-javascript"><span class="keyword">var</span> layerA = game.createLayer(<span class="string">'platform'</span>, {
-    full: <span class="literal">false</span>,
-    autoresize: <span class="literal">false</span>, <span class="comment">//if true, canvas is resized on window resize</span>
+<pre><code class="lang-javascript">var layerA = game.createLayer('platform', {
+    full: <span class="constant">false</span>,
+    autoresize: <span class="constant">false</span>, //<span class="keyword">if</span> <span class="constant">true</span>, canvas <span class="keyword">is</span> resized <span class="function_start"><span class="keyword">on</span> <span class="title">window</span></span> resize
     width: <span class="number">500</span>,
     height: <span class="number">300</span>,
 });</code></pre>
 <p>You can access to layer canvas DOM element with <code>layerA.canvas</code> property.</p>
 <h3 id="draw">Draw</h3>
 <p>Simple drawing can be achieved by using game layer canvas context(<strong><code>ctx</code></strong>) property which is just a reference to <code>canvas.getContext(&#39;2d&#39;)</code> (<a href="http://www.html5canvastutorials.com/tutorials/html5-canvas-element/">more info</a>).</p>
-<pre><code class="lang-javascript">layerA.ctx.fillStyle = <span class="string">"#DD0000"</span>;
-layerA.ctx.font = <span class="string">"14px monospace"</span>;
-layerA.ctx.fillText(<span class="string">"Welcome to foobar"</span>,<span class="number">10</span>,<span class="number">50</span>);</code></pre>
+<pre><code class="lang-javascript">layerA<span class="preprocessor">.ctx</span><span class="preprocessor">.fillStyle</span> = <span class="string">"#DD0000"</span><span class="comment">;</span>
+layerA<span class="preprocessor">.ctx</span><span class="preprocessor">.font</span> = <span class="string">"14px monospace"</span><span class="comment">;</span>
+layerA<span class="preprocessor">.ctx</span><span class="preprocessor">.fillText</span>(<span class="string">"Welcome to foobar"</span>,<span class="number">10</span>,<span class="number">50</span>)<span class="comment">;</span></code></pre>
 <h2 id="inputs">Inputs</h2>
 <h3 id="keyboard">Keyboard</h3>
 <p>Before you binds some keyboard events, you need to enable keyboard event listener.</p>
-<pre><code class="lang-javascript">game.keyboard.init();</code></pre>
+<pre><code class="lang-javascript">game<span class="preprocessor">.keyboard</span><span class="preprocessor">.init</span>()<span class="comment">;</span></code></pre>
 <p><strong>Capture a key</strong> event and execute fn callback:</p>
-<pre><code class="lang-javascript">game.keyboard.on(<span class="string">"p"</span>, <span class="keyword">function</span>() { ... });
-<span class="comment">// alternatively, you can use the upperchar keycode (80 = P)</span>
-game.keyboard.on(<span class="number">80</span>, <span class="keyword">function</span>() { ... });</code></pre>
+<pre><code class="lang-javascript">game.keyboard.on(<span class="string">"p"</span>, <span class="keyword">function</span>() { <span class="keyword">...</span> });
+// alternatively, you can use the upperchar keycode (<span class="number">80</span> = P)
+game.keyboard.on(<span class="number">80</span>, <span class="keyword">function</span>() { <span class="keyword">...</span> });</code></pre>
 <p><strong>Capture a group of keys</strong> events and execute fn callback:</p>
 <pre><code class="lang-javascript">game.keyboard.on([<span class="string">"space"</span>, <span class="string">"ctrl"</span>, <span class="string">"alt"</span>], <span class="keyword">function</span>(key) {
 
     <span class="keyword">if</span>(key.code === <span class="number">32</span>) console.log(<span class="string">'You have pressed SPACEBAR'</span>);
-    <span class="comment">// or (note: key.char is always lower case)</span>
+    // or (note: key.char is always lower case)
     <span class="keyword">if</span>(key.char === <span class="string">"space"</span>) console.log(<span class="string">'You have pressed SPACEBAR'</span>);
-    ...
+    <span class="keyword">...</span>
 });</code></pre>
 <p>Note: Binding key(s) with on() always prevent event default. It is possible to bind special keys like <strong>F1</strong> to <strong>F12</strong>, <strong>Esc</strong>, <strong>Return</strong>, etc.. But remember that it will prevent browser native behavior. Ex: Binding an event for F5 will prevent browser refresh.</p>
 <p><strong>Stop capturing</strong> key(s):</p>
-<pre><code class="lang-javascript">game.keyboard.off(<span class="number">80</span>); <span class="comment">// 80 = P</span>
-game.keyboard.off(<span class="string">"a"</span>); 
-game.keyboard.off([<span class="string">"space"</span>, <span class="string">"ctrl"</span>, <span class="string">"alt"</span>]);  
-game.keyboard.off();  <span class="comment">// unbind everything</span></code></pre>
+<pre><code class="lang-javascript">game<span class="preprocessor">.keyboard</span><span class="preprocessor">.off</span>(<span class="number">80</span>)<span class="comment">; // 80 = P</span>
+game<span class="preprocessor">.keyboard</span><span class="preprocessor">.off</span>(<span class="string">"a"</span>)<span class="comment">; </span>
+game<span class="preprocessor">.keyboard</span><span class="preprocessor">.off</span>([<span class="string">"space"</span>, <span class="string">"ctrl"</span>, <span class="string">"alt"</span>])<span class="comment">;  </span>
+game<span class="preprocessor">.keyboard</span><span class="preprocessor">.off</span>()<span class="comment">;  // unbind everything</span></code></pre>
 <p><strong>Check</strong> a key <strong>manually</strong>:</p>
-<pre><code class="lang-javascript"><span class="keyword">if</span>(game.keyboard.key(<span class="string">'space'</span>)) {
-    console.log(<span class="string">'spacebar pressed!'</span>);
+<pre><code class="lang-javascript"><span class="keyword">if</span>(game.keyboard.key('<span class="constant">space</span>')) {
+    console.<span class="command">log</span>('spacebar pressed!');
 }
-<span class="comment">//get an array of all pressed keys at this very moment</span>
-<span class="keyword">var</span> pressed_keys = game.keyboard.keys();</code></pre>
+//<span class="keyword">get</span> an array <span class="keyword">of</span> all pressed keys <span class="keyword">at</span> this very moment
+var pressed_keys = game.keyboard.keys();</code></pre>
 <p><strong>Trigger manually</strong> a key:</p>
-<pre><code class="lang-javascript">game.keyboard.trigger(<span class="string">"space"</span>);</code></pre>
+<pre><code class="lang-javascript">game<span class="preprocessor">.keyboard</span><span class="preprocessor">.trigger</span>(<span class="string">"space"</span>)<span class="comment">;</span></code></pre>
 <p><strong>Capturing all keys</strong> nonobstructive way. </p>
 <p>Important: This is a global callback, and it won&#39;t prevent other callbacks(defined with on()) from being triggered and won&#39;t prevent native browser behavior by default. </p>
 <p>To stop propagation, you need to add <code>return false</code> to your onAll() callback. To prevent native behavior, you need to add <code>event.preventDefault()</code> to your onAll() callback.</p>
@@ -218,151 +244,151 @@ game.keyboard.onAll(<span class="keyword">function</span>(event, key) {
     <span class="keyword">if</span>(key.char === <span class="string">"p"</span>) console.log(<span class="string">"pressed 2"</span>);
 });
 
-<span class="comment">// when pressing "p", output will be</span>
-<span class="comment">// "pressed 2"</span>
-<span class="comment">// "pressed 1"</span>
+// when pressing <span class="string">"p"</span>, output will be
+// <span class="string">"pressed 2"</span>
+// <span class="string">"pressed 1"</span>
 
-...
+<span class="keyword">...</span>
 
 game.keyboard.on(<span class="string">"space"</span>, <span class="keyword">function</span>() {
     console.log(<span class="string">"pressed 1"</span>);
 });
 game.keyboard.onAll(<span class="keyword">function</span>(event, key) {
     <span class="keyword">if</span>(key.char === <span class="string">"space"</span>) console.log(<span class="string">"pressed 2"</span>);
-    <span class="keyword">return</span> <span class="literal">false</span>;
+    <span class="keyword">return</span> false;
 });
 
-<span class="comment">// when pressing "space", output will be</span>
-<span class="comment">// "pressed 2"</span>
+// when pressing <span class="string">"space"</span>, output will be
+// <span class="string">"pressed 2"</span>
 
-...
+<span class="keyword">...</span>
 
 game.keyboard.onAll(<span class="keyword">function</span>(event, key) {
     <span class="keyword">if</span>(key.char === <span class="string">"backspace"</span>) 
-        <span class="comment">//...</span>
-        event.preventDefault(); <span class="comment">// prevent browser behavior</span>
+        //<span class="keyword">...</span>
+        event.preventDefault(); // prevent browser behavior
     }
 });</code></pre>
 <p><strong>Stop capturing all keys</strong>. It will remove global callback only, but not other callbacks defined with on().</p>
-<pre><code class="lang-javascript">game.keyboard.offAll();</code></pre>
+<pre><code class="lang-javascript">game<span class="preprocessor">.keyboard</span><span class="preprocessor">.offAll</span>()<span class="comment">;</span></code></pre>
 <h3 id="mouse">Mouse</h3>
 <p>Before you binds mouse events, you need to enable mouse event listener.</p>
 <p>If you have more than one layer, mouse events listener must be associated to the highest z-index canvas which is always the last one created by <code>createLayer()</code></p>
-<pre><code class="lang-javascript">game.mouse.init(layerB.canvas);</code></pre>
+<pre><code class="lang-javascript">game<span class="preprocessor">.mouse</span><span class="preprocessor">.init</span>(layerB<span class="preprocessor">.canvas</span>)<span class="comment">;</span></code></pre>
 <p><strong>Capture mouse click</strong> event and execute fn callback:</p>
 <pre><code class="lang-javascript">game.mouse.on(<span class="string">"click"</span>, <span class="keyword">function</span>() {
-    ...
+    <span class="keyword">...</span>
 });</code></pre>
 <p><strong>Stop capturing</strong> mouse event(s):</p>
-<pre><code class="lang-javascript">game.mouse.off(<span class="string">"click"</span>);</code></pre>
+<pre><code class="lang-javascript">game<span class="preprocessor">.mouse</span><span class="preprocessor">.off</span>(<span class="string">"click"</span>)<span class="comment">;</span></code></pre>
 <p>Access to current <strong>cursor position</strong>:</p>
-<pre><code class="lang-javascript"><span class="keyword">var</span> x = game.mouse.x();
-<span class="keyword">var</span> y = game.mouse.y();</code></pre>
+<pre><code class="lang-javascript">var <span class="built_in">x</span> = game<span class="preprocessor">.mouse</span><span class="preprocessor">.x</span>()<span class="comment">;</span>
+var <span class="built_in">y</span> = game<span class="preprocessor">.mouse</span><span class="preprocessor">.y</span>()<span class="comment">;</span></code></pre>
 <h2 id="resources-images-audio-">Resources (images/audio)</h2>
 <p>Support image and audio. Resource url are relative.</p>
 <p><strong>Loading resource</strong> like an image and call fn when ready.</p>
 <pre><code class="lang-javascript">game.resources.load(<span class="string">'img/foobar.jpg'</span>, <span class="keyword">function</span>(){
-    ...
+    <span class="keyword">...</span>
 });</code></pre>
 <p><strong>Loading a group of resource</strong> and call fn when all resource ready.</p>
-<pre><code class="lang-javascript">game.resources.load([<span class="string">'img/sprite1.jpg'</span>,<span class="string">'img/sprite1.jpg'</span>,...], <span class="keyword">function</span>(){
+<pre><code class="lang-javascript">game.resources.load([<span class="string">'img/sprite1.jpg'</span>,<span class="string">'img/sprite1.jpg'</span>,<span class="keyword">...</span>], <span class="keyword">function</span>(){
     game.start(<span class="string">"mygame"</span>);
 });</code></pre>
 <p><strong>Loading a group of resource</strong> with progression callback.  Usefull for stuff like a progress bar.</p>
-<pre><code class="lang-javascript">game.resources.load([<span class="string">'img/sprite1.jpg'</span>,<span class="string">'img/sprite1.jpg'</span>,...], <span class="keyword">function</span>(){
+<pre><code class="lang-javascript">game.resources.load([<span class="string">'img/sprite1.jpg'</span>,<span class="string">'img/sprite1.jpg'</span>,<span class="keyword">...</span>], <span class="keyword">function</span>(){
     game.start(<span class="string">"mygame"</span>);
 }, <span class="keyword">function</span>(p) {
     console.log(p.progress + <span class="string">" %"</span>);
 });
-<span class="comment">//will output:</span>
-<span class="comment">//5 %</span>
-<span class="comment">//10 %</span>
-<span class="comment">// etc...</span></code></pre>
+//will output:
+//<span class="number">5</span> %
+//<span class="number">10</span> %
+// etc...</code></pre>
 <p><strong>Retreive</strong> and <strong>use</strong> a loaded <strong>resource</strong>.</p>
-<pre><code class="lang-javascript"><span class="keyword">var</span> my_img = game.resources.get(<span class="string">'img/foobar.jpg'</span>); 
-layerA.ctx.drawImage(my_img , <span class="number">0</span>, <span class="number">0</span>, <span class="number">300</span>, <span class="number">400</span>);</code></pre>
+<pre><code class="lang-javascript">var my_img = <span class="transposed_variable">game.</span><span class="transposed_variable">resources.</span>get(<span class="string">'img/foobar.jpg'</span>); 
+<span class="transposed_variable">layerA.</span><span class="transposed_variable">ctx.</span>drawImage(my_img , <span class="number">0</span>, <span class="number">0</span>, <span class="number">300</span>, <span class="number">400</span>);</code></pre>
 <h2 id="scope">Scope</h2>
 <p>Calling Pew.createProject() store a new instance of <code>Pew.Project</code> inside Pew and return it. The other way to access to your project is going through <code>Pew.project()</code></p>
 <p>Create project and stored it into variable <code>game</code>: </p>
-<pre><code class="lang-javascript"><span class="keyword">var</span> game = Pew.createProject({
+<pre><code class="lang-javascript">var game = Pew<span class="preprocessor">.createProject</span>({
     title  : <span class="string">"My Game"</span>,
-});
+})<span class="comment">;</span>
 
-console.log(game.conf.title); <span class="comment">// output "My Game"</span>
-console.log(Pew.project().conf.title); <span class="comment">// output "My Game"</span></code></pre>
+console<span class="preprocessor">.log</span>(game<span class="preprocessor">.conf</span><span class="preprocessor">.title</span>)<span class="comment">; // output "My Game"</span>
+console<span class="preprocessor">.log</span>(Pew<span class="preprocessor">.project</span>()<span class="preprocessor">.conf</span><span class="preprocessor">.title</span>)<span class="comment">; // output "My Game"</span></code></pre>
 <p>In case your are out of scope, you can always access at most stuff of your current project via <code>Pew.project()</code></p>
 <pre><code class="lang-javascript"><span class="comment">// access to project config object</span>
-Pew.project().conf
+Pew<span class="variable">.project</span>()<span class="variable">.conf</span>
 <span class="comment">// access to a layer object</span>
-Pew.project().layers[<span class="string">"layer_name"</span>]
+Pew<span class="variable">.project</span>()<span class="variable">.layers</span>[<span class="string">"layer_name"</span>]
 <span class="comment">// access to a scene module</span>
-Pew.project().scenes[<span class="string">"scene_name"</span>]
+Pew<span class="variable">.project</span>()<span class="variable">.scenes</span>[<span class="string">"scene_name"</span>]
 <span class="comment">// access to keyboard module</span>
-Pew.project().keyboard
+Pew<span class="variable">.project</span>()<span class="variable">.keyboard</span>
 <span class="comment">// access to mouse module</span>
-Pew.project().mouse
+Pew<span class="variable">.project</span>()<span class="variable">.mouse</span>
 <span class="comment">// access to resources module</span>
-Pew.project().resources</code></pre>
+Pew<span class="variable">.project</span>()<span class="variable">.resources</span></code></pre>
 <h2 id="utilities">Utilities</h2>
 <p>Utilities can be accessed with <code>Pew.utils.[fn name]</code></p>
 <p>Generate a <strong>random number</strong>
 <code>Pew.utils.rand(min, max, interval = 1)</code></p>
-<pre><code class="lang-javascript">console.log(Pew.utils.rand(<span class="number">1</span>,<span class="number">10</span>)); 
-<span class="comment">// output a number between 1 and 10</span>
+<pre><code class="lang-javascript">console<span class="preprocessor">.log</span>(Pew<span class="preprocessor">.utils</span><span class="preprocessor">.rand</span>(<span class="number">1</span>,<span class="number">10</span>))<span class="comment">; </span>
+// output a number between <span class="number">1</span> <span class="keyword">and</span> <span class="number">10</span>
 
-console.log(Pew.utils.rand(<span class="number">0</span>,<span class="number">100</span>, <span class="number">25</span>)); 
-<span class="comment">// output a number between 0 and 100 at interval of 25</span>
-<span class="comment">// so possible value here can be 0,25,50,75 or 100 only</span></code></pre>
+console<span class="preprocessor">.log</span>(Pew<span class="preprocessor">.utils</span><span class="preprocessor">.rand</span>(<span class="number">0</span>,<span class="number">100</span>, <span class="number">25</span>))<span class="comment">; </span>
+// output a number between <span class="number">0</span> <span class="keyword">and</span> <span class="number">100</span> at interval of <span class="number">25</span>
+// so possible value here can be <span class="number">0</span>,<span class="number">25</span>,<span class="number">50</span>,<span class="number">75</span> <span class="keyword">or</span> <span class="number">100</span> only</code></pre>
 <p>Get a <strong>random element from an array</strong> 
 <code>Pew.utils.randIndex(array);</code></p>
-<pre><code class="lang-javascript">console.log( Pew.utils.randIndex([<span class="string">"aaa"</span>,<span class="string">"bbb"</span>,<span class="string">"ccc"</span>]) ); 
-<span class="comment">// output one random element form array</span>
-<span class="comment">// in this example, output can be "aaa","bbb" or "ccc"</span></code></pre>
+<pre><code class="lang-javascript">console<span class="preprocessor">.log</span>( Pew<span class="preprocessor">.utils</span><span class="preprocessor">.randIndex</span>([<span class="string">"aaa"</span>,<span class="string">"bbb"</span>,<span class="string">"ccc"</span>]) )<span class="comment">; </span>
+// output one random element form array
+// <span class="keyword">in</span> this example, output can be <span class="string">"aaa"</span>,<span class="string">"bbb"</span> <span class="keyword">or</span> <span class="string">"ccc"</span></code></pre>
 <p><strong>Extend an object</strong> with another object
 <code>Pew.utils.extend({}, objA, objB)</code></p>
-<pre><code class="lang-javascript"><span class="keyword">var</span> objA = { title: <span class="string">"AAA"</span>, x: <span class="number">0</span>, y: <span class="number">0</span> };
-<span class="keyword">var</span> objB = { title: <span class="string">"BBB"</span>, x: <span class="number">20</span> };
+<pre><code class="lang-javascript">var objA = { <span class="method">title:</span> <span class="comment">"AAA"</span>, <span class="method">x:</span> <span class="number">0</span>, <span class="method">y:</span> <span class="number">0</span> };
+var objB = { <span class="method">title:</span> <span class="comment">"BBB"</span>, <span class="method">x:</span> <span class="number">20</span> };
 
-<span class="comment">// merge objB into objA</span>
-console.log( Pew.utils.extend({}, objA, objB) ); 
-<span class="comment">// output {title: "BBB", x: 20, y: 0}</span></code></pre>
+// merge objB into objA
+console.log( <span class="class">Pew</span>.utils.extend({}, objA, objB) ); 
+// output {<span class="method">title:</span> <span class="comment">"BBB"</span>, <span class="method">x:</span> <span class="number">20</span>, <span class="method">y:</span> <span class="number">0</span>}</code></pre>
 <h2 id="extending-pewjs">Extending PewJS</h2>
 <p>Create your own reusable plugins by extending thoses objects:
 <code>Pew.Project</code>, <code>Pew.Layer</code> and <code>Pew.utils</code></p>
 <p><em>Example 1:</em></p>
-<pre><code class="lang-javascript">Pew.Layer.prototype.circle = <span class="keyword">function</span>(x, y, rad, fill, stroke, line_w) {
+<pre><code class="lang-javascript">Pew<span class="variable">.Layer</span><span class="variable">.prototype</span><span class="variable">.circle</span> = function(x, y, rad, fill, stroke, line_w) {
 
-    <span class="keyword">this</span>.ctx.beginPath();
-    <span class="keyword">this</span>.ctx.arc(x, y, rad, <span class="number">0</span>, <span class="number">2</span> * Math.PI, <span class="literal">false</span>);
-    <span class="keyword">this</span>.ctx.fillStyle = fill;
-    <span class="keyword">this</span>.ctx.fill();
+    <span class="keyword">this</span><span class="variable">.ctx</span><span class="variable">.beginPath</span>();
+    <span class="keyword">this</span><span class="variable">.ctx</span><span class="variable">.arc</span>(x, y, rad, <span class="number">0</span>, <span class="number">2</span> * Math<span class="variable">.PI</span>, <span class="literal">false</span>);
+    <span class="keyword">this</span><span class="variable">.ctx</span><span class="variable">.fillStyle</span> = fill;
+    <span class="keyword">this</span><span class="variable">.ctx</span><span class="variable">.fill</span>();
 
     <span class="keyword">if</span>(stroke) {
-        <span class="keyword">this</span>.ctx.lineWidth = line_w || <span class="number">1</span>;
-        <span class="keyword">this</span>.ctx.strokeStyle = stroke;
-        <span class="keyword">this</span>.ctx.stroke();
+        <span class="keyword">this</span><span class="variable">.ctx</span><span class="variable">.lineWidth</span> = line_w || <span class="number">1</span>;
+        <span class="keyword">this</span><span class="variable">.ctx</span><span class="variable">.strokeStyle</span> = stroke;
+        <span class="keyword">this</span><span class="variable">.ctx</span><span class="variable">.stroke</span>();
     }
 };
 
 <span class="comment">// ex in your scene draw loop:</span>
 <span class="comment">// layerA.circle(100,100,10,"#000");</span></code></pre>
 <p><em>Example 2:</em></p>
-<pre><code class="lang-javascript">Pew.Layer.prototype.gradient = <span class="keyword">function</span>(x, y, x2, y2, colors, stops) {
+<pre><code class="lang-javascript">Pew<span class="preprocessor">.Layer</span><span class="preprocessor">.prototype</span><span class="preprocessor">.gradient</span> = function(<span class="built_in">x</span>, <span class="built_in">y</span>, x2, y2, colors, stops) {
 
-    x2 = x2 || <span class="keyword">this</span>.canvas.width;
-    y2 = y2 || <span class="keyword">this</span>.canvas.height;
+    x2 = x2 || this<span class="preprocessor">.canvas</span><span class="preprocessor">.width</span><span class="comment">;</span>
+    y2 = y2 || this<span class="preprocessor">.canvas</span><span class="preprocessor">.height</span><span class="comment">;</span>
 
-    <span class="keyword">var</span> grd = <span class="keyword">this</span>.ctx.createLinearGradient(x, y, x2, y2);
+    var grd = this<span class="preprocessor">.ctx</span><span class="preprocessor">.createLinearGradient</span>(<span class="built_in">x</span>, <span class="built_in">y</span>, x2, y2)<span class="comment">;</span>
 
-    <span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">in</span> colors) {
-        grd.addColorStop(stop[i]||<span class="number">0</span>, colors[i]);
+    for(var i <span class="keyword">in</span> colors) {
+        grd<span class="preprocessor">.addColorStop</span>(stop[i]||<span class="number">0</span>, colors[i])<span class="comment">;</span>
     }
 
-    <span class="keyword">return</span> grd; 
-};
+    return grd<span class="comment">; </span>
+}<span class="comment">;</span>
 
-<span class="comment">// layers have now access to this function. ex:</span>
-<span class="comment">// layerA.ctx.fillStyle = layerA.gradient(0,0,100,100,["#000","#111"],[0.5,1]);</span></code></pre>
+// layers have now access to this function. ex:
+// layerA<span class="preprocessor">.ctx</span><span class="preprocessor">.fillStyle</span> = layerA<span class="preprocessor">.gradient</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">100</span>,<span class="number">100</span>,[<span class="string">"#000"</span>,<span class="string">"#111"</span>],[<span class="number">0.5</span>,<span class="number">1</span>])<span class="comment">;</span></code></pre>
 <h2 id="license">License</h2>
 <p>PewJS is released under the MIT Licence.
 Copyright (c) 2014 François Lajoie
@@ -383,11 +409,15 @@ MIT Licence - Copyright (c) 2013 Oleg Slobodskoi
 &nbsp;</p>
 <p>......................PewPew.........Pew.........PewPew...Pew.............</p>
 
+        </div>
+      </div>
     </div>
+
     <!-- JavaScript -->
     <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
+
   </body>
 </html>

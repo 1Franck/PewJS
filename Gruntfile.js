@@ -59,17 +59,17 @@ module.exports = function(grunt) {
     //   }
     // },
 
-    // less: {
-    //   development: {},
-    //   production: {
-    //     options: {
-    //       cleancss: true,
-    //     },
-    //     files: {
-    //       ".css": ".less",
-    //     }
-    //   }
-    // },
+    less: {
+      development: {},
+      production: {
+        options: {
+          cleancss: true,
+        },
+        files: {
+          "doc/assets/doc.css": "src/doc/doc.less",
+        }
+      }
+    },
 
     // concat: {
     //   options: {
@@ -83,7 +83,7 @@ module.exports = function(grunt) {
 
     watch: {
       scripts: {
-        files: ['src/doc/*.html', 'src/doc/*.md'],
+        files: ['src/doc/*.*'],
         tasks: ['default'],
         options: {
           spawn: false,
@@ -100,7 +100,7 @@ module.exports = function(grunt) {
   // Load the plugins
   //grunt.loadNpmTasks('grunt-contrib-uglify');
   //grunt.loadNpmTasks('grunt-contrib-concat');
-  //grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-less');
   //grunt.loadNpmTasks('grunt-contrib-copy');
   //grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-markdown');
@@ -108,5 +108,5 @@ module.exports = function(grunt) {
   //grunt.loadNpmTasks('grunt-contrib-qunit');
 
   // Default task (AKA BUILD)
-  grunt.registerTask('default', ['markdown']);
+  grunt.registerTask('default', ['markdown', 'less']);
 };
