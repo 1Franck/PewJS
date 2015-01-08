@@ -36,31 +36,30 @@
   <body>
 
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <!-- <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Analytics</a></li>
-            <li><a href="#">Export</a></li>
-          </ul>
- -->
-          
-          <!-- <ul class="nav nav-sidebar">
-            <li><a href="">Nav item</a></li>
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-            <li><a href="">More navigation</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-          </ul> -->
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h2 id="mouse">Mouse</h2>
+      <div class="sidebar">
+        <!-- <ul class="nav nav-sidebar">
+          <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+          <li><a href="#">Reports</a></li>
+          <li><a href="#">Analytics</a></li>
+          <li><a href="#">Export</a></li>
+        </ul>
+-->
+        
+        <!-- <ul class="nav nav-sidebar">
+          <li><a href="">Nav item</a></li>
+          <li><a href="">Nav item again</a></li>
+          <li><a href="">One more nav</a></li>
+          <li><a href="">Another nav item</a></li>
+          <li><a href="">More navigation</a></li>
+        </ul>
+        <ul class="nav nav-sidebar">
+          <li><a href="">Nav item again</a></li>
+          <li><a href="">One more nav</a></li>
+          <li><a href="">Another nav item</a></li>
+        </ul> -->
+      </div>
+      <div class="main">
+        <h2 id="mouse">Mouse</h2>
 <p>Before you binds mouse events, you need to enable mouse event listener.</p>
 <p>If you have more than one layer, mouse events listener must be associated to the highest z-index canvas which is always the last one created by <code>createLayer()</code></p>
 <pre><code class="lang-javascript">game<span class="preprocessor">.mouse</span><span class="preprocessor">.init</span>(layerB<span class="preprocessor">.canvas</span>)<span class="comment">;</span></code></pre>
@@ -74,7 +73,6 @@
 <pre><code class="lang-javascript">var <span class="built_in">x</span> = game<span class="preprocessor">.mouse</span><span class="preprocessor">.x</span>()<span class="comment">;</span>
 var <span class="built_in">y</span> = game<span class="preprocessor">.mouse</span><span class="preprocessor">.y</span>()<span class="comment">;</span></code></pre>
 
-        </div>
       </div>
     </div>
 

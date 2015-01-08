@@ -36,31 +36,30 @@
   <body>
 
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <!-- <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Analytics</a></li>
-            <li><a href="#">Export</a></li>
-          </ul>
- -->
-          
-          <!-- <ul class="nav nav-sidebar">
-            <li><a href="">Nav item</a></li>
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-            <li><a href="">More navigation</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-          </ul> -->
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h2 id="scenes">Scenes</h2>
+      <div class="sidebar">
+        <!-- <ul class="nav nav-sidebar">
+          <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+          <li><a href="#">Reports</a></li>
+          <li><a href="#">Analytics</a></li>
+          <li><a href="#">Export</a></li>
+        </ul>
+-->
+        
+        <!-- <ul class="nav nav-sidebar">
+          <li><a href="">Nav item</a></li>
+          <li><a href="">Nav item again</a></li>
+          <li><a href="">One more nav</a></li>
+          <li><a href="">Another nav item</a></li>
+          <li><a href="">More navigation</a></li>
+        </ul>
+        <ul class="nav nav-sidebar">
+          <li><a href="">Nav item again</a></li>
+          <li><a href="">One more nav</a></li>
+          <li><a href="">Another nav item</a></li>
+        </ul> -->
+      </div>
+      <div class="main">
+        <h2 id="scenes">Scenes</h2>
 <p>Scenes are javascript modules that encapsulate your animation logic and drawing loop. For small project, most of the time, one scene is sufficient, but there is no limit how many scenes you can have.</p>
 <p><strong>Create a new scene:</strong> (see <a href="#quick-start">Quick Start</a> boiler plate for more details)</p>
 <pre><code class="lang-javascript">game.createScene(<span class="string">'scene_name'</span>, (<span class="keyword">function</span>(){ <span class="keyword">...</span> })());</code></pre>
@@ -101,7 +100,6 @@ game<span class="preprocessor">.keyboard</span><span class="preprocessor">.on</s
 <span class="keyword">...</span>
 <span class="keyword">if</span>(scene.is(<span class="string">'playing'</span>)) { <span class="keyword">...</span> }</code></pre>
 
-        </div>
       </div>
     </div>
 

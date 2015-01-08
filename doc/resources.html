@@ -36,31 +36,30 @@
   <body>
 
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <!-- <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Analytics</a></li>
-            <li><a href="#">Export</a></li>
-          </ul>
- -->
-          
-          <!-- <ul class="nav nav-sidebar">
-            <li><a href="">Nav item</a></li>
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-            <li><a href="">More navigation</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-          </ul> -->
-        </div>
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h2 id="resources-images-audio-">Resources (images/audio)</h2>
+      <div class="sidebar">
+        <!-- <ul class="nav nav-sidebar">
+          <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+          <li><a href="#">Reports</a></li>
+          <li><a href="#">Analytics</a></li>
+          <li><a href="#">Export</a></li>
+        </ul>
+-->
+        
+        <!-- <ul class="nav nav-sidebar">
+          <li><a href="">Nav item</a></li>
+          <li><a href="">Nav item again</a></li>
+          <li><a href="">One more nav</a></li>
+          <li><a href="">Another nav item</a></li>
+          <li><a href="">More navigation</a></li>
+        </ul>
+        <ul class="nav nav-sidebar">
+          <li><a href="">Nav item again</a></li>
+          <li><a href="">One more nav</a></li>
+          <li><a href="">Another nav item</a></li>
+        </ul> -->
+      </div>
+      <div class="main">
+        <h2 id="resources-images-audio-">Resources (images/audio)</h2>
 <p>Support image and audio. Resource url are relative.</p>
 <p><strong>Loading resource</strong> like an image and call fn when ready.</p>
 <pre><code class="lang-javascript">game.resources.load(<span class="string">'img/foobar.jpg'</span>, <span class="keyword">function</span>(){
@@ -84,7 +83,6 @@
 <pre><code class="lang-javascript">var my_img = <span class="transposed_variable">game.</span><span class="transposed_variable">resources.</span>get(<span class="string">'img/foobar.jpg'</span>); 
 <span class="transposed_variable">layerA.</span><span class="transposed_variable">ctx.</span>drawImage(my_img , <span class="number">0</span>, <span class="number">0</span>, <span class="number">300</span>, <span class="number">400</span>);</code></pre>
 
-        </div>
       </div>
     </div>
 
