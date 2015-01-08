@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>PewJS</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://maxcdn.bootstrapcdn.com/bootswatch/3.3.1/slate/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/doc.css" rel="stylesheet">
+    <link href="assets/monokai_sublime.css" rel="stylesheet">
+    <link href="assets/ubuntu.css" rel="stylesheet">
+    <style>
+      body {
+        height: 100%;
+        background-color: #373737;
+        font-family: UbuntuRegular;
+        font-size: 14px;
+      }
+      pre {
+        background-color: rgba(0,0,0,0.1);
+        border: 0;
+        padding:10px;
+      }
+      h1,h2,h3,h4,h5,h6 {
+        color:#D98D00;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Analytics</a></li>
+            <li><a href="#">Export</a></li>
+          </ul>
+
+          
+          <!-- <ul class="nav nav-sidebar">
+            <li><a href="">Nav item</a></li>
+            <li><a href="">Nav item again</a></li>
+            <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li>
+            <li><a href="">More navigation</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="">Nav item again</a></li>
+            <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li>
+          </ul> -->
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h2 id="extending-pewjs">Extending PewJS</h2>
+<p>Create your own reusable plugins by extending thoses objects:
+<code>Pew.Project</code>, <code>Pew.Layer</code> and <code>Pew.utils</code></p>
+<p><em>Example 1:</em></p>
+<pre><code class="lang-javascript">Pew<span class="variable">.Layer</span><span class="variable">.prototype</span><span class="variable">.circle</span> = function(x, y, rad, fill, stroke, line_w) {
+
+    <span class="keyword">this</span><span class="variable">.ctx</span><span class="variable">.beginPath</span>();
+    <span class="keyword">this</span><span class="variable">.ctx</span><span class="variable">.arc</span>(x, y, rad, <span class="number">0</span>, <span class="number">2</span> * Math<span class="variable">.PI</span>, <span class="literal">false</span>);
+    <span class="keyword">this</span><span class="variable">.ctx</span><span class="variable">.fillStyle</span> = fill;
+    <span class="keyword">this</span><span class="variable">.ctx</span><span class="variable">.fill</span>();
+
+    <span class="keyword">if</span>(stroke) {
+        <span class="keyword">this</span><span class="variable">.ctx</span><span class="variable">.lineWidth</span> = line_w || <span class="number">1</span>;
+        <span class="keyword">this</span><span class="variable">.ctx</span><span class="variable">.strokeStyle</span> = stroke;
+        <span class="keyword">this</span><span class="variable">.ctx</span><span class="variable">.stroke</span>();
+    }
+};
+
+<span class="comment">// ex in your scene draw loop:</span>
+<span class="comment">// layerA.circle(100,100,10,"#000");</span></code></pre>
+<p><em>Example 2:</em></p>
+<pre><code class="lang-javascript">Pew<span class="preprocessor">.Layer</span><span class="preprocessor">.prototype</span><span class="preprocessor">.gradient</span> = function(<span class="built_in">x</span>, <span class="built_in">y</span>, x2, y2, colors, stops) {
+
+    x2 = x2 || this<span class="preprocessor">.canvas</span><span class="preprocessor">.width</span><span class="comment">;</span>
+    y2 = y2 || this<span class="preprocessor">.canvas</span><span class="preprocessor">.height</span><span class="comment">;</span>
+
+    var grd = this<span class="preprocessor">.ctx</span><span class="preprocessor">.createLinearGradient</span>(<span class="built_in">x</span>, <span class="built_in">y</span>, x2, y2)<span class="comment">;</span>
+
+    for(var i <span class="keyword">in</span> colors) {
+        grd<span class="preprocessor">.addColorStop</span>(stop[i]||<span class="number">0</span>, colors[i])<span class="comment">;</span>
+    }
+
+    return grd<span class="comment">; </span>
+}<span class="comment">;</span>
+
+// layers have now access to this function. ex:
+// layerA<span class="preprocessor">.ctx</span><span class="preprocessor">.fillStyle</span> = layerA<span class="preprocessor">.gradient</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">100</span>,<span class="number">100</span>,[<span class="string">"#000"</span>,<span class="string">"#111"</span>],[<span class="number">0.5</span>,<span class="number">1</span>])<span class="comment">;</span></code></pre>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+  </body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>PewJS</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://maxcdn.bootstrapcdn.com/bootswatch/3.3.1/slate/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/doc.css" rel="stylesheet">
+    <link href="assets/monokai_sublime.css" rel="stylesheet">
+    <link href="assets/ubuntu.css" rel="stylesheet">
+    <style>
+      body {
+        height: 100%;
+        background-color: #373737;
+        font-family: UbuntuRegular;
+        font-size: 14px;
+      }
+      pre {
+        background-color: rgba(0,0,0,0.1);
+        border: 0;
+        padding:10px;
+      }
+      h1,h2,h3,h4,h5,h6 {
+        color:#D98D00;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Analytics</a></li>
+            <li><a href="#">Export</a></li>
+          </ul>
+
+          
+          <!-- <ul class="nav nav-sidebar">
+            <li><a href="">Nav item</a></li>
+            <li><a href="">Nav item again</a></li>
+            <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li>
+            <li><a href="">More navigation</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="">Nav item again</a></li>
+            <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li>
+          </ul> -->
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h2 id="quick-start">Quick Start</h2>
+<p>Take a look at this boiler plate. <strong>We will use this code as reference for the next paragraphs.</strong></p>
+<pre><code class="lang-javascript"><span class="regexp">//</span> Create the game
+<span class="reserved">var</span> game = Pew.createProject({
+    title  : <span class="string">"My Game"</span>,
+});
+
+<span class="regexp">//</span> Create a scene
+game.createScene(<span class="string">'myscene'</span>, (<span class="reserved">function</span>(){
+
+    <span class="regexp">//</span> Scene properties
+    <span class="reserved">var</span> scene = {};
+
+    <span class="regexp">//</span> Create canvas layers 
+    <span class="reserved">var</span> layerA = game.createLayer(<span class="string">'background'</span>),
+        layerB = game.createLayer(<span class="string">'foreground'</span>);
+
+    <span class="regexp">//</span> Start inputs capture
+    <span class="regexp">//</span> Mouse note: to work properly, mouse event must 
+    <span class="regexp">//</span> be associated to the highest z-index canvas which 
+    <span class="regexp">//</span> <span class="keyword">is</span> always the last one created
+    game.keyboard.init();
+    game.mouse.init(layerB.canvas); 
+
+
+    <span class="regexp">//</span> Called once <span class="keyword">when</span> animation start
+    scene.init = <span class="reserved">function</span>() {
+    };
+
+    <span class="regexp">//</span> Update <span class="keyword">loop</span>
+    scene.update = <span class="reserved">function</span>() { 
+    };
+
+    <span class="regexp">//</span> Draw <span class="keyword">loop</span>
+    scene.draw = <span class="reserved">function</span>() {
+
+        scene.update();
+
+        <span class="regexp">//</span>&lt;!-- your stuff --&gt;
+
+        <span class="regexp">//</span> request animation frame
+        <span class="regexp">//</span> <span class="keyword">by</span> <span class="reserved">default</span> scene draw() <span class="keyword">is</span> called again.
+        <span class="regexp">//</span> Switch to another property callback <span class="keyword">for</span> 
+        <span class="regexp">//</span> animation frame <span class="keyword">by</span> specifying it within requestAnim().
+        <span class="regexp">//</span> ex: scene.requestAnim(<span class="string">"mypropertyname"</span>);
+        scene.requestAnim();
+    };
+
+    <span class="regexp">//</span> always <span class="keyword">return</span> scene object
+    <span class="keyword">return</span> scene;
+
+})());
+
+
+<span class="regexp">//</span> Start scene animation <span class="keyword">loop</span>
+game.start(<span class="string">'myscene'</span>);</code></pre>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+  </body>
+</html>

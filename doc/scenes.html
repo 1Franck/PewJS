@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>PewJS</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="http://maxcdn.bootstrapcdn.com/bootswatch/3.3.1/slate/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/doc.css" rel="stylesheet">
+    <link href="assets/monokai_sublime.css" rel="stylesheet">
+    <link href="assets/ubuntu.css" rel="stylesheet">
+    <style>
+      body {
+        height: 100%;
+        background-color: #373737;
+        font-family: UbuntuRegular;
+        font-size: 14px;
+      }
+      pre {
+        background-color: rgba(0,0,0,0.1);
+        border: 0;
+        padding:10px;
+      }
+      h1,h2,h3,h4,h5,h6 {
+        color:#D98D00;
+      }
+    </style>
+  </head>
+
+  <body>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Analytics</a></li>
+            <li><a href="#">Export</a></li>
+          </ul>
+
+          
+          <!-- <ul class="nav nav-sidebar">
+            <li><a href="">Nav item</a></li>
+            <li><a href="">Nav item again</a></li>
+            <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li>
+            <li><a href="">More navigation</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="">Nav item again</a></li>
+            <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li>
+          </ul> -->
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h2 id="scenes">Scenes</h2>
+<p>Scenes are javascript modules that encapsulate your animation logic and drawing loop. For small project, most of the time, one scene is sufficient, but there is no limit how many scenes you can have.</p>
+<p><strong>Create a new scene:</strong> (see <a href="#quick-start">Quick Start</a> boiler plate for more details)</p>
+<pre><code class="lang-javascript">game.createScene(<span class="string">'scene_name'</span>, (<span class="keyword">function</span>(){ <span class="keyword">...</span> })());</code></pre>
+<p><strong>Request next animation frame</strong>. By default, scene.draw is used</p>
+<pre><code class="lang-javascript">scene.draw = <span class="keyword">function</span>() {
+    <span class="keyword">...</span>
+    // recall scene.draw()
+    scene.requestAnim(); 
+}</code></pre>
+<p><strong>Change</strong> animation <strong>loop</strong> frame <strong>callback</strong></p>
+<pre><code class="lang-javascript">scene.draw = <span class="keyword">function</span>() {
+    <span class="keyword">...</span>
+    <span class="keyword">if</span>(foo === <span class="string">"bar"</span>) {
+        <span class="keyword">return</span> scene.draw2();
+    }
+    scene.requestAnim();
+}
+
+scene.draw2 = <span class="keyword">function</span>() {
+    <span class="keyword">...</span>
+    scene.requestAnim(scene.draw2);
+}</code></pre>
+<p><strong>Pause</strong> the animation loop</p>
+<pre><code class="lang-javascript">scene.draw = <span class="keyword">function</span>() {
+    <span class="keyword">...</span>
+    <span class="keyword">if</span>(foo === <span class="string">"bar"</span>) {
+        <span class="keyword">return</span> scene.cancelAnim();
+    }
+    scene.requestAnim();
+}</code></pre>
+<p><strong>Toggle</strong> the loop (request/cancel)</p>
+<pre><code class="lang-javascript">// example of pause toggle button
+game<span class="preprocessor">.keyboard</span><span class="preprocessor">.on</span>(<span class="string">"p"</span>, function(){
+    scene<span class="preprocessor">.toggleAnim</span>()<span class="comment">;</span>
+})<span class="comment">;</span></code></pre>
+<p><strong>Check</strong> the loop status (idle/playing)</p>
+<pre><code class="lang-javascript"><span class="keyword">if</span>(scene.is(<span class="string">'idle'</span>)) { <span class="keyword">...</span> }
+<span class="keyword">...</span>
+<span class="keyword">if</span>(scene.is(<span class="string">'playing'</span>)) { <span class="keyword">...</span> }</code></pre>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+  </body>
+</html>
