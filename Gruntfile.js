@@ -5,7 +5,6 @@ module.exports = function(grunt) {
 
     pkg: grunt.file.readJSON('package.json'),
 
-
     markdown: {
       all: {
         files: [
@@ -35,30 +34,6 @@ module.exports = function(grunt) {
       }
     },
 
-    // uglify: {
-    //   options: {
-    //     banner: '/*! build <%= grunt.template.today("yyyy-mm-dd HH:mm:ss") %> */\n/*! Pew.js */\n/*! Copyright Francois Lajoie */\n/*! MIT License */\n'
-    //   },
-    //   my_target: {
-    //     files: {
-    //       'build/Pew.min.js': ['build/pew.js']
-    //     }
-    //   }
-    // },
-
-    // copy: {
-    //   build: {
-    //     files: [
-    //       {
-    //         cwd: 'src/boilerplate',     // set working folder / root to copy
-    //         src: '**/*',                // copy all files and subfolders
-    //         dest: '',  // destination folder
-    //         expand: true                // required when using cwd
-    //       },
-    //       
-    //   }
-    // },
-
     less: {
       development: {},
       production: {
@@ -73,11 +48,25 @@ module.exports = function(grunt) {
 
     // concat: {
     //   options: {
-    //     separator: ';',
+    //     separator: '',
     //   },
     //   dist: {
-    //     src: [],
-    //     dest: '',
+    //     src: [
+    //       'src/doc/_header.html',
+    //       'doc/quickstart.html',
+    //       'doc/project.html',
+    //       'doc/scenes.html',
+    //       'doc/layers.html',
+    //       'doc/keyboard.html',
+    //       'doc/mouse.html',
+    //       'doc/resources.html',
+    //       'doc/scope.html',
+    //       'doc/utilities.html',
+    //       'doc/extending.html',
+    //       'doc/license.html',
+    //       'src/doc/_footer.html',
+    //     ],
+    //     dest: 'doc/index.html',
     //   },
     // },
 
@@ -91,15 +80,11 @@ module.exports = function(grunt) {
       },
     },
 
-    // clean: {
-    //   less: [""],
-    // },
-
   });
 
   // Load the plugins
   //grunt.loadNpmTasks('grunt-contrib-uglify');
-  //grunt.loadNpmTasks('grunt-contrib-concat');
+  // grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-less');
   //grunt.loadNpmTasks('grunt-contrib-copy');
   //grunt.loadNpmTasks('grunt-contrib-clean');

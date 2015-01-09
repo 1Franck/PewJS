@@ -5,8 +5,34 @@
 /* Move down content because we have a fixed navbar that is 50px tall */
 body {
   padding-top: 50px;
+  height: 100%;
+  background-color: #373737;
+  font-family: UbuntuRegular;
+  font-size: 14px;
 }
 
+strong {
+  // text-decoration: underline;
+  color:#fff;
+  font-weight: normal;
+  text-shadow:1px 1px 3px #000;
+}
+
+code {
+    color:#fff;
+    background: #222;
+}
+
+pre {
+  background-color: rgba(0,0,0,0.1);
+  border: 0;
+  padding:10px;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  color:#D98D00;
+  text-shadow:1px 1px 3px #000;
+}
 
 /*
  * Global add-ons
@@ -37,7 +63,7 @@ body {
   .sidebar {
     position: fixed;
     width:200px;
-    background: #000;
+    //background: #000;
     top: 51px;
     bottom: 0;
     left: 0;
@@ -76,7 +102,7 @@ body {
 .main {
   padding: 20px;
   margin-left:200px;
-  background: #ccc;
+  //background: #ccc;
 }
 @media (min-width: 768px) {
   .main {
