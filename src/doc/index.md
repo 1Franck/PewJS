@@ -27,12 +27,10 @@ game.createScene('myscene', (function(){
 
 
     // Called once when animation start
-    scene.init = function() {
-    };
+    scene.start = function() {}
 
     // Update loop
-    scene.update = function() { 
-    };
+    scene.update = function() {}
 
     // Draw loop
     scene.draw = function() {
