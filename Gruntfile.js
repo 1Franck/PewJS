@@ -21,7 +21,9 @@ module.exports = function(grunt) {
           template: 'src/doc/_layout.html',
           preCompile: function(src, context) {},
           postCompile: function(src, context) {},
-          templateContext: {},
+          templateContext: {
+            builddate: grunt.template.today("yyyy-mm-dd HH:mm:ss")
+          },
           markdownOptions: {
             gfm: true,
             highlight: 'auto',
