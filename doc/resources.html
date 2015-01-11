@@ -18,9 +18,10 @@
   </head>
 
   <body>
-
     <div class="container-fluid">
       <div class="sidebar">
+        <h4>PewJS doc</h4>
+        <hr>
         <ul>
           <li><a href="index.html">Quick Start</a></li>
           <li><a href="project.html">Project</a></li>
@@ -34,30 +35,45 @@
           <li><a href="extending.html">Extending PewJS</a></li>
           <li><a href="license.html">License</a></li>
         </ul>
+        <hr>
+        <small>Last update:<br>2015-01-10 22:01:37 </small>
       </div>
       <div class="main">
         <h2 id="resources-images-audio-">Resources (images/audio)</h2>
-<p>Support image and audio. Resource url are relative.</p>
-<p><strong>Loading resource</strong> like an image and call fn when ready.</p>
-<pre><code class="lang-javascript">game.resources.load(<span class="string">'img/foobar.jpg'</span>, <span class="keyword">function</span>(){
-    <span class="keyword">...</span>
+<p>Load images and audios.
+Resource url are relative.</p>
+<pre><code class="lang-javascript">var proj = Pew.createProject({
+    //<span class="keyword">...</span>
+    resources : [{
+        name: <span class="string">'mario'</span>,
+        src:  <span class="string">'assets/img/smb1.png'</span>,
+    }, {
+        name: <span class="string">'explosion_1'</span>,
+        src:  <span class="string">'assets/img/explosion_1.png'</span>,
+    }],
 });</code></pre>
-<p><strong>Loading a group of resource</strong> and call fn when all resource ready.</p>
-<pre><code class="lang-javascript">game.resources.load([<span class="string">'img/sprite1.jpg'</span>,<span class="string">'img/sprite1.jpg'</span>,<span class="keyword">...</span>], <span class="keyword">function</span>(){
-    game.start(<span class="string">"mygame"</span>);
-});</code></pre>
-<p><strong>Loading a group of resource</strong> with progression callback.  Usefull for stuff like a progress bar.</p>
-<pre><code class="lang-javascript">game.resources.load([<span class="string">'img/sprite1.jpg'</span>,<span class="string">'img/sprite1.jpg'</span>,<span class="keyword">...</span>], <span class="keyword">function</span>(){
-    game.start(<span class="string">"mygame"</span>);
-}, <span class="keyword">function</span>(p) {
-    console.log(p.progress + <span class="string">" %"</span>);
+<p><hr class="sep">
+<strong>Loading resource</strong> like an image and call fn when ready.</p>
+<pre><code class="lang-javascript">proj.resources.load(proj.conf.resources, <span class="keyword">function</span>(){ <span class="keyword">...</span> });</code></pre>
+<p><hr class="sep">
+<strong>Loading a group of resource</strong> and call fn when all resource ready.</p>
+<pre><code class="lang-javascript">proj<span class="preprocessor">.resources</span><span class="preprocessor">.load</span>(proj<span class="preprocessor">.conf</span><span class="preprocessor">.resources</span>, function(){
+    proj<span class="preprocessor">.startScene</span>(<span class="string">"myproj"</span>)<span class="comment">;</span>
+})<span class="comment">;</span></code></pre>
+<p><hr class="sep">
+<strong>Loading a group of resource</strong> with progression callback.  Usefull for stuff like a progress bar.</p>
+<pre><code class="lang-javascript">proj<span class="variable">.resources</span><span class="variable">.load</span>(proj<span class="variable">.conf</span><span class="variable">.resources</span>, function(){
+    proj<span class="variable">.start</span>(<span class="string">"myproj"</span>);
+}, function(p) {
+    console<span class="variable">.log</span>(p<span class="variable">.progress</span> + <span class="string">" %"</span>);
 });
-//will output:
-//<span class="number">5</span> %
-//<span class="number">10</span> %
-// etc...</code></pre>
-<p><strong>Retreive</strong> and <strong>use</strong> a loaded <strong>resource</strong>.</p>
-<pre><code class="lang-javascript">var my_img = <span class="transposed_variable">game.</span><span class="transposed_variable">resources.</span>get(<span class="string">'img/foobar.jpg'</span>); 
+<span class="comment">//will output:</span>
+<span class="comment">//5 %</span>
+<span class="comment">//10 %</span>
+<span class="comment">// etc...</span></code></pre>
+<p><hr class="sep">
+<strong>Retreive</strong> and <strong>use</strong> a loaded <strong>resource</strong>.</p>
+<pre><code class="lang-javascript">var my_img = <span class="transposed_variable">proj.</span><span class="transposed_variable">resources.</span>get(<span class="string">'mario'</span>); 
 <span class="transposed_variable">layerA.</span><span class="transposed_variable">ctx.</span>drawImage(my_img , <span class="number">0</span>, <span class="number">0</span>, <span class="number">300</span>, <span class="number">400</span>);</code></pre>
 
       </div>

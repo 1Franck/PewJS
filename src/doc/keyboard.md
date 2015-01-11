@@ -5,7 +5,7 @@ Before you binds some keyboard events, you need to enable keyboard event listene
 ```javascript
 game.keyboard.init();
 ```
-
+<hr class="sep"> 
 **Capture a key** event and execute fn callback:
 
 ```javascript
@@ -13,7 +13,8 @@ game.keyboard.on("p", function() { ... });
 // alternatively, you can use the upperchar keycode (80 = P)
 game.keyboard.on(80, function() { ... });
 ```
-    
+
+<hr class="sep">
 **Capture a group of keys** events and execute fn callback:
 
 ```javascript
@@ -29,7 +30,7 @@ game.keyboard.on(["space", "ctrl", "alt"], function(key) {
 
 Note: Binding key(s) with on() always prevent event default. It is possible to bind special keys like **F1** to **F12**, **Esc**, **Return**, etc.. But remember that it will prevent browser native behavior. Ex: Binding an event for F5 will prevent browser refresh.
 
-    
+<hr class="sep"> 
 **Stop capturing** key(s):
 
 ```javascript    
@@ -39,6 +40,7 @@ game.keyboard.off(["space", "ctrl", "alt"]);
 game.keyboard.off();  // unbind everything
 ```
 
+<hr class="sep"> 
 **Check** a key **manually**:
 
 ```javascript
@@ -48,13 +50,13 @@ if(game.keyboard.key('space')) {
 //get an array of all pressed keys at this very moment
 var pressed_keys = game.keyboard.keys();
 ```
-
+<hr class="sep"> 
 **Trigger manually** a key:
 
 ```javascript
 game.keyboard.trigger("space");
 ```
-
+<hr class="sep"> 
 **Capturing all keys** nonobstructive way. 
 
 Important: This is a global callback, and it won't prevent other callbacks(defined with on()) from being triggered and won't prevent native browser behavior by default. 
@@ -97,6 +99,8 @@ game.keyboard.onAll(function(event, key) {
     }
 });
 ```
+
+<hr class="sep"> 
 **Stop capturing all keys**. It will remove global callback only, but not other callbacks defined with on().
 ```javascript
 game.keyboard.offAll();

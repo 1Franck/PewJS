@@ -18,9 +18,10 @@
   </head>
 
   <body>
-
     <div class="container-fluid">
       <div class="sidebar">
+        <h4>PewJS doc</h4>
+        <hr>
         <ul>
           <li><a href="index.html">Quick Start</a></li>
           <li><a href="project.html">Project</a></li>
@@ -34,16 +35,20 @@
           <li><a href="extending.html">Extending PewJS</a></li>
           <li><a href="license.html">License</a></li>
         </ul>
+        <hr>
+        <small>Last update:<br>2015-01-10 22:01:37 </small>
       </div>
       <div class="main">
         <h3 id="keyboard">Keyboard</h3>
 <p>Before you binds some keyboard events, you need to enable keyboard event listener.</p>
 <pre><code class="lang-javascript">game<span class="preprocessor">.keyboard</span><span class="preprocessor">.init</span>()<span class="comment">;</span></code></pre>
-<p><strong>Capture a key</strong> event and execute fn callback:</p>
+<p><hr class="sep"> 
+<strong>Capture a key</strong> event and execute fn callback:</p>
 <pre><code class="lang-javascript">game.keyboard.on(<span class="string">"p"</span>, <span class="keyword">function</span>() { <span class="keyword">...</span> });
 // alternatively, you can use the upperchar keycode (<span class="number">80</span> = P)
 game.keyboard.on(<span class="number">80</span>, <span class="keyword">function</span>() { <span class="keyword">...</span> });</code></pre>
-<p><strong>Capture a group of keys</strong> events and execute fn callback:</p>
+<p><hr class="sep">
+<strong>Capture a group of keys</strong> events and execute fn callback:</p>
 <pre><code class="lang-javascript">game.keyboard.on([<span class="string">"space"</span>, <span class="string">"ctrl"</span>, <span class="string">"alt"</span>], <span class="keyword">function</span>(key) {
 
     <span class="keyword">if</span>(key.code === <span class="number">32</span>) console.log(<span class="string">'You have pressed SPACEBAR'</span>);
@@ -52,20 +57,24 @@ game.keyboard.on(<span class="number">80</span>, <span class="keyword">function<
     <span class="keyword">...</span>
 });</code></pre>
 <p>Note: Binding key(s) with on() always prevent event default. It is possible to bind special keys like <strong>F1</strong> to <strong>F12</strong>, <strong>Esc</strong>, <strong>Return</strong>, etc.. But remember that it will prevent browser native behavior. Ex: Binding an event for F5 will prevent browser refresh.</p>
-<p><strong>Stop capturing</strong> key(s):</p>
+<p><hr class="sep"> 
+<strong>Stop capturing</strong> key(s):</p>
 <pre><code class="lang-javascript">game<span class="preprocessor">.keyboard</span><span class="preprocessor">.off</span>(<span class="number">80</span>)<span class="comment">; // 80 = P</span>
 game<span class="preprocessor">.keyboard</span><span class="preprocessor">.off</span>(<span class="string">"a"</span>)<span class="comment">; </span>
 game<span class="preprocessor">.keyboard</span><span class="preprocessor">.off</span>([<span class="string">"space"</span>, <span class="string">"ctrl"</span>, <span class="string">"alt"</span>])<span class="comment">;  </span>
 game<span class="preprocessor">.keyboard</span><span class="preprocessor">.off</span>()<span class="comment">;  // unbind everything</span></code></pre>
-<p><strong>Check</strong> a key <strong>manually</strong>:</p>
+<p><hr class="sep"> 
+<strong>Check</strong> a key <strong>manually</strong>:</p>
 <pre><code class="lang-javascript"><span class="keyword">if</span>(game.keyboard.key('<span class="constant">space</span>')) {
     console.<span class="command">log</span>('spacebar pressed!');
 }
 //<span class="keyword">get</span> an array <span class="keyword">of</span> all pressed keys <span class="keyword">at</span> this very moment
 var pressed_keys = game.keyboard.keys();</code></pre>
-<p><strong>Trigger manually</strong> a key:</p>
+<p><hr class="sep"> 
+<strong>Trigger manually</strong> a key:</p>
 <pre><code class="lang-javascript">game<span class="preprocessor">.keyboard</span><span class="preprocessor">.trigger</span>(<span class="string">"space"</span>)<span class="comment">;</span></code></pre>
-<p><strong>Capturing all keys</strong> nonobstructive way. </p>
+<p><hr class="sep"> 
+<strong>Capturing all keys</strong> nonobstructive way. </p>
 <p>Important: This is a global callback, and it won&#39;t prevent other callbacks(defined with on()) from being triggered and won&#39;t prevent native browser behavior by default. </p>
 <p>To stop propagation, you need to add <code>return false</code> to your onAll() callback. To prevent native behavior, you need to add <code>event.preventDefault()</code> to your onAll() callback.</p>
 <pre><code class="lang-javascript">
@@ -101,7 +110,8 @@ game.keyboard.onAll(<span class="keyword">function</span>(event, key) {
         event.preventDefault(); // prevent browser behavior
     }
 });</code></pre>
-<p><strong>Stop capturing all keys</strong>. It will remove global callback only, but not other callbacks defined with on().</p>
+<p><hr class="sep"> 
+<strong>Stop capturing all keys</strong>. It will remove global callback only, but not other callbacks defined with on().</p>
 <pre><code class="lang-javascript">game<span class="preprocessor">.keyboard</span><span class="preprocessor">.offAll</span>()<span class="comment">;</span></code></pre>
 
       </div>

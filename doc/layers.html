@@ -18,9 +18,10 @@
   </head>
 
   <body>
-
     <div class="container-fluid">
       <div class="sidebar">
+        <h4>PewJS doc</h4>
+        <hr>
         <ul>
           <li><a href="index.html">Quick Start</a></li>
           <li><a href="project.html">Project</a></li>
@@ -34,6 +35,8 @@
           <li><a href="extending.html">Extending PewJS</a></li>
           <li><a href="license.html">License</a></li>
         </ul>
+        <hr>
+        <small>Last update:<br>2015-01-10 22:01:37 </small>
       </div>
       <div class="main">
         <h2 id="canvas-layers">Canvas layers</h2>
@@ -42,7 +45,8 @@
 <span class="keyword">var</span> layerA = game.createLayer(<span class="string">'background'</span>),
     layerB = game.createLayer(<span class="string">'foreground'</span>);</code></pre>
 <p>By default, layer take all browser window space. </p>
-<p>Change layer configs:</p>
+<p><hr class="sep">
+Change layer configs:</p>
 <pre><code class="lang-javascript">var layerA = game.createLayer('platform', {
     full: <span class="constant">false</span>,
     autoresize: <span class="constant">false</span>, //<span class="keyword">if</span> <span class="constant">true</span>, canvas <span class="keyword">is</span> resized <span class="function_start"><span class="keyword">on</span> <span class="title">window</span></span> resize
@@ -50,6 +54,8 @@
     height: <span class="number">300</span>,
 });</code></pre>
 <p>You can access to layer canvas DOM element with <code>layerA.canvas</code> property.</p>
+<hr class="sep">
+
 <h3 id="draw">Draw</h3>
 <p>Simple drawing can be achieved by using game layer canvas context(<strong><code>ctx</code></strong>) property which is just a reference to <code>canvas.getContext(&#39;2d&#39;)</code> (<a href="http://www.html5canvastutorials.com/tutorials/html5-canvas-element/">more info</a>).</p>
 <pre><code class="lang-javascript">layerA<span class="preprocessor">.ctx</span><span class="preprocessor">.fillStyle</span> = <span class="string">"#DD0000"</span><span class="comment">;</span>

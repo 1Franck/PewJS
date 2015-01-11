@@ -9,6 +9,7 @@ var layerA = game.createLayer('background'),
 
 By default, layer take all browser window space. 
 
+<hr class="sep">
 Change layer configs:
 ```javascript
 var layerA = game.createLayer('platform', {
@@ -20,6 +21,8 @@ var layerA = game.createLayer('platform', {
 ```
 
 You can access to layer canvas DOM element with `layerA.canvas` property.
+
+<hr class="sep">
 
 ###Draw
 

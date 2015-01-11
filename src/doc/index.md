@@ -1,6 +1,6 @@
 ##Quick Start
 
-Take a look at this boiler plate. **We will use this code as reference for the next paragraphs.**
+This is a project boiler plate:
 
 ```javascript
 // Create the game
