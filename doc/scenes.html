@@ -41,15 +41,18 @@
       <div class="main">
         <h2 id="scenes">Scenes</h2>
 <p>Scenes are javascript modules that encapsulate your animation logic and drawing loop. For small project, most of the time, one scene is sufficient, but there is no limit how many scenes you can have.</p>
-<p><strong>Create a new scene:</strong> (see <a href="#quick-start">Quick Start</a> boiler plate for more details)</p>
+<p><hr class="sep">
+<strong>Create a new scene:</strong> (see <a href="#quick-start">Quick Start</a> boiler plate for more details)</p>
 <pre><code class="lang-javascript">game.createScene(<span class="string">'scene_name'</span>, (<span class="keyword">function</span>(){ <span class="keyword">...</span> })());</code></pre>
-<p><strong>Request next animation frame</strong>. By default, scene.draw is used</p>
+<p><hr class="sep">
+<strong>Request next animation frame</strong>. By default, scene.draw is used</p>
 <pre><code class="lang-javascript">scene.draw = <span class="keyword">function</span>() {
     <span class="keyword">...</span>
     // recall scene.draw()
     scene.requestAnim(); 
 }</code></pre>
-<p><strong>Change</strong> animation <strong>loop</strong> frame <strong>callback</strong></p>
+<p><hr class="sep">
+<strong>Change</strong> animation <strong>loop</strong> frame <strong>callback</strong></p>
 <pre><code class="lang-javascript">scene.draw = <span class="keyword">function</span>() {
     <span class="keyword">...</span>
     <span class="keyword">if</span>(foo === <span class="string">"bar"</span>) {
@@ -62,7 +65,8 @@ scene.draw2 = <span class="keyword">function</span>() {
     <span class="keyword">...</span>
     scene.requestAnim(scene.draw2);
 }</code></pre>
-<p><strong>Pause</strong> the animation loop</p>
+<p><hr class="sep">
+<strong>Pause</strong> the animation loop</p>
 <pre><code class="lang-javascript">scene.draw = <span class="keyword">function</span>() {
     <span class="keyword">...</span>
     <span class="keyword">if</span>(foo === <span class="string">"bar"</span>) {
@@ -70,12 +74,14 @@ scene.draw2 = <span class="keyword">function</span>() {
     }
     scene.requestAnim();
 }</code></pre>
-<p><strong>Toggle</strong> the loop (request/cancel)</p>
+<p><hr class="sep">
+<strong>Toggle</strong> the loop (request/cancel)</p>
 <pre><code class="lang-javascript">// example of pause toggle button
 game<span class="preprocessor">.keyboard</span><span class="preprocessor">.on</span>(<span class="string">"p"</span>, function(){
     scene<span class="preprocessor">.toggleAnim</span>()<span class="comment">;</span>
 })<span class="comment">;</span></code></pre>
-<p><strong>Check</strong> the loop status (idle/playing)</p>
+<p><hr class="sep">
+<strong>Check</strong> the loop status (idle/playing)</p>
 <pre><code class="lang-javascript"><span class="keyword">if</span>(scene.is(<span class="string">'idle'</span>)) { <span class="keyword">...</span> }
 <span class="keyword">...</span>
 <span class="keyword">if</span>(scene.is(<span class="string">'playing'</span>)) { <span class="keyword">...</span> }</code></pre>

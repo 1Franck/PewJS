@@ -1,5 +1,5 @@
 ##Resources (images/audio)#
-Load images and audios.
+
 Resource url are relative.
 
 ```javascript
