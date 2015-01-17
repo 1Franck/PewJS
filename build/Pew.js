@@ -1189,13 +1189,29 @@ Pew.Project.prototype.audio = (function() {
 
     return {
 
-        play: function(resource) {
+        /**
+         * Play a sound
+         * 
+         * @param  string  resource
+         * @param  bool    loop    
+         * @return object         
+         */
+        play: function(resource, loop) {
 
-            var res = Pew.project().resources.get(resource),
-                snd = new Audio();
+            var res  = Pew.project().resources.get(resource),
+                snd  = new Audio(),
+                loop = loop || false;
 
             if(!res instanceof Audio) return;
             snd.src = res.src;
+
+            // loop audio
+            if(loop === true) {
+                snd.addEventListener('ended', function() {
+                    this.currentTime = 0;
+                    this.play();
+                }, false);
+            }
 
             try {
                 snd.play();
@@ -1204,8 +1220,12 @@ Pew.Project.prototype.audio = (function() {
                 // Fail silently but show in F12 developer tools console
                 if(window.console && console.log("Error:" + e));
             }
+
+            return snd;
         }
     }
+
+    
 })();;/**
  * Pew / Project / fps meter 
  * Original source from AnimationFrame.js
