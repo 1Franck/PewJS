@@ -7,11 +7,11 @@ module.exports = function(grunt) {
 
     uglify: {
       options: {
-        banner: '/*! build <%= grunt.template.today("yyyy-mm-dd HH:mm:ss") %> */\n/*! Pew.js */\n/*! Copyright Francois Lajoie */\n/*! MIT License */\n'
+        banner: '/*! build <%= grunt.template.today("yyyy-mm-dd HH:mm:ss") %> */\n/*! pew.js */\n/*! Copyright Francois Lajoie */\n/*! MIT License */\n'
       },
       my_target: {
         files: {
-          'build/Pew.min.js': ['build/pew.js']
+          'build/pew.min.js': ['build/pew.js']
         }
       }
     },
@@ -26,19 +26,31 @@ module.exports = function(grunt) {
             expand: true                // required when using cwd
           },
           {
-            src:  'build/Pew.js',     // set working folder / root to copy
-            dest: 'demos/assets/Pew.js',  // destination folder
+            src:  'build/pew.js',     // set working folder / root to copy
+            dest: 'demos/assets/pew.js',  // destination folder
           },
         ],
       },
       demos: {
         files: [
           {
-            src:  'build/Pew.js',     // set working folder / root to copy
-            dest: 'demos/assets/Pew.js',  // destination folder
+            src:  'build/pew.js',     // set working folder / root to copy
+            dest: 'demos/assets/pew.js',  // destination folder
           },
         ],
-      }
+      },
+      gh_pages: {
+        files: [
+          {
+            src:  'build/pew.min.js',     // set working folder / root to copy
+            dest: 'demos/assets/pew.js',   // destination folder
+          },
+          {
+            src:  'build/pew.js',     // set working folder / root to copy
+            dest: 'demos/assets/pew.js',   // destination folder
+          },
+        ],
+      },
     },
 
     less: {
@@ -71,7 +83,7 @@ module.exports = function(grunt) {
               'src/pew/utils.js', 
               'src/vendors/AnimationFrame/AnimationFrame.js'],
 
-        dest: 'build/Pew.js',
+        dest: 'build/pew.js',
       },
     },
 
