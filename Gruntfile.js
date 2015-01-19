@@ -42,12 +42,8 @@ module.exports = function(grunt) {
       gh_pages: {
         files: [
           {
-            src:  'build/pew.min.js',     // set working folder / root to copy
-            dest: 'demos/assets/pew.js',   // destination folder
-          },
-          {
-            src:  'build/pew.js',     // set working folder / root to copy
-            dest: 'demos/assets/pew.js',   // destination folder
+            src:  'build/pew.min.js',                            // set working folder / root to copy
+            dest: '../pewjs.gh-pages/demos/assets/pew.min.js',   // destination folder
           },
         ],
       },
@@ -141,5 +137,8 @@ module.exports = function(grunt) {
 
   // Test task
   grunt.registerTask('tests', ['qunit']);
+
+  // gh-pages task
+  grunt.registerTask('gh-pages', ['copy:gh_pages']);
 
 };
