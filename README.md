@@ -9,4 +9,4 @@ PewJS is a tiny HTML5 Canvas framework for games and animations.
 ----
 
 Demo:
-[Cross raod](http://1franck.github.io/PewJS/demos/game-crossroad.html)
+[Cross road](http://1franck.github.io/PewJS/demos/game-crossroad.html)
