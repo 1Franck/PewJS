@@ -32,23 +32,23 @@ game.createScene('scene1', (function(){
 
     var log = [];
 
-    game.mouse.on("click", function(e) {
-        log.unshift("Mouse click");
+    game.mouse.on("click", function(e,x,y) {
+        log.unshift("Mouse click at " + x + "," + y);
         drawConsole();
     });
 
-    game.mouse.on("dblclick", function(e) {
-        log.unshift("Mouse double-click");
+    game.mouse.on("dblclick", function(e,x,y) {
+        log.unshift("Mouse double-click at " + x + "," + y);
         drawConsole();
     });
 
-    game.mouse.on("mouseup", function(e) {
-        log.unshift("Mouse up");
+    game.mouse.on("mouseup", function(e,x,y) {
+        log.unshift("Mouse up at " + x + "," + y);
         drawConsole();
     });
 
-    game.mouse.on("mousedown", function(e) {
-        log.unshift("Mouse down");
+    game.mouse.on("mousedown", function(e,x,y) {
+        log.unshift("Mouse down at " + x + "," + y);
         drawConsole();
     });
 
