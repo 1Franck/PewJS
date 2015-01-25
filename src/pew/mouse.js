@@ -14,7 +14,7 @@ Pew.Project.prototype.mouse = (function(){
                 events[name] = true;
 
                 if(events_cb[name])
-                    events_cb[name](event);
+                    events_cb[name](event, cursor.x, cursor.y);
                 
                 events[name] = false;
             }
