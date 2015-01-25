@@ -10,8 +10,10 @@
  * @copyright 2013 Oleg Slobodskoi > https://github.com/kof/animationFrame
  */
 
-"use strict";
 
+(function(window) {
+
+"use strict";
 var Pew = (function(){
 
     // current project instance
@@ -1381,6 +1383,16 @@ Pew.utils.isRangeStr = function(str) {
 Pew.utils.isArray = function(ar) {
     return Object.prototype.toString.call(ar) == "[object Array]";
 };;
+// Support commonjs wrapper, amd define and plain window.
+if (typeof exports == 'object' && typeof module == 'object') {
+    module.exports = Pew
+} else if (typeof define == 'function' && define.amd) {
+    define(function() { return Pew })
+} else {
+    window.Pew = Pew
+}
+
+}(window));;
 
 /**
  * An even better animation frame.
