@@ -364,6 +364,16 @@ Pew.Project.prototype.mouse = (function(){
         cursor = {
             x : 0,
             y : 0
+        },
+        event_fn = function(name) {
+            return function(event) {
+                events[name] = true;
+
+                if(events_cb[name])
+                    events_cb[name](event);
+                
+                events[name] = false;
+            }
         };
 
     /**
@@ -394,46 +404,18 @@ Pew.Project.prototype.mouse = (function(){
 
         var el = el || null;
         if(el == null) return;
-        
+
         // mouse click event
-        el.addEventListener ("click", function (event) {
-            events['click'] = true;
-
-            if(events_cb['click'])
-                events_cb['click'](event);
-
-            events['click'] = false;
-        });
+        el.addEventListener ("click", event_fn('click'));
 
         // mouse dblclick event
-        el.addEventListener ("dblclick", function (event) {
-            events['dblclick'] = true;
-
-            if(events_cb['dblclick'])
-                events_cb['dblclick'](event);
-
-            events['dblclick'] = false;
-        });
+        el.addEventListener ("dblclick", event_fn('dblclick'));
 
         // mousedown event
-        el.addEventListener ("mousedown", function (event) {
-            events['mousedown'] = true;
-
-            if(events_cb['mousedown'])
-                events_cb['mousedown'](event);
-
-            events['mousedown'] = false;
-        });
+        el.addEventListener ("mousedown", event_fn('mousedown'));
 
         // mouseup event
-        el.addEventListener ("mouseup", function (event) {
-            events['mouseup'] = true;
-
-            if(events_cb['mouseup'])
-                events_cb['mouseup'](event);
-
-            events['mouseup'] = false;
-        });
+        el.addEventListener ("mouseup", event_fn('mouseup'));
 
         //mouse move event
         el.addEventListener ("mousemove", function (event) {
