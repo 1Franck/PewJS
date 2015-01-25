@@ -66,7 +66,8 @@ module.exports = function(grunt) {
         separator: ';',
       },
       dist: {
-        src: ['src/pew/pew.js', 
+        src: ['src/pew/_h.js',
+              'src/pew/pew.js', 
               'src/pew/scene.js', 
               'src/pew/layer.js', 
               'src/pew/project.js', 
@@ -77,6 +78,7 @@ module.exports = function(grunt) {
               'src/pew/audio.js',
               'src/pew/fps.js',
               'src/pew/utils.js', 
+              'src/pew/_f.js',
               'src/vendors/AnimationFrame/AnimationFrame.js'],
 
         dest: 'build/pew.js',
