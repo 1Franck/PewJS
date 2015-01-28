@@ -906,6 +906,7 @@ Pew.Project.prototype.sprites = (function() {
         this.conf       = Pew.utils.extend({}, def, conf);
         this.frames     = [];
         this.to_radians = Math.PI/180;
+        this.animations = [];
 
         // get resource if needed
         if(typeof this.conf.resource === "string") {
@@ -1082,21 +1083,35 @@ Pew.Project.prototype.sprites = (function() {
     /**
      * Create animation set
      *
+     * @param  string name
      * @param  object conf
      * @return object
      */
-    Sprite.prototype.createAnim = function(conf) {
+    Sprite.prototype.createAnim = function(name, conf) {
 
-        return new Animation(conf, this.frames.length);
+        this.animations[name] = new Animation(conf, this);
+        return this.animations[name];
     };
+
+    /**
+     * Get animation set
+     *
+     * @param  object name
+     * @return object
+     */
+    Sprite.prototype.anim = function(name) {
+
+        return this.animations[name];
+    };
+
 
     /**
      * Animation from a custom set of frames
      * 
-     * @param object  conf
-     * @param integer total
+     * @param object conf
+     * @param object sprite
      */
-    function Animation(conf, total) {
+    function Animation(conf, sprite) {
 
         var def = {
             duration: 500, //ms
@@ -1104,11 +1119,14 @@ Pew.Project.prototype.sprites = (function() {
             loop: true,
         };
 
-        this.conf = Pew.utils.extend({}, def, conf);
+        this.sprite = sprite;
+        this.conf   = Pew.utils.extend({}, def, conf);
 
         if(this.conf.frames === 'all') {
             this.conf.frames = [];
-            for(var i=0;i<total;++i) this.conf.frames.push(i);
+            for(var i=0;i<this.sprite.frames.length;++i) {
+                this.conf.frames.push(i);
+            }
         }
 
         this.ticks       = Pew.project().anim_frame.frameRate * (this.conf.duration / 1000);
@@ -1152,9 +1170,9 @@ Pew.Project.prototype.sprites = (function() {
     /**
      * Draw frame / @see sprite drawFrame()
      */
-    Animation.prototype.drawFrame = function(sprite, layer, x, y, deg) {
+    Animation.prototype.drawFrame = function(layer, x, y, deg) {
         var num = this.getFrame();
-        sprite.drawFrame(num, layer, x, y, deg);
+        this.sprite.drawFrame(num, layer, x, y, deg);
     };
 
     /**
