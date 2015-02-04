@@ -36,25 +36,35 @@
           <li><a href="license.html">License</a></li>
         </ul>
         <hr>
-        <small>Last update:<br>2015-01-10 22:01:37 </small>
+        <small>Last update:<br>2015-02-03 23:02:15 </small>
       </div>
       <div class="main">
         <h2 id="mouse">Mouse</h2>
 <p>Before you binds mouse events, you need to enable mouse event listener.</p>
 <p>If you have more than one layer, mouse events listener must be associated to the highest z-index canvas which is always the last one created by <code>createLayer()</code></p>
-<pre><code class="lang-javascript">game<span class="preprocessor">.mouse</span><span class="preprocessor">.init</span>(layerB<span class="preprocessor">.canvas</span>)<span class="comment">;</span></code></pre>
+<pre><code class="lang-javascript">proj<span class="preprocessor">.mouse</span><span class="preprocessor">.init</span>(layer<span class="preprocessor">.canvas</span>)<span class="comment">;</span></code></pre>
+<hr class="sep">
+
+<h4 id="events-">Events:</h4>
+<ul>
+<li><code>click</code></li>
+<li><code>dblclick</code></li>
+<li><code>mousedown</code></li>
+<li><code>mouseup</code></li>
+<li><code>mousemove</code></li>
+</ul>
 <p><hr class="sep">
-<strong>Capture mouse click</strong> event and execute fn callback:</p>
-<pre><code class="lang-javascript">game.mouse.on(<span class="string">"click"</span>, <span class="keyword">function</span>() {
+<strong>Capture mouse event</strong> and execute fn callback:</p>
+<pre><code class="lang-javascript">proj.mouse.on(<span class="string">"click"</span>, <span class="keyword">function</span>(x, y) {
     <span class="keyword">...</span>
 });</code></pre>
 <p><hr class="sep"> 
 <strong>Stop capturing</strong> mouse event(s):</p>
-<pre><code class="lang-javascript">game<span class="preprocessor">.mouse</span><span class="preprocessor">.off</span>(<span class="string">"click"</span>)<span class="comment">;</span></code></pre>
+<pre><code class="lang-javascript">proj<span class="preprocessor">.mouse</span><span class="preprocessor">.off</span>(<span class="string">"click"</span>)<span class="comment">;</span></code></pre>
 <p><hr class="sep">
 Access to current <strong>cursor position</strong>:</p>
-<pre><code class="lang-javascript">var <span class="built_in">x</span> = game<span class="preprocessor">.mouse</span><span class="preprocessor">.x</span>()<span class="comment">;</span>
-var <span class="built_in">y</span> = game<span class="preprocessor">.mouse</span><span class="preprocessor">.y</span>()<span class="comment">;</span></code></pre>
+<pre><code class="lang-javascript">var <span class="built_in">x</span> = proj<span class="preprocessor">.mouse</span><span class="preprocessor">.x</span>()<span class="comment">;</span>
+var <span class="built_in">y</span> = proj<span class="preprocessor">.mouse</span><span class="preprocessor">.y</span>()<span class="comment">;</span></code></pre>
 
       </div>
     </div>
