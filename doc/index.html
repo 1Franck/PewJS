@@ -36,32 +36,32 @@
           <li><a href="license.html">License</a></li>
         </ul>
         <hr>
-        <small>Last update:<br>2015-01-10 22:01:37 </small>
+        <small>Last update:<br>2015-02-03 23:02:15 </small>
       </div>
       <div class="main">
         <h2 id="quick-start">Quick Start</h2>
 <p>This is a project boiler plate:</p>
 <pre><code class="lang-javascript"><span class="regexp">//</span> Create the game
-<span class="reserved">var</span> game = Pew.createProject({
+<span class="reserved">var</span> proj = Pew.createProject({
     title  : <span class="string">"My Game"</span>,
 });
 
 <span class="regexp">//</span> Create a scene
-game.createScene(<span class="string">'myscene'</span>, (<span class="reserved">function</span>(){
+proj.createScene(<span class="string">'myscene'</span>, (<span class="reserved">function</span>(){
 
     <span class="regexp">//</span> Scene properties
     <span class="reserved">var</span> scene = {};
 
     <span class="regexp">//</span> Create canvas layers 
-    <span class="reserved">var</span> layerA = game.createLayer(<span class="string">'background'</span>),
-        layerB = game.createLayer(<span class="string">'foreground'</span>);
+    <span class="reserved">var</span> layerA = proj.createLayer(<span class="string">'background'</span>),
+        layerB = proj.createLayer(<span class="string">'foreground'</span>);
 
     <span class="regexp">//</span> Start inputs capture
     <span class="regexp">//</span> Mouse note: to work properly, mouse event must 
     <span class="regexp">//</span> be associated to the highest z-index canvas which 
     <span class="regexp">//</span> <span class="keyword">is</span> always the last one created
-    game.keyboard.init();
-    game.mouse.init(layerB.canvas); 
+    proj.keyboard.init();
+    proj.mouse.init(layerB.canvas); 
 
 
     <span class="regexp">//</span> Called once <span class="keyword">when</span> animation start
@@ -92,7 +92,7 @@ game.createScene(<span class="string">'myscene'</span>, (<span class="reserved">
 
 
 <span class="regexp">//</span> Start scene animation <span class="keyword">loop</span>
-game.start(<span class="string">'myscene'</span>);</code></pre>
+proj.start(<span class="string">'myscene'</span>);</code></pre>
 
       </div>
     </div>
