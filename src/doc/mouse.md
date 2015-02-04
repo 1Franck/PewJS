@@ -4,14 +4,27 @@ Before you binds mouse events, you need to enable mouse event listener.
 
 If you have more than one layer, mouse events listener must be associated to the highest z-index canvas which is always the last one created by `createLayer()`
 
+
 ```javascript
-game.mouse.init(layerB.canvas);
+proj.mouse.init(layer.canvas);
 ```
+
 <hr class="sep">
-**Capture mouse click** event and execute fn callback:
+
+####Events:
+
+ * `click`
+ * `dblclick`
+ * `mousedown`
+ * `mouseup`
+ * `mousemove`
+
+
+<hr class="sep">
+**Capture mouse event** and execute fn callback:
     
 ```javascript
-game.mouse.on("click", function() {
+proj.mouse.on("click", function(x, y) {
     ...
 });
 ```
@@ -19,12 +32,12 @@ game.mouse.on("click", function() {
 **Stop capturing** mouse event(s):
 
 ```javascript
-game.mouse.off("click"); 
+proj.mouse.off("click"); 
 ```
 <hr class="sep">
 Access to current **cursor position**:
     
 ```javascript
-var x = game.mouse.x();
-var y = game.mouse.y();
+var x = proj.mouse.x();
+var y = proj.mouse.y();
 ```    
